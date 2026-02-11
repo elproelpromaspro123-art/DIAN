@@ -29,8 +29,6 @@ async function generateIcons() {
     const size = spec.size;
     const { canvas, ctx } = drawLogoSquare(size);
     const padding = Math.round(size * spec.paddingRatio);
-    ctx.fillStyle = "#ffffff";
-    ctx.fillRect(0, 0, size, size);
 
     const available = size - padding * 2;
     const scale = Math.min(available / logo.width, available / logo.height);
