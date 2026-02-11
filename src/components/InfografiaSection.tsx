@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   BookOpen,
   Building2,
+  CalendarClock,
   FileCheck2,
   Gavel,
   HeartHandshake,
@@ -12,15 +13,30 @@ import {
   X,
   ChevronRight,
   Download,
+  ExternalLink,
+  type LucideIcon,
 } from "lucide-react";
 import { useFocusTrap } from "@/lib/useFocusTrap";
 
-const resources = [
+type Resource = {
+  name: string;
+  icon: LucideIcon;
+  available: boolean;
+  color: string;
+  summary: string;
+  kind: "pdf" | "link";
+  file?: string;
+  href?: string;
+};
+
+const resources: Resource[] = [
   {
     name: "Naturaleza jurídica y objeto de la DIAN",
     icon: Building2,
     available: true,
     color: "from-emerald-500 to-teal-600",
+    summary: "Documento base institucional.",
+    kind: "pdf",
     file: "/recursos/dian-naturaleza-juridica.pdf",
   },
   {
@@ -28,6 +44,8 @@ const resources = [
     icon: FileCheck2,
     available: true,
     color: "from-blue-500 to-sky-600",
+    summary: "Competencias y ejes temáticos OPEC 236732.",
+    kind: "pdf",
     file: "/recursos/manual-funciones-analista-v.pdf",
   },
   {
@@ -35,6 +53,8 @@ const resources = [
     icon: FileCheck2,
     available: true,
     color: "from-indigo-500 to-slate-600",
+    summary: "Competencias y ejes temáticos OPEC 236741.",
+    kind: "pdf",
     file: "/recursos/manual-funciones-gestor-i.pdf",
   },
   {
@@ -42,6 +62,8 @@ const resources = [
     icon: BookOpen,
     available: true,
     color: "from-amber-500 to-orange-600",
+    summary: "Conductas observables por nivel.",
+    kind: "pdf",
     file: "/recursos/diccionario-competencias-res-065-2024.pdf",
   },
   {
@@ -49,6 +71,8 @@ const resources = [
     icon: ShieldCheck,
     available: true,
     color: "from-green-500 to-emerald-600",
+    summary: "Marco oficial de competencias DIAN.",
+    kind: "pdf",
     file: "/recursos/diccionario-competencias-dian.pdf",
   },
   {
@@ -56,6 +80,8 @@ const resources = [
     icon: HeartHandshake,
     available: true,
     color: "from-rose-500 to-pink-600",
+    summary: "Valores y juramento institucional.",
+    kind: "pdf",
     file: "/recursos/codigo-integridad-dian.pdf",
   },
   {
@@ -63,19 +89,56 @@ const resources = [
     icon: Gavel,
     available: true,
     color: "from-purple-500 to-violet-600",
+    summary: "Lineamientos éticos complementarios.",
+    kind: "pdf",
     file: "/recursos/codigo-etica-dian-2021.pdf",
+  },
+  {
+    name: "DIAN · Inicio de inscripciones (28-ene-2026)",
+    icon: CalendarClock,
+    available: true,
+    color: "from-sky-500 to-cyan-600",
+    summary: "Comunicado oficial DIAN 2676.",
+    kind: "link",
+    href: "https://www.dian.gov.co/Prensa/Paginas/NG-Inician-inscripciones-para-proceso-de-seleccion-DIAN-2676.aspx",
+  },
+  {
+    name: "CNSC · Ampliación hasta 7-feb-2026",
+    icon: CalendarClock,
+    available: true,
+    color: "from-teal-500 to-cyan-700",
+    summary: "Aviso oficial por incidencia SIMO.",
+    kind: "link",
+    href: "https://www.cnsc.gov.co/node/60247",
+  },
+  {
+    name: "CNSC · Incidencia pago de derechos SIMO",
+    icon: CalendarClock,
+    available: true,
+    color: "from-slate-500 to-slate-700",
+    summary: "Aviso oficial del 4-feb-2026.",
+    kind: "link",
+    href: "https://www.cnsc.gov.co/node/60011",
   },
 ];
 
 export default function InfografiaSection() {
-  const [selectedResource, setSelectedResource] = useState<string | null>(null);
-  const selected = resources.find((a) => a.name === selectedResource);
-  const pdfSrc = selected?.file ? `${selected.file}#view=FitH` : "";
+  const [selectedResource, setSelectedResource] = useState<Resource | null>(null);
+  const [isMobileViewport, setIsMobileViewport] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
 
-  useFocusTrap(modalRef, Boolean(selected));
+  useFocusTrap(modalRef, Boolean(selectedResource));
 
   const handleClose = useCallback(() => setSelectedResource(null), []);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const media = window.matchMedia("(max-width: 900px)");
+    const update = () => setIsMobileViewport(media.matches);
+    update();
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, []);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -84,6 +147,28 @@ export default function InfografiaSection() {
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [selectedResource, handleClose]);
+
+  const handleResourceOpen = (resource: Resource) => {
+    if (!resource.available) return;
+
+    if (resource.kind === "link" && resource.href) {
+      window.open(resource.href, "_blank", "noopener,noreferrer");
+      return;
+    }
+
+    if (resource.kind === "pdf" && resource.file) {
+      if (isMobileViewport) {
+        window.open(resource.file, "_blank", "noopener,noreferrer");
+        return;
+      }
+      setSelectedResource(resource);
+    }
+  };
+
+  const pdfSrc =
+    selectedResource?.kind === "pdf" && selectedResource.file
+      ? `${selectedResource.file}#view=FitH`
+      : "";
 
   return (
     <section
@@ -96,8 +181,8 @@ export default function InfografiaSection() {
             Recursos oficiales DIAN + CNSC
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto text-sm">
-            Documentos verificados que sustentan las pruebas, competencias y
-            valores que se evalúan. Puedes leerlos en línea o descargarlos.
+            Documentos y avisos oficiales verificados. En móvil los recursos PDF
+            se abren en pestaña nueva para evitar bloqueos del visor integrado.
           </p>
         </div>
 
@@ -107,7 +192,7 @@ export default function InfografiaSection() {
             return (
               <button
                 key={resource.name}
-                onClick={() => resource.available && setSelectedResource(resource.name)}
+                onClick={() => handleResourceOpen(resource)}
                 disabled={!resource.available}
                 className={`relative group rounded-2xl p-5 text-left transition-all duration-300 border-2 shadow-sm hover:-translate-y-0.5 ${
                   resource.available
@@ -120,11 +205,11 @@ export default function InfografiaSection() {
                 >
                   <Icon className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="font-semibold text-sm text-gray-800">
-                  {resource.name}
-                </h3>
+                <h3 className="font-semibold text-sm text-gray-800">{resource.name}</h3>
+                <p className="text-xs text-gray-500 mt-1">{resource.summary}</p>
                 <span className="mt-2 inline-flex items-center text-xs text-dian-navy font-medium">
-                  Abrir documento <ChevronRight className="w-3 h-3 ml-0.5" />
+                  {resource.kind === "pdf" ? "Abrir documento" : "Abrir aviso oficial"}
+                  <ChevronRight className="w-3 h-3 ml-0.5" />
                 </span>
               </button>
             );
@@ -133,7 +218,7 @@ export default function InfografiaSection() {
       </div>
 
       <AnimatePresence>
-        {selected && selected.file && (
+        {selectedResource && selectedResource.kind === "pdf" && selectedResource.file && (
           <motion.div
             role="dialog"
             aria-modal="true"
@@ -157,14 +242,14 @@ export default function InfografiaSection() {
               <div className="sticky top-0 bg-white sm:rounded-t-2xl border-b px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between gap-3 z-10">
                 <div>
                   <h3 id="resource-modal-title" className="font-bold text-dian-navy text-base sm:text-lg">
-                    Documento — {selected.name}
+                    Documento — {selectedResource.name}
                   </h3>
                   <p id="resource-modal-desc" className="text-xs text-gray-500">
-                    En móvil puedes hacer zoom con los dedos o descargar el PDF para verlo sin conexión.
+                    Si el visor falla en tu navegador, usa &quot;Abrir en pestaña nueva&quot;.
                   </p>
                   <div className="flex flex-wrap items-center gap-3 text-xs mt-2">
                     <a
-                      href={selected.file}
+                      href={selectedResource.file}
                       target="_blank"
                       rel="noreferrer"
                       className="text-dian-navy hover:underline"
@@ -172,7 +257,7 @@ export default function InfografiaSection() {
                       Abrir en pestaña nueva
                     </a>
                     <a
-                      href={selected.file}
+                      href={selectedResource.file}
                       download
                       className="inline-flex items-center gap-1 text-dian-navy hover:underline"
                     >
@@ -191,16 +276,42 @@ export default function InfografiaSection() {
               </div>
               <div className="flex-1 bg-gray-50 overflow-auto">
                 <iframe
-                  title={`Documento ${selected.name}`}
+                  title={`Documento ${selectedResource.name}`}
                   src={pdfSrc}
                   className="w-full h-full infografia-frame"
-                  allowFullScreen
+                  loading="lazy"
                 />
               </div>
             </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
+
+      <div className="max-w-6xl mx-auto px-4 mt-6">
+        <p className="text-xs text-gray-500">
+          Fuentes oficiales de consulta directa: {" "}
+          <a
+            href="https://www.cnsc.gov.co/node/59797"
+            target="_blank"
+            rel="noreferrer"
+            className="text-dian-navy hover:underline inline-flex items-center gap-1"
+          >
+            CNSC DIAN 2676
+            <ExternalLink className="w-3 h-3" />
+          </a>
+          {" "}y{" "}
+          <a
+            href="https://www.dian.gov.co/Prensa/Paginas/NG-Inician-inscripciones-para-proceso-de-seleccion-DIAN-2676.aspx"
+            target="_blank"
+            rel="noreferrer"
+            className="text-dian-navy hover:underline inline-flex items-center gap-1"
+          >
+            Comunicado DIAN
+            <ExternalLink className="w-3 h-3" />
+          </a>
+          .
+        </p>
+      </div>
     </section>
   );
 }

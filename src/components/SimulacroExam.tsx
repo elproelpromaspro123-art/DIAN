@@ -28,7 +28,6 @@ import {
   SimulacroProgress,
   SimulacroHistoryEntry,
   HISTORY_KEY,
-  makeLegacyProgressKey,
   makeProgressKey,
   safeParseJSON,
 } from "@/lib/simulacro";
@@ -63,7 +62,7 @@ function formatTime(seconds: number): string {
 function calculateScore(correct: number, total: number): number {
   const raw = correct / total;
   const score = Math.round(raw * 100);
-  return Math.max(1, Math.min(100, score));
+  return Math.max(0, Math.min(100, score));
 }
 
 function getScoreColor(score: number): string {
@@ -80,6 +79,54 @@ function getScoreLabel(score: number): string {
   return "Necesitas mejorar";
 }
 
+type PhaseKey = "fase-1" | "fase-2" | "fase-3" | "otros";
+
+type PhaseSummary = {
+  key: PhaseKey;
+  label: string;
+  weight: number;
+  total: number;
+  correct: number;
+  score: number;
+};
+
+function resolvePhase(question: Question): { key: PhaseKey; label: string; weight: number } {
+  const label = question.groupLabel?.toLowerCase() ?? "";
+  if (label.includes("fase 1")) {
+    return {
+      key: "fase-1",
+      label:
+        question.groupLabel ??
+        "Fase 1 · Competencias básicas y funcionales (eliminatoria)",
+      weight: 0.6,
+    };
+  }
+  if (label.includes("fase 2")) {
+    return {
+      key: "fase-2",
+      label:
+        question.groupLabel ??
+        "Fase 2 · Competencias comportamentales (clasificatoria)",
+      weight: 0.2,
+    };
+  }
+  if (label.includes("fase 3")) {
+    return {
+      key: "fase-3",
+      label:
+        question.groupLabel ??
+        "Fase 3 · Integridad y ética pública (clasificatoria)",
+      weight: 0.2,
+    };
+  }
+
+  return {
+    key: "otros",
+    label: question.groupLabel ?? "Bloque general",
+    weight: 0,
+  };
+}
+
 type InitialExamState = {
   order: number[];
   answers: Record<number, string>;
@@ -90,11 +137,10 @@ type InitialExamState = {
 function buildInitialExamState(params: {
   allQuestions: Question[];
   progressKey: string;
-  areaId: string;
   questionCount: number;
   randomize: boolean;
 }): InitialExamState {
-  const { allQuestions, progressKey, areaId, questionCount, randomize } = params;
+  const { allQuestions, progressKey, questionCount, randomize } = params;
 
   if (typeof window === "undefined") {
     return { order: [], answers: {}, currentIndex: 0, elapsed: 0 };
@@ -104,21 +150,9 @@ function buildInitialExamState(params: {
     return { order: [], answers: {}, currentIndex: 0, elapsed: 0 };
   }
 
-  let data = safeParseJSON<SimulacroProgress>(
+  const data = safeParseJSON<SimulacroProgress>(
     localStorage.getItem(progressKey)
   );
-
-  if (!data && areaId === "matematicas") {
-    const legacyKey = makeLegacyProgressKey(questionCount, randomize);
-    const legacyData = safeParseJSON<SimulacroProgress>(
-      localStorage.getItem(legacyKey)
-    );
-    if (legacyData) {
-      data = { ...legacyData, areaId };
-      localStorage.setItem(progressKey, JSON.stringify(data));
-      localStorage.removeItem(legacyKey);
-    }
-  }
 
   if (data && Array.isArray(data.order) && typeof data.currentIndex === "number") {
     const safeOrder = data.order;
@@ -159,7 +193,6 @@ export default function SimulacroExam({
     buildInitialExamState({
       allQuestions,
       progressKey,
-      areaId,
       questionCount,
       randomize,
     })
@@ -305,6 +338,43 @@ export default function SimulacroExam({
     ? questions.filter((q) => answers[q.id] !== q.correctAnswer)
     : questions;
 
+  const phaseSummaries = useMemo<PhaseSummary[]>(() => {
+    const bucket = new Map<PhaseKey, PhaseSummary>();
+
+    for (const question of questions) {
+      const phase = resolvePhase(question);
+      const entry = bucket.get(phase.key) ?? {
+        key: phase.key,
+        label: phase.label,
+        weight: phase.weight,
+        total: 0,
+        correct: 0,
+        score: 0,
+      };
+
+      entry.total += 1;
+      if (answers[question.id] === question.correctAnswer) {
+        entry.correct += 1;
+      }
+
+      entry.score = calculateScore(entry.correct, entry.total);
+      bucket.set(phase.key, entry);
+    }
+
+    const order: PhaseKey[] = ["fase-1", "fase-2", "fase-3", "otros"];
+    return order
+      .map((key) => bucket.get(key))
+      .filter(Boolean) as PhaseSummary[];
+  }, [questions, answers]);
+
+  const phaseOneScore =
+    phaseSummaries.find((phase) => phase.key === "fase-1")?.score ?? score;
+  const simulatedWeightedScore = Math.round(
+    phaseSummaries.reduce((acc, phase) => acc + phase.score * phase.weight, 0)
+  );
+  const hasWeightedModel = phaseSummaries.some((phase) => phase.weight > 0);
+  const displayScore = hasWeightedModel ? simulatedWeightedScore : score;
+
   if (questionOrder.length === 0 || questions.length === 0) {
     return (
       <div className={`min-h-screen ${rootClass} flex items-center justify-center px-4`}>
@@ -340,12 +410,12 @@ export default function SimulacroExam({
 
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
               <div className="bg-dian-mint rounded-xl p-4">
-                <p className={`text-3xl font-bold ${getScoreColor(score)}`}>
-                  {score}
+                <p className={`text-3xl font-bold ${getScoreColor(displayScore)}`}>
+                  {displayScore}
                 </p>
-                <p className="text-xs text-gray-500 mt-1">Puntaje /100</p>
-                <p className={`text-xs font-semibold mt-1 ${getScoreColor(score)}`}>
-                  {getScoreLabel(score)}
+                <p className="text-xs text-gray-500 mt-1">Puntaje simulado /100</p>
+                <p className={`text-xs font-semibold mt-1 ${getScoreColor(displayScore)}`}>
+                  {getScoreLabel(displayScore)}
                 </p>
               </div>
               <div className="bg-green-50 rounded-xl p-4">
@@ -369,6 +439,44 @@ export default function SimulacroExam({
                 </div>
                 <p className="text-xs text-gray-500 mt-1">Tiempo total</p>
               </div>
+            </div>
+
+            <div className="text-left bg-dian-gray/70 border border-gray-200 rounded-xl p-4 mb-6">
+              <p className="text-sm font-semibold text-dian-navy mb-2">
+                Evaluación por fases (simulación pedagógica)
+              </p>
+              <p
+                className={`text-xs font-semibold mb-3 ${
+                  phaseOneScore >= 70 ? "text-green-600" : "text-dian-danger"
+                }`}
+              >
+                Fase 1 eliminatoria: {phaseOneScore}/100{" "}
+                {phaseOneScore >= 70
+                  ? "· Habilitado en esta simulación"
+                  : "· No habilitado en esta simulación"}
+              </p>
+              <div className="grid sm:grid-cols-3 gap-2 mb-2">
+                {phaseSummaries.map((phase) => (
+                  <div
+                    key={`phase-${phase.key}`}
+                    className="rounded-lg border border-gray-200 bg-white p-3"
+                  >
+                    <p className="text-xs font-semibold text-gray-700">
+                      {phase.label}
+                    </p>
+                    <p className="text-sm font-bold text-dian-navy mt-1">
+                      {phase.score}/100
+                    </p>
+                    <p className="text-[11px] text-gray-500 mt-1">
+                      {phase.correct}/{phase.total} correctas
+                    </p>
+                  </div>
+                ))}
+              </div>
+              <p className="text-[11px] text-gray-500">
+                Resultado orientativo basado en pesos referenciales (60/20/20). La
+                calificación oficial siempre la define CNSC según anexos y reglas vigentes.
+              </p>
             </div>
 
             <div className="flex flex-wrap justify-center gap-3">

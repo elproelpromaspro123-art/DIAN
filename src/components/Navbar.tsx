@@ -43,17 +43,17 @@ export default function Navbar() {
           <Link
             href="/"
             prefetch={false}
-            className="flex items-center gap-2 font-bold text-lg"
+            className="flex items-center gap-2.5 font-bold text-lg"
           >
             <Image
               src="/brand/logo.png"
               alt="Prepárate DIAN"
-              width={28}
-              height={28}
+              width={36}
+              height={36}
               className="rounded-md"
               priority
             />
-            <span className="hidden sm:inline">Prepárate DIAN</span>
+            <span className="hidden sm:inline text-[1.08rem] leading-none">Prepárate DIAN</span>
             <span className="sm:hidden">DIAN 2676</span>
           </Link>
 

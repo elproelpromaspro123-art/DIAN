@@ -1,4 +1,4 @@
-﻿const CACHE_NAME = "simo-dian-prep-v1";
+﻿const CACHE_NAME = "simo-dian-prep-v2";
 
 const PRECACHE_URLS = [
   "/",
@@ -30,6 +30,9 @@ self.addEventListener("fetch", (event) => {
   if (event.request.method !== "GET") return;
 
   const url = new URL(event.request.url);
+  if (url.origin !== self.location.origin) return;
+  if (url.pathname.startsWith("/_next-live/")) return;
+
   const unsupportedSchemes = ["chrome-extension", "chrome", "moz-extension"];
   if (unsupportedSchemes.some((scheme) => url.protocol.startsWith(scheme))) {
     return;
@@ -51,9 +54,9 @@ self.addEventListener("fetch", (event) => {
           }
           return response;
         })
-        .catch(() => cached);
+        .catch(() => cached ?? Response.error());
 
-      return cached || fetchPromise;
+      return cached ?? fetchPromise;
     })
   );
 });

@@ -1,5 +1,5 @@
 ﻿import { redirect } from "next/navigation";
 
-export default function LegacySimulacroRedirect() {
+export default function LegacyRedirectPage() {
   redirect("/");
 }

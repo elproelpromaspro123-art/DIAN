@@ -167,15 +167,15 @@ export default function InfoSection() {
               <div className="flex items-start gap-2">
                 <CheckCircle2 className="w-4 h-4 text-dian-success mt-0.5" />
                 <p>
-                  La DIAN anunció inscripciones del 28 de enero al 6 de febrero de
-                  2026, y la CNSC amplió el cierre al 7 de febrero de 2026.
+                  DIAN publicó apertura de inscripciones (28-ene-2026) y la CNSC
+                  amplió el cierre hasta el 7-feb-2026 por incidencia operativa en SIMO.
                 </p>
               </div>
               <div className="flex items-start gap-2">
                 <CheckCircle2 className="w-4 h-4 text-dian-success mt-0.5" />
                 <p>
-                  La etapa actual depende del cronograma publicado por la CNSC en
-                  SIMO. Consulta los avisos oficiales en la sección de recursos.
+                  La etapa vigente depende del cronograma oficial que publique la CNSC.
+                  Revisa siempre avisos oficiales antes de tomar decisiones.
                 </p>
               </div>
               <div className="flex items-start gap-2">
@@ -185,6 +185,32 @@ export default function InfoSection() {
                   las otras dos determinan tu posición en la lista de elegibles.
                 </p>
               </div>
+            </div>
+            <div className="flex flex-wrap gap-3 mt-4 text-xs">
+              <a
+                href="https://www.dian.gov.co/Prensa/Paginas/NG-Inician-inscripciones-para-proceso-de-seleccion-DIAN-2676.aspx"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-dian-navy hover:underline"
+              >
+                Comunicado DIAN (28-ene-2026)
+              </a>
+              <a
+                href="https://www.cnsc.gov.co/node/60247"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-dian-navy hover:underline"
+              >
+                Aviso CNSC ampliación (7-feb-2026)
+              </a>
+              <a
+                href="https://www.cnsc.gov.co/node/60011"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-dian-navy hover:underline"
+              >
+                Aviso CNSC incidencia SIMO (4-feb-2026)
+              </a>
             </div>
           </motion.div>
 
@@ -407,8 +433,8 @@ export default function InfoSection() {
                   <Link
                     href={
                       cargo.id === "analista"
-                        ? "/estudio/analista-basicas"
-                        : "/estudio/gestor-basicas"
+                        ? "/estudio/analista-v"
+                        : "/estudio/gestor-i"
                     }
                     prefetch={false}
                     className="inline-flex items-center gap-2 text-xs font-semibold text-white bg-dian-navy px-4 py-2 rounded-lg hover:bg-dian-navy-light transition-colors"

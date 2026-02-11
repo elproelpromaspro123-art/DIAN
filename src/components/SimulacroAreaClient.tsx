@@ -240,9 +240,10 @@ export default function SimulacroAreaClient({
                       ¿Qué contiene este cuadernillo?
                     </p>
                     <p>
-                      Preguntas de práctica basadas en los documentos oficiales
-                      del cargo {areaLabel}. Están diseñadas para familiarizarte
-                      con el tipo de evaluación y los criterios de la convocatoria.
+                      Reactivos de entrenamiento basados en documentos oficiales
+                      del cargo {areaLabel}. No son ítems reservados de la CNSC;
+                      están diseñados para familiarizarte con el tipo de evaluación
+                      y los criterios de la convocatoria.
                     </p>
                     <p>
                       <strong>¡Recuerda!</strong> Las pruebas DIAN evalúan

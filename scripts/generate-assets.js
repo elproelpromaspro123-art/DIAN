@@ -18,11 +18,11 @@ async function generateIcons() {
   const logo = await loadImage(brandPath);
 
   const iconSpecs = [
-    { name: "icon-512.png", size: 512, paddingRatio: 0.18 },
-    { name: "icon-192.png", size: 192, paddingRatio: 0.18 },
-    { name: "favicon.png", size: 256, paddingRatio: 0.2 },
-    { name: "apple-icon.png", size: 180, paddingRatio: 0.18 },
-    { name: "icon.png", size: 512, paddingRatio: 0.18 },
+    { name: "icon-512.png", size: 512, paddingRatio: 0.09 },
+    { name: "icon-192.png", size: 192, paddingRatio: 0.09 },
+    { name: "favicon.png", size: 256, paddingRatio: 0.08 },
+    { name: "apple-icon.png", size: 180, paddingRatio: 0.1 },
+    { name: "icon.png", size: 512, paddingRatio: 0.09 },
   ];
 
   for (const spec of iconSpecs) {

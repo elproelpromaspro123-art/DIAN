@@ -8,21 +8,13 @@ const lastModified = new Date("2026-02-11");
 const monthly = "monthly" as const;
 
 const simulacroRoutes = [
-  "analista-basicas",
-  "analista-comportamentales",
-  "analista-integridad",
-  "gestor-basicas",
-  "gestor-comportamentales",
-  "gestor-integridad",
+  "analista-v",
+  "gestor-i",
 ];
 
 const estudioRoutes = [
-  "analista-basicas",
-  "analista-comportamentales",
-  "analista-integridad",
-  "gestor-basicas",
-  "gestor-comportamentales",
-  "gestor-integridad",
+  "analista-v",
+  "gestor-i",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

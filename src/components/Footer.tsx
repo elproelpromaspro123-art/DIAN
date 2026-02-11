@@ -34,7 +34,7 @@ export default function Footer() {
                 <ExternalLink className="w-3 h-3" />
               </a>
               <a
-                href="https://www.cnsc.gov.co/convocatorias/dian-2676"
+                href="https://www.cnsc.gov.co/node/59797"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-dian-gold hover:underline inline-flex items-center gap-1"
@@ -43,7 +43,7 @@ export default function Footer() {
                 <ExternalLink className="w-3 h-3" />
               </a>
               <a
-                href="https://www.dian.gov.co/Prensa/Paginas/NG-Convocatoria-DIAN-2676-2025-.aspx"
+                href="https://www.dian.gov.co/Prensa/Paginas/NG-Inician-inscripciones-para-proceso-de-seleccion-DIAN-2676.aspx"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-dian-gold hover:underline inline-flex items-center gap-1"
