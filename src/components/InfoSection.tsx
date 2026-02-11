@@ -188,7 +188,7 @@ export default function InfoSection() {
             </div>
             <div className="flex flex-wrap gap-3 mt-4 text-xs">
               <a
-                href="https://www.dian.gov.co/Prensa/Paginas/NG-Inician-inscripciones-para-proceso-de-seleccion-DIAN-2676.aspx"
+                href="https://www.dian.gov.co/Prensa/Paginas/NG-Inician-inscripciones-en-la-modalidad-abierta-del-concurso-de-meritos-DIAN-2676.aspx"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-dian-navy hover:underline"
@@ -196,7 +196,7 @@ export default function InfoSection() {
                 Comunicado DIAN (28-ene-2026)
               </a>
               <a
-                href="https://www.cnsc.gov.co/node/60247"
+                href="https://www.cnsc.gov.co/node/59797"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-dian-navy hover:underline"
@@ -204,7 +204,7 @@ export default function InfoSection() {
                 Aviso CNSC ampliación (7-feb-2026)
               </a>
               <a
-                href="https://www.cnsc.gov.co/node/60011"
+                href="https://www.cnsc.gov.co/node/59574"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-dian-navy hover:underline"
@@ -451,3 +451,4 @@ export default function InfoSection() {
     </section>
   );
 }
+

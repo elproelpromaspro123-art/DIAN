@@ -100,7 +100,7 @@ const resources: Resource[] = [
     color: "from-sky-500 to-cyan-600",
     summary: "Comunicado oficial DIAN 2676.",
     kind: "link",
-    href: "https://www.dian.gov.co/Prensa/Paginas/NG-Inician-inscripciones-para-proceso-de-seleccion-DIAN-2676.aspx",
+    href: "https://www.dian.gov.co/Prensa/Paginas/NG-Inician-inscripciones-en-la-modalidad-abierta-del-concurso-de-meritos-DIAN-2676.aspx",
   },
   {
     name: "CNSC · Ampliación hasta 7-feb-2026",
@@ -109,7 +109,7 @@ const resources: Resource[] = [
     color: "from-teal-500 to-cyan-700",
     summary: "Aviso oficial por incidencia SIMO.",
     kind: "link",
-    href: "https://www.cnsc.gov.co/node/60247",
+    href: "https://www.cnsc.gov.co/node/59797",
   },
   {
     name: "CNSC · Incidencia pago de derechos SIMO",
@@ -118,7 +118,7 @@ const resources: Resource[] = [
     color: "from-slate-500 to-slate-700",
     summary: "Aviso oficial del 4-feb-2026.",
     kind: "link",
-    href: "https://www.cnsc.gov.co/node/60011",
+    href: "https://www.cnsc.gov.co/node/59574",
   },
 ];
 
@@ -301,7 +301,7 @@ export default function InfografiaSection() {
           </a>
           {" "}y{" "}
           <a
-            href="https://www.dian.gov.co/Prensa/Paginas/NG-Inician-inscripciones-para-proceso-de-seleccion-DIAN-2676.aspx"
+            href="https://www.dian.gov.co/Prensa/Paginas/NG-Inician-inscripciones-en-la-modalidad-abierta-del-concurso-de-meritos-DIAN-2676.aspx"
             target="_blank"
             rel="noreferrer"
             className="text-dian-navy hover:underline inline-flex items-center gap-1"
@@ -315,3 +315,4 @@ export default function InfografiaSection() {
     </section>
   );
 }
+

@@ -1,4 +1,4 @@
-﻿const CACHE_NAME = "simo-dian-prep-v2";
+﻿const CACHE_NAME = "simo-dian-prep-v3";
 
 const PRECACHE_URLS = [
   "/",

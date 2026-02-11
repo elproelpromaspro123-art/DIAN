@@ -56,9 +56,9 @@ export const ANALISTA_STUDY_CONTENT: CargoStudyContent = {
     { label: "CNSC Convocatoria DIAN 2676", href: "https://www.cnsc.gov.co/node/59797" },
     {
       label: "DIAN comunicado de inscripciones (28-ene-2026)",
-      href: "https://www.dian.gov.co/Prensa/Paginas/NG-Inician-inscripciones-para-proceso-de-seleccion-DIAN-2676.aspx",
+      href: "https://www.dian.gov.co/Prensa/Paginas/NG-Inician-inscripciones-en-la-modalidad-abierta-del-concurso-de-meritos-DIAN-2676.aspx",
     },
-    { label: "CNSC ampliación al 7-feb-2026", href: "https://www.cnsc.gov.co/node/60247" },
+    { label: "CNSC ampliación al 7-feb-2026", href: "https://www.cnsc.gov.co/node/59797" },
   ],
   phases: [
     {
@@ -250,9 +250,9 @@ export const GESTOR_STUDY_CONTENT: CargoStudyContent = {
     { label: "CNSC Convocatoria DIAN 2676", href: "https://www.cnsc.gov.co/node/59797" },
     {
       label: "DIAN comunicado de inscripciones (28-ene-2026)",
-      href: "https://www.dian.gov.co/Prensa/Paginas/NG-Inician-inscripciones-para-proceso-de-seleccion-DIAN-2676.aspx",
+      href: "https://www.dian.gov.co/Prensa/Paginas/NG-Inician-inscripciones-en-la-modalidad-abierta-del-concurso-de-meritos-DIAN-2676.aspx",
     },
-    { label: "CNSC ampliación al 7-feb-2026", href: "https://www.cnsc.gov.co/node/60247" },
+    { label: "CNSC ampliación al 7-feb-2026", href: "https://www.cnsc.gov.co/node/59797" },
   ],
   phases: [
     {
@@ -415,3 +415,4 @@ export const GESTOR_STUDY_CONTENT: CargoStudyContent = {
     },
   ],
 };
+

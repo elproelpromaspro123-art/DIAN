@@ -162,7 +162,7 @@ export default function Hero() {
               CNSC Convocatoria
             </a>
             <a
-              href="https://www.dian.gov.co/Prensa/Paginas/NG-Inician-inscripciones-para-proceso-de-seleccion-DIAN-2676.aspx"
+              href="https://www.dian.gov.co/Prensa/Paginas/NG-Inician-inscripciones-en-la-modalidad-abierta-del-concurso-de-meritos-DIAN-2676.aspx"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 bg-white/15 text-white font-semibold px-5 py-2.5 rounded-lg hover:bg-white/25 transition-colors text-sm border border-white/20 w-full sm:w-auto"
@@ -170,6 +170,35 @@ export default function Hero() {
               <ExternalLink className="w-4 h-4" />
               Comunicado DIAN
             </a>
+          </div>
+          <div className="mt-3 text-xs text-white/75 leading-relaxed">
+            <p className="font-semibold text-white/90">Fuentes verificadas (clic para abrir):</p>
+            <div className="flex flex-wrap justify-center gap-3 mt-1">
+              <a
+                href="https://www.dian.gov.co/Prensa/Paginas/NG-Inician-inscripciones-en-la-modalidad-abierta-del-concurso-de-meritos-DIAN-2676.aspx"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:underline"
+              >
+                DIAN · 28-ene-2026
+              </a>
+              <a
+                href="https://www.cnsc.gov.co/node/59797"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:underline"
+              >
+                CNSC · Ampliación 7-feb-2026
+              </a>
+              <a
+                href="https://www.cnsc.gov.co/node/59574"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:underline"
+              >
+                CNSC · Incidencia SIMO 4-feb-2026
+              </a>
+            </div>
           </div>
           <p className="text-xs text-white/50 mt-3">
             Proyecto educativo independiente — No afiliado con la DIAN, la CNSC ni SIMO.
@@ -179,4 +208,5 @@ export default function Hero() {
     </section>
   );
 }
+
 
