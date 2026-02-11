@@ -28,6 +28,7 @@ import {
   SimulacroProgress,
   SimulacroHistoryEntry,
   HISTORY_KEY,
+  makeLegacyProgressKey,
   makeProgressKey,
   safeParseJSON,
 } from "@/lib/simulacro";
@@ -62,7 +63,7 @@ function formatTime(seconds: number): string {
 function calculateScore(correct: number, total: number): number {
   const raw = correct / total;
   const score = Math.round(raw * 100);
-  return Math.max(0, Math.min(100, score));
+  return Math.max(1, Math.min(100, score));
 }
 
 function getScoreColor(score: number): string {
@@ -89,10 +90,11 @@ type InitialExamState = {
 function buildInitialExamState(params: {
   allQuestions: Question[];
   progressKey: string;
+  areaId: string;
   questionCount: number;
   randomize: boolean;
 }): InitialExamState {
-  const { allQuestions, progressKey, questionCount, randomize } = params;
+  const { allQuestions, progressKey, areaId, questionCount, randomize } = params;
 
   if (typeof window === "undefined") {
     return { order: [], answers: {}, currentIndex: 0, elapsed: 0 };
@@ -102,9 +104,21 @@ function buildInitialExamState(params: {
     return { order: [], answers: {}, currentIndex: 0, elapsed: 0 };
   }
 
-  const data = safeParseJSON<SimulacroProgress>(
+  let data = safeParseJSON<SimulacroProgress>(
     localStorage.getItem(progressKey)
   );
+
+  if (!data && areaId === "matematicas") {
+    const legacyKey = makeLegacyProgressKey(questionCount, randomize);
+    const legacyData = safeParseJSON<SimulacroProgress>(
+      localStorage.getItem(legacyKey)
+    );
+    if (legacyData) {
+      data = { ...legacyData, areaId };
+      localStorage.setItem(progressKey, JSON.stringify(data));
+      localStorage.removeItem(legacyKey);
+    }
+  }
 
   if (data && Array.isArray(data.order) && typeof data.currentIndex === "number") {
     const safeOrder = data.order;
@@ -145,6 +159,7 @@ export default function SimulacroExam({
     buildInitialExamState({
       allQuestions,
       progressKey,
+      areaId,
       questionCount,
       randomize,
     })

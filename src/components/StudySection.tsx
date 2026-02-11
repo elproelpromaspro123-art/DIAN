@@ -93,7 +93,7 @@ export default function StudySection() {
                       <h3 className="font-bold text-gray-900 mb-1">{area.name}</h3>
                       <p className="text-xs text-gray-500 mb-3">{area.description}</p>
                       <span className="text-xs bg-dian-mint text-dian-navy font-medium px-2 py-1 rounded-full">
-                        {area.total} preguntas guiadas
+                        {area.total} lecturas guiadas
                       </span>
                     </div>
                     <ArrowRight className="w-5 h-5 text-gray-300 group-hover:text-dian-navy transition-colors shrink-0 mt-1" />
