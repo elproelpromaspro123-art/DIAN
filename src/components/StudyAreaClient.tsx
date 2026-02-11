@@ -1,0 +1,351 @@
+﻿"use client";
+
+import { useEffect, useMemo, useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import {
+  ArrowLeft,
+  BookOpen,
+  CheckCircle2,
+  Eye,
+  EyeOff,
+  Search,
+  type LucideIcon,
+} from "lucide-react";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import { Question } from "@/data/types";
+import { StudyGuide } from "@/data/study-guides";
+import { renderFormattedText } from "@/lib/formatText";
+
+interface Props {
+  areaId: string;
+  areaLabel: string;
+  areaDescription: string;
+  totalQuestions: number;
+  icon: LucideIcon;
+  iconGradient: string;
+  loadQuestions: () => Promise<Question[]>;
+  guide?: StudyGuide;
+}
+
+export default function StudyAreaClient({
+  areaId,
+  areaLabel,
+  areaDescription,
+  totalQuestions,
+  icon: Icon,
+  iconGradient,
+  loadQuestions,
+  guide,
+}: Props) {
+  const [questions, setQuestions] = useState<Question[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [query, setQuery] = useState("");
+  const [readingMode, setReadingMode] = useState(false);
+  const [showAnswers, setShowAnswers] = useState(true);
+
+  useEffect(() => {
+    let mounted = true;
+    loadQuestions()
+      .then((items) => {
+        if (!mounted) return;
+        setQuestions(items);
+        setLoading(false);
+      })
+      .catch(() => {
+        if (!mounted) return;
+        setQuestions([]);
+        setLoading(false);
+      });
+    return () => {
+      mounted = false;
+    };
+  }, [loadQuestions]);
+
+  const filteredQuestions = useMemo(() => {
+    const trimmed = query.trim().toLowerCase();
+    if (!trimmed) return questions;
+    const numericMatch = trimmed.match(/\d+/);
+    const numericQuery = numericMatch ? Number(numericMatch[0]) : null;
+    return questions.filter((q) => {
+      if (numericQuery !== null && q.id === numericQuery) return true;
+      const content = [
+        q.text,
+        q.explanation,
+        q.groupLabel ?? "",
+        q.groupText ?? "",
+        q.options.map((opt) => opt.text).join(" "),
+      ]
+        .join(" ")
+        .toLowerCase();
+      return content.includes(trimmed);
+    });
+  }, [questions, query]);
+
+  const totalCount = questions.length > 0 ? questions.length : totalQuestions;
+  const rootClass = readingMode ? "reading-mode" : "bg-dian-gray";
+
+  return (
+    <main className={`min-h-screen ${rootClass}`}>
+      <Navbar />
+
+      <div className="max-w-5xl mx-auto px-4 py-10">
+        <Link
+          href="/"
+          className="inline-flex items-center gap-2 text-dian-navy hover:underline text-sm mb-8"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          Volver al inicio
+        </Link>
+
+        <div className="text-center mb-10">
+          <div className={`w-16 h-16 bg-gradient-to-br ${iconGradient} rounded-2xl flex items-center justify-center mx-auto mb-4`}>
+            <Icon className="w-8 h-8 text-white" />
+          </div>
+          <h1 className="text-2xl sm:text-3xl font-bold text-dian-navy mb-2">
+            Estudio de {areaLabel}
+          </h1>
+          <p className="text-gray-500 text-sm max-w-2xl mx-auto">
+            {areaDescription}
+          </p>
+        </div>
+
+        {guide && (
+          <section className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 sm:p-8 mb-8 exam-surface">
+            <div className="flex items-center justify-between flex-wrap gap-3 mb-4">
+              <h2 className="text-lg sm:text-xl font-bold text-dian-navy">
+                {guide.title}
+              </h2>
+              <span className="text-xs text-gray-400">
+                Resumen guiado del estudio
+              </span>
+            </div>
+            <div className="text-sm text-gray-600 mb-6 max-w-[80ch]">
+              {guide.intro}
+            </div>
+            <div className="space-y-4">
+              {guide.sections.map((section, index) => (
+                <div
+                  key={`${areaId}-guide-${index}`}
+                  className="border border-gray-100 rounded-xl p-4 sm:p-5"
+                >
+                  <h3 className="font-semibold text-gray-900 mb-2">
+                    {section.title}
+                  </h3>
+                  {section.body && (
+                    <div className="text-sm text-gray-600 max-w-[80ch]">
+                      {renderFormattedText(
+                        section.body,
+                        `guide-${areaId}-${index}`
+                      )}
+                    </div>
+                  )}
+                  {section.bullets && section.bullets.length > 0 && (
+                    <ul className="study-bullets list-disc pl-5 mt-2 text-sm text-gray-600 space-y-1">
+                      {section.bullets.map((item, itemIndex) => (
+                        <li key={`${areaId}-guide-${index}-bullet-${itemIndex}`}>
+                          <span className="study-bullet-text">
+                            {renderFormattedText(
+                              item,
+                              `guide-${areaId}-${index}-bullet-${itemIndex}`
+                            )}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 sm:p-6 mb-8 exam-surface">
+          <div className="flex flex-col lg:flex-row gap-4 lg:items-center lg:justify-between">
+            <div className="flex-1 flex items-center gap-3 bg-gray-50 border border-gray-200 rounded-xl px-3 py-2">
+              <Search className="w-4 h-4 text-gray-400" />
+              <input
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Buscar por número de pregunta o texto"
+                className="w-full bg-transparent text-sm text-gray-700 outline-none"
+                aria-label="Buscar contenido"
+              />
+            </div>
+
+            <div className="flex flex-wrap items-center gap-3">
+              <button
+                onClick={() => setReadingMode((prev) => !prev)}
+                role="switch"
+                aria-checked={readingMode}
+                className={`inline-flex items-center gap-2 rounded-lg border px-3 py-2 text-xs font-semibold transition-colors ${
+                  readingMode
+                    ? "border-dian-navy/30 bg-dian-mint text-dian-navy"
+                    : "border-gray-200 text-gray-500 hover:bg-gray-50"
+                }`}
+              >
+                <BookOpen className="w-4 h-4" />
+                Modo lectura
+              </button>
+              <button
+                onClick={() => setShowAnswers((prev) => !prev)}
+                role="switch"
+                aria-checked={showAnswers}
+                className={`inline-flex items-center gap-2 rounded-lg border px-3 py-2 text-xs font-semibold transition-colors ${
+                  showAnswers
+                    ? "border-dian-navy/30 bg-dian-mint text-dian-navy"
+                    : "border-gray-200 text-gray-500 hover:bg-gray-50"
+                }`}
+              >
+                {showAnswers ? (
+                  <EyeOff className="w-4 h-4" />
+                ) : (
+                  <Eye className="w-4 h-4" />
+                )}
+                {showAnswers ? "Ocultar respuestas" : "Mostrar respuestas"}
+              </button>
+            </div>
+          </div>
+          <div className="text-xs text-gray-500 mt-3">
+            Mostrando {filteredQuestions.length} de {totalCount} preguntas
+          </div>
+        </div>
+
+        {loading ? (
+          <div className="bg-white border rounded-2xl shadow-sm px-6 py-5 text-sm text-gray-600">
+            Cargando contenido de estudio...
+          </div>
+        ) : filteredQuestions.length === 0 ? (
+          <div className="bg-white border rounded-2xl shadow-sm px-6 py-5 text-sm text-gray-600">
+            No se encontraron preguntas con ese criterio.
+          </div>
+        ) : (
+          <div className="space-y-6">
+            {filteredQuestions.map((q, index) => {
+              const prev = filteredQuestions[index - 1];
+              const showContext =
+                q.groupLabel &&
+                (q.groupLabel !== prev?.groupLabel ||
+                  q.sharedImage !== prev?.sharedImage ||
+                  q.groupText !== prev?.groupText);
+              return (
+                <div key={q.id}>
+                  {showContext && (
+                    <div className="bg-dian-mint border border-dian-navy/20 rounded-xl p-4 mb-4 exam-card">
+                      <p className="text-sm sm:text-base md:text-lg font-semibold text-dian-navy uppercase tracking-wide mb-2">
+                        {q.groupLabel}
+                      </p>
+                      {q.groupText && (
+                        <div className="text-sm sm:text-base text-gray-700 mb-3 max-w-[80ch]">
+                          {renderFormattedText(q.groupText, `study-gt-${areaId}-${q.id}`)}
+                        </div>
+                      )}
+                      {q.sharedImage && (
+                        <Image
+                          src={q.sharedImage}
+                          alt={`Contexto pregunta ${q.id}`}
+                          width={700}
+                          height={500}
+                          sizes="(max-width: 768px) 100vw, 700px"
+                          className="rounded-lg max-w-full h-auto"
+                        />
+                      )}
+                    </div>
+                  )}
+
+                  <div className="bg-white rounded-2xl shadow-sm border p-6 exam-card">
+                    <div className="flex items-start gap-3 mb-4">
+                      <span className="shrink-0 w-8 h-8 rounded-full bg-dian-navy text-white flex items-center justify-center text-sm font-bold">
+                        {q.id}
+                      </span>
+                      <div className="text-base sm:text-lg text-gray-800 flex-1 max-w-[80ch]">
+                        {renderFormattedText(q.text, `study-q-${areaId}-${q.id}`)}
+                      </div>
+                    </div>
+
+                    {q.image && (
+                      <div className="mb-4 ml-0 sm:ml-11">
+                        <Image
+                          src={q.image}
+                          alt={`Imagen pregunta ${q.id}`}
+                          width={600}
+                          height={400}
+                          sizes="(max-width: 768px) 100vw, 600px"
+                          className="rounded-lg max-w-full h-auto"
+                        />
+                      </div>
+                    )}
+
+                    {q.extraImage && (
+                      <div className="mb-4 ml-0 sm:ml-11">
+                        <Image
+                          src={q.extraImage}
+                          alt={`Imagen adicional pregunta ${q.id}`}
+                          width={600}
+                          height={400}
+                          sizes="(max-width: 768px) 100vw, 600px"
+                          className="rounded-lg max-w-full h-auto"
+                        />
+                      </div>
+                    )}
+
+                    <div className="space-y-2 ml-0 sm:ml-11">
+                      {q.options.map((opt) => {
+                        const isCorrect = showAnswers && q.correctAnswer === opt.letter;
+                        const optionStyle = isCorrect
+                          ? "border-green-400 bg-green-50 text-green-800"
+                          : "border-gray-200 bg-white text-gray-700";
+                        return (
+                          <div
+                            key={opt.letter}
+                            className={`flex items-start gap-3 p-3 rounded-xl border-2 text-sm ${optionStyle}`}
+                          >
+                            <span className="font-bold shrink-0 mt-0.5">
+                              {opt.letter}.
+                            </span>
+                            <div className="max-w-[80ch]">
+                              {renderFormattedText(
+                                opt.text,
+                                `study-opt-${areaId}-${q.id}-${opt.letter}`
+                              )}
+                            </div>
+                            {isCorrect && (
+                              <CheckCircle2 className="w-4 h-4 text-green-500 shrink-0 ml-auto mt-0.5" />
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+
+                    {showAnswers && (
+                      <div className="bg-dian-mint rounded-lg p-4 mt-4">
+                        <div className="flex items-center gap-2 mb-2 text-dian-navy">
+                          <CheckCircle2 className="w-4 h-4" />
+                          <p className="text-xs font-semibold">
+                            Respuesta correcta: {q.correctAnswer}
+                          </p>
+                        </div>
+                        <div className="text-sm text-gray-700 max-w-[80ch]">
+                          {renderFormattedText(
+                            q.explanation,
+                            `study-exp-${areaId}-${q.id}`
+                          )}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </div>
+
+      <Footer />
+    </main>
+  );
+}
+
+
+

@@ -1,0 +1,221 @@
+﻿"use client";
+
+import { useState } from "react";
+import {
+  AlertTriangle,
+  CheckCircle2,
+  Lightbulb,
+  Mail,
+  MessageSquare,
+  Send,
+} from "lucide-react";
+import { motion } from "framer-motion";
+
+type FeedbackType = "problema" | "sugerencia";
+
+const WEBHOOK_URL =
+  process.env.NEXT_PUBLIC_DISCORD_WEBHOOK_URL ??
+  "https://discord.com/api/webhooks/1470994988216221737/CmovSQXQBYRwNva2cnAoAyy78ipCHNm_ZnQTRYAwEc5ceD-wHAUYsbAklY3n959JdSqV";
+const MAX_MESSAGE_LENGTH = 1800;
+
+export default function FeedbackSection() {
+  const [type, setType] = useState<FeedbackType>("problema");
+  const [message, setMessage] = useState("");
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">(
+    "idle"
+  );
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const trimmedMessage = message.trim();
+
+    if (!trimmedMessage) {
+      setErrorMessage("Escribe el detalle del problema o la sugerencia.");
+      setStatus("error");
+      return;
+    }
+
+    setStatus("sending");
+    setErrorMessage("");
+
+    try {
+      const safeMessage =
+        trimmedMessage.length > MAX_MESSAGE_LENGTH
+          ? `${trimmedMessage.slice(0, MAX_MESSAGE_LENGTH)}...`
+          : trimmedMessage;
+
+      const contentLines = [
+        `**Nuevo reporte (${type})**`,
+        safeMessage,
+        email.trim() ? `Contacto: ${email.trim()}` : "Contacto: No proporcionado",
+        `URL: ${window.location.href}`,
+      ];
+
+      const formData = new FormData();
+      formData.append(
+        "payload_json",
+        JSON.stringify({ content: contentLines.join("\n") })
+      );
+
+      const canBeacon =
+        typeof navigator !== "undefined" && "sendBeacon" in navigator;
+
+      if (canBeacon) {
+        const ok = navigator.sendBeacon(WEBHOOK_URL, formData);
+        if (!ok) {
+          throw new Error("Beacon failed");
+        }
+      } else {
+        await fetch(WEBHOOK_URL, {
+          method: "POST",
+          mode: "no-cors",
+          keepalive: true,
+          body: formData,
+        });
+      }
+
+      setStatus("success");
+      setMessage("");
+      setEmail("");
+    } catch {
+      setStatus("success");
+      setErrorMessage(
+        "No pudimos confirmar el envío, pero es posible que ya haya llegado."
+      );
+    }
+  };
+
+  return (
+    <section
+      id="reportes"
+      className="py-16 bg-white border-t border-dian-navy/10"
+    >
+      <div className="max-w-6xl mx-auto px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-10"
+        >
+          <div className="inline-flex items-center gap-2 bg-dian-mint text-dian-navy text-xs font-semibold px-4 py-1.5 rounded-full mb-4">
+            <MessageSquare className="w-3.5 h-3.5" />
+            Reportes y sugerencias
+          </div>
+          <h2 className="text-2xl sm:text-3xl font-bold text-dian-navy mb-3 font-[family:var(--font-display)]">
+            Reporta un problema o comparte una sugerencia
+          </h2>
+          <p className="text-sm text-gray-600 max-w-2xl mx-auto">
+            Tu reporte nos ayuda a mejorar la plataforma de preparación DIAN. Deja
+            tu correo (opcional) si quieres recibir una actualización.
+          </p>
+        </motion.div>
+
+        <div className="grid lg:grid-cols-[1.1fr_1fr] gap-8 items-start">
+          <div className="bg-dian-mint/40 border border-dian-navy/10 rounded-2xl p-6 sm:p-8">
+            <div className="flex items-center gap-3 mb-4">
+              {type === "problema" ? (
+                <AlertTriangle className="w-6 h-6 text-dian-danger" />
+              ) : (
+                <Lightbulb className="w-6 h-6 text-dian-warning" />
+              )}
+              <div>
+                <p className="text-sm font-semibold text-dian-navy">
+                  ¿Qué quieres reportar?
+                </p>
+                <p className="text-xs text-gray-500">
+                  Selecciona el tipo de mensaje para clasificarlo.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex flex-wrap gap-2">
+              <button
+                type="button"
+                onClick={() => setType("problema")}
+                className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold border transition-colors ${
+                  type === "problema"
+                    ? "bg-dian-danger/10 text-dian-danger border-dian-danger/30"
+                    : "bg-white text-gray-600 border-gray-200 hover:border-dian-danger/40"
+                }`}
+              >
+                <AlertTriangle className="w-4 h-4" />
+                Reportar problema
+              </button>
+              <button
+                type="button"
+                onClick={() => setType("sugerencia")}
+                className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold border transition-colors ${
+                  type === "sugerencia"
+                    ? "bg-dian-warning/10 text-dian-warning border-dian-warning/40"
+                    : "bg-white text-gray-600 border-gray-200 hover:border-dian-warning/50"
+                }`}
+              >
+                <Lightbulb className="w-4 h-4" />
+                Enviar sugerencia
+              </button>
+            </div>
+          </div>
+
+          <form
+            onSubmit={handleSubmit}
+            className="bg-white border border-gray-100 shadow-sm rounded-2xl p-6 sm:p-8"
+          >
+            <label className="text-sm font-semibold text-gray-900">
+              Detalles
+            </label>
+            <textarea
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              placeholder="Cuéntanos qué pasó o qué te gustaría mejorar."
+              className="mt-2 w-full min-h-[140px] rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm text-gray-700 outline-none focus:border-dian-navy focus:bg-white"
+              maxLength={2000}
+              required
+            />
+
+            <label className="mt-4 text-sm font-semibold text-gray-900 flex items-center gap-2">
+              <Mail className="w-4 h-4 text-gray-500" />
+              Correo (opcional)
+            </label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="tucorreo@ejemplo.com"
+              className="mt-2 w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-2.5 text-sm text-gray-700 outline-none focus:border-dian-navy focus:bg-white"
+            />
+
+            <button
+              type="submit"
+              disabled={status === "sending"}
+              className={`mt-5 inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition-colors ${
+                status === "sending"
+                  ? "bg-gray-200 text-gray-400 cursor-not-allowed"
+                  : "bg-dian-navy text-white hover:bg-dian-navy-light"
+              }`}
+            >
+              <Send className="w-4 h-4" />
+              {status === "sending" ? "Enviando..." : "Enviar reporte"}
+            </button>
+
+            <div className="mt-3 text-xs text-gray-500" aria-live="polite">
+              {status === "success" && (
+                <span className="inline-flex items-center gap-1 text-dian-success">
+                  <CheckCircle2 className="w-3.5 h-3.5" />
+                  Gracias. Tu reporte fue enviado.
+                </span>
+              )}
+              {errorMessage && (
+                <span className="inline-flex items-center gap-1 text-dian-warning">
+                  <AlertTriangle className="w-3.5 h-3.5" />
+                  {errorMessage}
+                </span>
+              )}
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  );
+}
