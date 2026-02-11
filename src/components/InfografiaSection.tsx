@@ -151,11 +151,6 @@ export default function InfografiaSection() {
   const handleResourceOpen = (resource: Resource) => {
     if (!resource.available) return;
 
-    if (resource.kind === "link" && resource.href) {
-      window.open(resource.href, "_blank", "noopener,noreferrer");
-      return;
-    }
-
     if (resource.kind === "pdf" && resource.file) {
       if (isMobileViewport) {
         window.open(resource.file, "_blank", "noopener,noreferrer");
@@ -189,16 +184,43 @@ export default function InfografiaSection() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {resources.map((resource) => {
             const Icon = resource.icon;
+            const cardClass = `relative group rounded-2xl p-5 text-left transition-all duration-300 border-2 shadow-sm hover:-translate-y-0.5 ${
+              resource.available
+                ? "border-dian-navy/15 hover:border-dian-navy hover:shadow-lg cursor-pointer bg-white"
+                : "border-gray-200 bg-gray-50 cursor-not-allowed opacity-70"
+            }`;
+
+            if (resource.kind === "link" && resource.href) {
+              return (
+                <a
+                  key={resource.name}
+                  href={resource.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={cardClass}
+                >
+                  <div
+                    className={`w-12 h-12 mb-3 rounded-xl bg-gradient-to-br ${resource.color} flex items-center justify-center`}
+                  >
+                    <Icon className="w-6 h-6 text-white" />
+                  </div>
+                  <h3 className="font-semibold text-sm text-gray-800">{resource.name}</h3>
+                  <p className="text-xs text-gray-500 mt-1">{resource.summary}</p>
+                  <span className="mt-2 inline-flex items-center text-xs text-dian-navy font-medium">
+                    Abrir aviso oficial
+                    <ChevronRight className="w-3 h-3 ml-0.5" />
+                  </span>
+                  <p className="text-[11px] text-gray-400 mt-2">Fuente oficial CNSC (enlace directo)</p>
+                </a>
+              );
+            }
+
             return (
               <button
                 key={resource.name}
                 onClick={() => handleResourceOpen(resource)}
                 disabled={!resource.available}
-                className={`relative group rounded-2xl p-5 text-left transition-all duration-300 border-2 shadow-sm hover:-translate-y-0.5 ${
-                  resource.available
-                    ? "border-dian-navy/15 hover:border-dian-navy hover:shadow-lg cursor-pointer bg-white"
-                    : "border-gray-200 bg-gray-50 cursor-not-allowed opacity-70"
-                }`}
+                className={cardClass}
               >
                 <div
                   className={`w-12 h-12 mb-3 rounded-xl bg-gradient-to-br ${resource.color} flex items-center justify-center`}
@@ -208,7 +230,7 @@ export default function InfografiaSection() {
                 <h3 className="font-semibold text-sm text-gray-800">{resource.name}</h3>
                 <p className="text-xs text-gray-500 mt-1">{resource.summary}</p>
                 <span className="mt-2 inline-flex items-center text-xs text-dian-navy font-medium">
-                  {resource.kind === "pdf" ? "Abrir documento" : "Abrir aviso oficial"}
+                  Abrir documento
                   <ChevronRight className="w-3 h-3 ml-0.5" />
                 </span>
               </button>
