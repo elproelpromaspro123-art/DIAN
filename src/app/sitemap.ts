@@ -5,6 +5,7 @@ export const dynamic = "force-static";
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://simo-dian.vercel.app";
 
 const lastModified = new Date("2026-02-11");
+const monthly = "monthly" as const;
 
 const simulacroRoutes = [
   "analista-basicas",
@@ -35,13 +36,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...simulacroRoutes.map((route) => ({
       url: `${siteUrl}/simulacro/${route}`,
       lastModified,
-      changeFrequency: "monthly",
+      changeFrequency: monthly,
       priority: 0.7,
     })),
     ...estudioRoutes.map((route) => ({
       url: `${siteUrl}/estudio/${route}`,
       lastModified,
-      changeFrequency: "monthly",
+      changeFrequency: monthly,
       priority: 0.7,
     })),
   ];

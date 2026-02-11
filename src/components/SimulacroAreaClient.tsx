@@ -99,7 +99,9 @@ export default function SimulacroAreaClient({
       const nextMap: Record<number, SimulacroProgress | null> = {};
       for (const mode of modes) {
         const key = makeProgressKey(areaId, mode.count, randomize);
-        let data = safeParseJSON<SimulacroProgress>(localStorage.getItem(key));
+        const data = safeParseJSON<SimulacroProgress>(
+          localStorage.getItem(key)
+        );
 
         nextMap[mode.count] = data;
       }
