@@ -33,10 +33,6 @@ export function makeProgressKey(
   }`;
 }
 
-export function makeLegacyProgressKey(count: number, randomize: boolean): string {
-  return `simo_dian_simulacro_progress_${count}_${randomize ? "rand" : "fixed"}`;
-}
-
 export function safeParseJSON<T>(raw: string | null): T | null {
   if (!raw) return null;
   try {
