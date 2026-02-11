@@ -75,7 +75,12 @@ export default function SimulacroAreaClient({
 
   useFocusTrap(introRef, showIntro);
 
-  const modes = useMemo(() => buildModes(totalQuestions), [totalQuestions]);
+  const effectiveTotalQuestions =
+    questions && questions.length > 0 ? questions.length : totalQuestions;
+  const modes = useMemo(
+    () => buildModes(effectiveTotalQuestions),
+    [effectiveTotalQuestions]
+  );
   const areaHref = `/simulacro/${areaId}`;
 
   useEffect(() => {
@@ -378,7 +383,7 @@ export default function SimulacroAreaClient({
                       {mode.label}
                     </p>
                     <p className="text-xs text-gray-400">
-                      {Math.round((mode.count / totalQuestions) * 100)}% del
+                      {Math.round((mode.count / effectiveTotalQuestions) * 100)}% del
                       simulacro completo
                     </p>
                     {progressMap[mode.count] && (

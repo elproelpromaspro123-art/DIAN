@@ -15,10 +15,11 @@ export default function SimulacroAnalistaVClient() {
       areaId="analista-v"
       areaLabel="Analista V · Simulacro integral"
       areaDescription="Simulacro completo por fases (eliminatoria + clasificatorias) para Analista V."
-      totalQuestions={50}
+      totalQuestions={100}
       icon={ClipboardCheck}
       iconGradient="from-emerald-500 to-teal-600"
       loadQuestions={loadAnalistaVQuestions}
     />
   );
 }
+

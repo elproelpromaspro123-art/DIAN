@@ -18,21 +18,21 @@ import Link from "next/link";
 const pruebas = [
   {
     title: "Competencias básicas y funcionales",
-    badge: "Eliminatorio · ~60%",
+    badge: "Eliminatorio · 65% (Analista) / 70% (Gestor)",
     description:
       "Evalúa conocimientos normativos, tributarios, aduaneros, cambiarios y el manual de funciones del cargo. No superar el mínimo te excluye del proceso.",
     icon: ClipboardCheck,
   },
   {
     title: "Competencias comportamentales",
-    badge: "Clasificatorio · ~20%",
+    badge: "Clasificatorio · 15% (Analista) / 20% (Gestor)",
     description:
       "Mide tu forma de actuar en el trabajo, alineada con el Diccionario de Competencias y las conductas observables definidas oficialmente.",
     icon: Users,
   },
   {
     title: "Prueba de integridad",
-    badge: "Clasificatorio · ~10-20%",
+    badge: "Clasificatorio · 10% (ambos cargos)",
     description:
       "Valora ética pública, honestidad y coherencia frente a dilemas del servicio, con base en el Código de Integridad y el Código de Ética DIAN.",
     icon: ShieldAlert,
@@ -63,7 +63,7 @@ const cargos = [
     ],
     comportamentales: [
       "Comportamiento ético (nivel 4)",
-      "Adaptabilidad (nivel 3)",
+      "Adaptabilidad (nivel 4)",
       "Comunicación efectiva (nivel 3)",
       "Trabajo en equipo (nivel 3)",
     ],
@@ -222,10 +222,10 @@ export default function InfoSection() {
           >
             <div className="flex items-center gap-3 mb-5">
               <Target className="w-6 h-6 text-dian-navy" />
-              <div>
-                <p className="text-sm font-semibold text-dian-navy">Estructura de pruebas</p>
-                <p className="text-xs text-gray-600">Peso aproximado y enfoque.</p>
-              </div>
+            <div>
+              <p className="text-sm font-semibold text-dian-navy">Estructura de pruebas</p>
+              <p className="text-xs text-gray-600">Pesos oficiales CNSC por cargo.</p>
+            </div>
             </div>
             <div className="space-y-4">
               {pruebas.map((prueba) => {
@@ -283,7 +283,7 @@ export default function InfoSection() {
                     Competencias básicas y funcionales
                   </td>
                   <td className="py-3 pr-4">Eliminatorio</td>
-                  <td className="py-3 pr-4">~60%</td>
+                  <td className="py-3 pr-4">65% / 70%</td>
                   <td className="py-3">
                     Conocimientos de ley, tributos, aduanas y manual de funciones.
                     Si no superas el mínimo, quedas fuera del proceso.
@@ -294,7 +294,7 @@ export default function InfoSection() {
                     Competencias comportamentales
                   </td>
                   <td className="py-3 pr-4">Clasificatorio</td>
-                  <td className="py-3 pr-4">~20%</td>
+                  <td className="py-3 pr-4">15% / 20%</td>
                   <td className="py-3">
                     Forma de actuar basada en el Diccionario de Competencias
                     (adaptabilidad, comunicación, etc.).
@@ -305,7 +305,7 @@ export default function InfoSection() {
                     Prueba de integridad
                   </td>
                   <td className="py-3 pr-4">Clasificatorio</td>
-                  <td className="py-3 pr-4">~10-20%</td>
+                  <td className="py-3 pr-4">10%</td>
                   <td className="py-3">
                     Valores éticos y honestidad frente a dilemas del servicio público.
                   </td>

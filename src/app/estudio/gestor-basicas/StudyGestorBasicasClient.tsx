@@ -16,7 +16,7 @@ export default function StudyGestorBasicasClient() {
       areaId="gestor-basicas"
       areaLabel="Gestor I · Básicas y funcionales"
       areaDescription="Funciones administrativas, logística y contratación pública del Gestor I."
-      totalQuestions={12}
+      totalQuestions={25}
       icon={ClipboardCheck}
       iconGradient="from-indigo-500 to-slate-600"
       loadQuestions={loadGestorBasicasQuestions}
@@ -24,3 +24,4 @@ export default function StudyGestorBasicasClient() {
     />
   );
 }
+

@@ -16,7 +16,7 @@ export default function StudyGestorIntegridadClient() {
       areaId="gestor-integridad"
       areaLabel="Gestor I · Integridad"
       areaDescription="Código de Ética DIAN y principios de integridad pública."
-      totalQuestions={12}
+      totalQuestions={25}
       icon={ShieldCheck}
       iconGradient="from-teal-500 to-cyan-600"
       loadQuestions={loadGestorIntegridadQuestions}
@@ -24,3 +24,4 @@ export default function StudyGestorIntegridadClient() {
     />
   );
 }
+

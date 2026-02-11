@@ -10,7 +10,7 @@ const areas = [
     icon: ClipboardCheck,
     href: "/simulacro/analista-v",
     color: "from-emerald-500 to-teal-600",
-    questions: 50,
+    questions: 100,
     description:
       "Incluye fase eliminatoria y dos fases clasificatorias, con retroalimentación detallada.",
   },
@@ -19,7 +19,7 @@ const areas = [
     icon: Briefcase,
     href: "/simulacro/gestor-i",
     color: "from-indigo-500 to-slate-600",
-    questions: 50,
+    questions: 100,
     description:
       "Entrenamiento completo por fases con evaluación de desempeño y mejora por bloque.",
   },

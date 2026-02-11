@@ -15,10 +15,11 @@ export default function SimulacroGestorBasicasClient() {
       areaId="gestor-basicas"
       areaLabel="Gestor I · Básicas y funcionales"
       areaDescription="Prueba eliminatoria basada en el manual de funciones del Gestor I."
-      totalQuestions={12}
+      totalQuestions={25}
       icon={ClipboardCheck}
       iconGradient="from-indigo-500 to-slate-600"
       loadQuestions={loadGestorBasicasQuestions}
     />
   );
 }
+

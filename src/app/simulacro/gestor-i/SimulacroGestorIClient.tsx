@@ -15,10 +15,11 @@ export default function SimulacroGestorIClient() {
       areaId="gestor-i"
       areaLabel="Gestor I · Simulacro integral"
       areaDescription="Simulacro completo por fases (eliminatoria + clasificatorias) para Gestor I."
-      totalQuestions={50}
+      totalQuestions={100}
       icon={ClipboardCheck}
       iconGradient="from-indigo-500 to-slate-600"
       loadQuestions={loadGestorIQuestions}
     />
   );
 }
+

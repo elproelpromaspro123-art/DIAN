@@ -15,10 +15,11 @@ export default function SimulacroAnalistaIntegridadClient() {
       areaId="analista-integridad"
       areaLabel="Analista V · Integridad"
       areaDescription="Valores públicos y Código de Integridad DIAN."
-      totalQuestions={12}
+      totalQuestions={25}
       icon={ShieldCheck}
       iconGradient="from-rose-500 to-pink-600"
       loadQuestions={loadAnalistaIntegridadQuestions}
     />
   );
 }
+

@@ -16,7 +16,7 @@ export default function StudyAnalistaComportamentalesClient() {
       areaId="analista-comportamentales"
       areaLabel="Analista V · Comportamentales"
       areaDescription="Competencias conductuales basadas en el diccionario oficial DIAN."
-      totalQuestions={12}
+      totalQuestions={25}
       icon={Users}
       iconGradient="from-blue-500 to-sky-600"
       loadQuestions={loadAnalistaComportamentalesQuestions}
@@ -24,3 +24,4 @@ export default function StudyAnalistaComportamentalesClient() {
     />
   );
 }
+

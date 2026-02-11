@@ -15,10 +15,11 @@ export default function SimulacroAnalistaBasicasClient() {
       areaId="analista-basicas"
       areaLabel="Analista V · Básicas y funcionales"
       areaDescription="Prueba eliminatoria basada en el manual de funciones del Analista V."
-      totalQuestions={12}
+      totalQuestions={25}
       icon={ClipboardCheck}
       iconGradient="from-emerald-500 to-teal-600"
       loadQuestions={loadAnalistaBasicasQuestions}
     />
   );
 }
+

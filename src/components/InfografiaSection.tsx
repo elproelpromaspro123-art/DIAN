@@ -120,6 +120,78 @@ const resources: Resource[] = [
     kind: "link",
     href: "https://www.cnsc.gov.co/node/59574",
   },
+  {
+    name: "CNSC · Acuerdo 21 (PDF oficial)",
+    icon: FileCheck2,
+    available: true,
+    color: "from-cyan-600 to-blue-700",
+    summary: "Reglas, pesos y etapas del proceso DIAN 2676.",
+    kind: "link",
+    href: "https://historico.cnsc.gov.co/docs/DIAN_4.5._Acuerdo_No_21_del_31_de_enero_del_2025.pdf",
+  },
+  {
+    name: "CNSC · Anexo técnico DIAN 2676 (PDF)",
+    icon: FileCheck2,
+    available: true,
+    color: "from-teal-600 to-emerald-700",
+    summary: "Especificaciones técnicas de pruebas y criterios.",
+    kind: "link",
+    href: "https://historico.cnsc.gov.co/docs/DIAN_4.6._Anexo_del_31_de_enero_del_2025.pdf",
+  },
+  {
+    name: "DIAN · Resolución 0067 de 2024 (MERF)",
+    icon: BookOpen,
+    available: true,
+    color: "from-blue-700 to-indigo-700",
+    summary: "Manual Específico de Requisitos y Funciones.",
+    kind: "link",
+    href: "https://historico.cnsc.gov.co/docs/DIAN_3._Resolucion_no_0067_del_11_de_abril_del_2024.pdf",
+  },
+  {
+    name: "DIAN · Resolución 0065 de 2024 (Diccionario)",
+    icon: BookOpen,
+    available: true,
+    color: "from-amber-600 to-orange-700",
+    summary: "Competencias comportamentales por nivel.",
+    kind: "link",
+    href: "https://historico.cnsc.gov.co/docs/DIAN_2._Resolucion_no_0065_del_11_de_abril_del_2024.pdf",
+  },
+  {
+    name: "Ley 80 de 1993 (Función Pública)",
+    icon: Gavel,
+    available: true,
+    color: "from-slate-700 to-zinc-700",
+    summary: "Estatuto General de Contratación Pública.",
+    kind: "link",
+    href: "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=304",
+  },
+  {
+    name: "Ley 1150 de 2007 (Función Pública)",
+    icon: Gavel,
+    available: true,
+    color: "from-slate-700 to-zinc-700",
+    summary: "Medidas de eficiencia y transparencia contractual.",
+    kind: "link",
+    href: "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=25806",
+  },
+  {
+    name: "Ley 1437 de 2011 (CPACA)",
+    icon: Gavel,
+    available: true,
+    color: "from-slate-700 to-zinc-700",
+    summary: "Procedimiento administrativo y contencioso.",
+    kind: "link",
+    href: "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=41249",
+  },
+  {
+    name: "Ley 1712 de 2014 (Transparencia)",
+    icon: Gavel,
+    available: true,
+    color: "from-slate-700 to-zinc-700",
+    summary: "Acceso a información pública y máxima publicidad.",
+    kind: "link",
+    href: "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=56882",
+  },
 ];
 
 export default function InfografiaSection() {
@@ -207,10 +279,10 @@ export default function InfografiaSection() {
                   <h3 className="font-semibold text-sm text-gray-800">{resource.name}</h3>
                   <p className="text-xs text-gray-500 mt-1">{resource.summary}</p>
                   <span className="mt-2 inline-flex items-center text-xs text-dian-navy font-medium">
-                    Abrir aviso oficial
+                    Abrir enlace oficial
                     <ChevronRight className="w-3 h-3 ml-0.5" />
                   </span>
-                  <p className="text-[11px] text-gray-400 mt-2">Fuente oficial CNSC (enlace directo)</p>
+                  <p className="text-[11px] text-gray-400 mt-2">Fuente oficial (enlace directo)</p>
                 </a>
               );
             }

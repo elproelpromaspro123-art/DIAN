@@ -16,7 +16,7 @@ export default function StudyAnalistaIntegridadClient() {
       areaId="analista-integridad"
       areaLabel="Analista V · Integridad"
       areaDescription="Valores públicos y juramento de integridad DIAN."
-      totalQuestions={12}
+      totalQuestions={25}
       icon={ShieldCheck}
       iconGradient="from-rose-500 to-pink-600"
       loadQuestions={loadAnalistaIntegridadQuestions}
@@ -24,3 +24,4 @@ export default function StudyAnalistaIntegridadClient() {
     />
   );
 }
+

@@ -16,7 +16,7 @@ export default function StudyGestorComportamentalesClient() {
       areaId="gestor-comportamentales"
       areaLabel="Gestor I · Comportamentales"
       areaDescription="Competencias conductuales específicas del Gestor I."
-      totalQuestions={12}
+      totalQuestions={25}
       icon={Users}
       iconGradient="from-amber-500 to-orange-600"
       loadQuestions={loadGestorComportamentalesQuestions}
@@ -24,3 +24,4 @@ export default function StudyGestorComportamentalesClient() {
     />
   );
 }
+

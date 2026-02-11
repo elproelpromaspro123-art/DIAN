@@ -15,10 +15,11 @@ export default function SimulacroAnalistaComportamentalesClient() {
       areaId="analista-comportamentales"
       areaLabel="Analista V · Comportamentales"
       areaDescription="Escenarios conductuales basados en el diccionario oficial de competencias."
-      totalQuestions={12}
+      totalQuestions={25}
       icon={Users}
       iconGradient="from-blue-500 to-sky-600"
       loadQuestions={loadAnalistaComportamentalesQuestions}
     />
   );
 }
+

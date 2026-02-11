@@ -15,10 +15,11 @@ export default function SimulacroGestorIntegridadClient() {
       areaId="gestor-integridad"
       areaLabel="Gestor I · Integridad"
       areaDescription="Ética pública y principios del Código de Ética DIAN."
-      totalQuestions={12}
+      totalQuestions={25}
       icon={ShieldCheck}
       iconGradient="from-teal-500 to-cyan-600"
       loadQuestions={loadGestorIntegridadQuestions}
     />
   );
 }
+

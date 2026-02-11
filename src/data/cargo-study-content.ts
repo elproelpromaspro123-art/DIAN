@@ -41,7 +41,7 @@ export type CargoStudyContent = {
 export const ANALISTA_STUDY_CONTENT: CargoStudyContent = {
   slug: "analista-v",
   cargo: "Analista V",
-  subtitle: "Ruta integrada de estudio para DIAN 2676",
+  subtitle: "Ruta integrada de estudio oficial para DIAN 2676",
   opec: "236732",
   level: "Técnico",
   codeGrade: "Código 205 · Grado 5",
@@ -49,121 +49,195 @@ export const ANALISTA_STUDY_CONTENT: CargoStudyContent = {
   salary: "$7.171.627",
   salaryYear: "Vigencia salarial 2025",
   enrollmentWindow:
-    "Inscripciones DIAN 2676: del 28-ene-2026 al 6-feb-2026. La CNSC amplió cierre hasta el 7-feb-2026.",
+    "Inscripciones DIAN 2676: del 28-ene-2026 al 6-feb-2026, con ampliación oficial CNSC hasta el 7-feb-2026.",
   lastUpdate: "11-feb-2026",
   sources: [
-    { label: "SIMO oferta empleo", href: "https://simo.cnsc.gov.co/#/ofertaEmpleo" },
-    { label: "CNSC Convocatoria DIAN 2676", href: "https://www.cnsc.gov.co/node/59797" },
+    { label: "SIMO · Oferta de empleo", href: "https://simo.cnsc.gov.co/#/ofertaEmpleo" },
+    { label: "CNSC · Convocatoria DIAN 2676", href: "https://www.cnsc.gov.co/node/59797" },
     {
-      label: "DIAN comunicado de inscripciones (28-ene-2026)",
+      label: "CNSC · Acuerdo 21 (PDF)",
+      href: "https://historico.cnsc.gov.co/docs/DIAN_4.5._Acuerdo_No_21_del_31_de_enero_del_2025.pdf",
+    },
+    {
+      label: "CNSC · Anexo técnico (PDF)",
+      href: "https://historico.cnsc.gov.co/docs/DIAN_4.6._Anexo_del_31_de_enero_del_2025.pdf",
+    },
+    {
+      label: "DIAN · Comunicado de inicio de inscripciones",
       href: "https://www.dian.gov.co/Prensa/Paginas/NG-Inician-inscripciones-en-la-modalidad-abierta-del-concurso-de-meritos-DIAN-2676.aspx",
     },
-    { label: "CNSC ampliación al 7-feb-2026", href: "https://www.cnsc.gov.co/node/59797" },
   ],
   phases: [
     {
       id: "fase-1",
       title: "Competencias básicas y funcionales",
       character: "Eliminatoria",
-      weight: "~60%",
+      weight: "65% (mínimo aprobatorio: 70/100)",
       whatEvaluates:
-        "Conocimiento del manual de funciones, normativa pública y temas técnicos del subproceso del cargo.",
+        "Dominio aplicado del manual funcional de Analista V: cobro persuasivo/coactivo, control extensivo, devoluciones y compensaciones, medidas cautelares, procesos concursales y soporte normativo administrativo/constitucional.",
       thematicAxes: [
-        "Proceso misional: cumplimiento de obligaciones tributarias.",
-        "Subproceso: administración de cartera y recaudo/devoluciones.",
-        "Control extensivo, devoluciones y compensaciones, cobro coactivo y persuasivo.",
-        "Medidas cautelares, procesos concursales y principios de función pública.",
+        "Manual de funciones Analista V: propósito, proceso y subproceso del cargo.",
+        "Cobro persuasivo y cobro coactivo (ET arts. 823 a 843).",
+        "Mandamiento de pago, título ejecutivo y excepciones en cobro.",
+        "Medidas cautelares (embargo/secuestro) y debido proceso.",
+        "Devoluciones y compensaciones con soporte documental y trazabilidad.",
+        "Control extensivo de obligaciones y campañas de cumplimiento.",
+        "DIAN: naturaleza jurídica, objeto, estructura y dirección.",
+        "Constitución, CPACA, MIPG, gestión documental, transparencia y PQRSF.",
       ],
       quickSummary: [
-        "En Analista V, esta fase es el filtro principal: si no alcanzas el mínimo exigido por la convocatoria, quedas fuera del proceso.",
-        "Tu prioridad es dominar lo que el manual enumera como competencias funcionales y los ejes de conocimiento básico institucional.",
+        "Esta fase define permanencia: si no alcanzas 70/100, quedas fuera del concurso.",
+        "El entrenamiento útil combina norma + caso operativo, no memorización aislada.",
+        "Prioriza secuencia real de actuación: recaudo, cartera, cobro, devoluciones y control.",
+        "La Valoración de Antecedentes (10%) existe en Analista V, pero se evalúa documentalmente fuera de este simulador.",
       ],
       checkpoints: [
         {
           id: "an-f1-1",
-          prompt:
-            "¿Qué subproceso debes priorizar primero para Analista V antes de entrar a simulacros largos?",
+          prompt: "¿Qué bloque funcional del cargo Analista V debes dominar primero para asegurar el mínimo eliminatorio?",
           answer:
-            "Administración de cartera y recaudo/devoluciones; de ahí salen varias competencias funcionales centrales.",
-          source: "Manual de funciones Analista V",
+            "Administración de cartera y recaudo/devoluciones, porque concentra cobro, devoluciones, control extensivo y medidas cautelares del manual.",
+          source: "Manual Analista V (Res. DIAN 0067 de 2024)",
         },
         {
           id: "an-f1-2",
-          prompt:
-            "Si estudias solo teoría tributaria y dejas por fuera cobro coactivo/persuasivo, ¿tu preparación queda completa?",
+          prompt: "¿Qué diferencia operativa clave existe entre cobro persuasivo y coactivo?",
           answer:
-            "No. El manual exige ambos frentes y la prueba funcional combina norma + aplicación al proceso del cargo.",
-          source: "Manual de funciones Analista V",
+            "El persuasivo busca pago voluntario; el coactivo ejecuta administrativamente la obligación con mandamiento de pago y posibles cautelares.",
+          source: "Estatuto Tributario (arts. 823 y ss.)",
         },
         {
           id: "an-f1-3",
-          prompt: "¿Qué fecha oficial quedó como cierre final de inscripciones DIAN 2676?",
-          answer: "7 de febrero de 2026, por ampliación oficial CNSC.",
-          source: "CNSC aviso de ampliación 7-feb-2026",
+          prompt: "¿Cuál artículo del Estatuto Tributario debes memorizar para medidas cautelares?",
+          answer: "El artículo 837, por regular embargo y secuestro en el proceso de cobro coactivo.",
+          source: "Estatuto Tributario, art. 837",
         },
         {
           id: "an-f1-4",
-          prompt:
-            "¿Por qué debes estudiar también Ley 1437 y principios de función pública en esta fase?",
+          prompt: "¿Qué principios constitucionales rigen el sistema tributario colombiano?",
+          answer: "Equidad, eficiencia y progresividad (artículo 363 de la Constitución Política).",
+          source: "Constitución Política, art. 363",
+        },
+        {
+          id: "an-f1-5",
+          prompt: "En una solicitud de devolución, ¿qué rol técnico cumple Analista V?",
           answer:
-            "Porque el manual incluye procedimiento administrativo y fundamentos de actuación pública, no solo técnica tributaria.",
-          source: "Manual de funciones Analista V",
+            "Verificación integral de requisitos, soportes y consistencia, con trazabilidad para decisión administrativa fundada.",
+          source: "Manual Analista V + procedimiento DIAN de devoluciones",
+        },
+        {
+          id: "an-f1-6",
+          prompt: "¿Por qué CPACA y derecho de petición son tema obligatorio para esta fase?",
+          answer:
+            "Porque regulan debido proceso, motivación de actos y términos de respuesta institucional en actuaciones administrativas.",
+          source: "Ley 1437 de 2011 y Ley 1755 de 2015",
+        },
+        {
+          id: "an-f1-7",
+          prompt: "¿Qué relación práctica tiene MIPG con el trabajo del Analista V?",
+          answer:
+            "Ordena gestión por resultados, control interno y mejora continua en el proceso misional, no solo cumplimiento formal de tareas.",
+          source: "Marco MIPG · Función Pública",
+        },
+        {
+          id: "an-f1-8",
+          prompt: "¿Qué fecha absoluta quedó como cierre de inscripciones en DIAN 2676?",
+          answer: "El cierre oficial ampliado fue el 7 de febrero de 2026.",
+          source: "CNSC · aviso de ampliación DIAN 2676",
         },
       ],
       sources: [
         { label: "Manual Analista V (PDF)", href: "/recursos/manual-funciones-analista-v.pdf" },
-        { label: "DIAN naturaleza jurídica", href: "/recursos/dian-naturaleza-juridica.pdf" },
+        { label: "DIAN · Naturaleza jurídica (PDF)", href: "/recursos/dian-naturaleza-juridica.pdf" },
+        {
+          label: "Ley 1437 de 2011",
+          href: "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=41249",
+        },
+        {
+          label: "Ley 1712 de 2014",
+          href: "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=56882",
+        },
       ],
     },
     {
       id: "fase-2",
       title: "Competencias comportamentales",
       character: "Clasificatoria",
-      weight: "~20%",
+      weight: "15%",
       whatEvaluates:
-        "Conductas observables del diccionario DIAN: adaptabilidad, comunicación efectiva, trabajo en equipo y comportamiento ético.",
+        "Conductas observables del cargo Analista V: Comportamiento ético (N4), Adaptabilidad (N4), Comunicación efectiva (N3) y Trabajo en equipo (N3), en escenarios de presión y coordinación interáreas.",
       thematicAxes: [
-        "Lectura de escenarios laborales con foco en conducta observable.",
-        "Decisiones con impacto colectivo y orientación a resultados.",
-        "Coherencia entre acción, norma institucional y servicio al ciudadano.",
+        "Comportamiento ético N4: referente institucional e imparcialidad.",
+        "Adaptabilidad N4: liderazgo de cambio y rediseño metodológico.",
+        "Comunicación efectiva N3: elección de canal, claridad y reducción de barreras.",
+        "Trabajo en equipo N3: coordinación y cumplimiento de acuerdos colectivos.",
+        "Gestión de conflictos entre áreas misionales y de apoyo.",
+        "Toma de decisiones con impacto ciudadano bajo restricciones de tiempo.",
+        "Coherencia entre directriz operativa y marco de integridad pública.",
+        "Escenarios situacionales de cobro, devoluciones y control extensivo.",
       ],
       quickSummary: [
-        "Aquí no memorices definiciones sueltas: entrena decisiones concretas en casos de trabajo real.",
-        "La respuesta fuerte suele ser la que combina legalidad, cooperación y claridad comunicativa.",
+        "No gana la respuesta más rápida, gana la conducta observable alineada al diccionario oficial.",
+        "En nivel 4 se evalúa capacidad de influir en prácticas del equipo, no solo conducta individual.",
+        "Identifica primero la competencia evaluada y luego el comportamiento esperado por nivel.",
+        "Evita opciones heroicas o informales que sacrifiquen legalidad y trazabilidad.",
       ],
       checkpoints: [
         {
           id: "an-f2-1",
-          prompt:
-            "Si cambia un procedimiento y el equipo se resiste, ¿qué conducta puntúa mejor en adaptabilidad?",
+          prompt: "Si una instrucción presiona atajos sin soporte, ¿qué competencia se activa primero?",
           answer:
-            "Ajustar el plan, comunicar el propósito del cambio y acompañar su implementación.",
-          source: "Diccionario de competencias DIAN",
+            "Comportamiento ético N4: sostener legalidad, advertir riesgo y orientar una salida institucional válida.",
+          source: "Diccionario comportamental DIAN (Res. 065 de 2024)",
         },
         {
           id: "an-f2-2",
-          prompt: "¿Qué diferencia una comunicación efectiva de un mensaje solo " +
-            '"rápido"' + "?",
+          prompt: "¿Qué diferencia N4 de Adaptabilidad frente a N3?",
           answer:
-            "La efectiva verifica comprensión, conserva trazabilidad y evita ambigüedad.",
-          source: "Diccionario de competencias DIAN",
+            "N4 diseña y promueve cambios organizacionales; N3 se centra en ajustarse proactivamente al cambio.",
+          source: "Res. 065 de 2024 · niveles de competencia",
         },
         {
           id: "an-f2-3",
-          prompt:
-            "En trabajo en equipo, ¿qué vale más para el evaluador: " +
-            '"hacer todo solo"' + " o coordinar acuerdos?",
+          prompt: "¿Cómo evidenciar Comunicación efectiva N3 en un caso técnico complejo?",
           answer:
-            "Coordinar acuerdos y cumplir compromisos colectivos.",
-          source: "Diccionario de competencias DIAN",
+            "Seleccionando canal idóneo, mensaje claro con soporte y verificación explícita de comprensión.",
+          source: "Diccionario comportamental DIAN",
         },
         {
           id: "an-f2-4",
-          prompt:
-            "¿Qué señal práctica muestra comportamiento ético en esta fase?",
+          prompt: "En Trabajo en equipo N3, ¿qué pesa más: esfuerzo individual o coordinación efectiva?",
           answer:
-            "Aplicar el mismo criterio normativo para todos, sin privilegios ni atajos.",
-          source: "Diccionario + Código de Integridad DIAN",
+            "La coordinación con seguimiento de compromisos para lograr resultados comunes.",
+          source: "Diccionario comportamental DIAN",
+        },
+        {
+          id: "an-f2-5",
+          prompt: "Si hay conflicto entre áreas por prioridades, ¿cuál respuesta puntúa mejor?",
+          answer:
+            "Construir acuerdo operativo con roles claros, plazos y control de cumplimiento.",
+          source: "Diccionario + enfoque de trabajo colaborativo DIAN",
+        },
+        {
+          id: "an-f2-6",
+          prompt: "¿Qué error comportamental es frecuente en simulacros?",
+          answer:
+            "Elegir opción técnicamente útil, pero éticamente débil por omitir trazabilidad o imparcialidad.",
+          source: "Diccionario comportamental + Código de Integridad",
+        },
+        {
+          id: "an-f2-7",
+          prompt: "¿Qué señal práctica indica Adaptabilidad N4 en un cambio de sistema?",
+          answer:
+            "No solo usarlo: diseñar transición, acompañar adopción y medir impacto del cambio.",
+          source: "Res. 065 de 2024",
+        },
+        {
+          id: "an-f2-8",
+          prompt: "¿Cuál criterio desempata entre dos respuestas viables en fase comportamental?",
+          answer:
+            "La que mejor combine legalidad, efectividad operativa y conducta observable exigida por nivel.",
+          source: "Diccionario comportamental DIAN",
         },
       ],
       sources: [
@@ -181,47 +255,75 @@ export const ANALISTA_STUDY_CONTENT: CargoStudyContent = {
       id: "fase-3",
       title: "Integridad y ética pública",
       character: "Clasificatoria",
-      weight: "~10-20%",
+      weight: "10%",
       whatEvaluates:
-        "Coherencia ética frente a dilemas reales del servicio público, alineada al Código de Integridad y al Código de Ética DIAN.",
+        "Criterio ético aplicado a dilemas reales del servicio público: conflicto de interés, trato imparcial, transparencia, responsabilidad por la elección y coherencia con Código de Integridad y Código de Ética DIAN.",
       thematicAxes: [
-        "Valores: honestidad, respeto, compromiso, diligencia y justicia.",
-        "Transparencia, manejo de conflicto de interés y rechazo de ventajas indebidas.",
-        "Decisiones orientadas al interés general y no al beneficio particular.",
+        "Valores del Código de Integridad: Honestidad, Respeto, Compromiso, Diligencia y Justicia.",
+        "Conductas " + '"lo que hago"' + " y " + '"lo que no hago"' + " por cada valor.",
+        "Juramento de integridad y deber de ejemplaridad pública.",
+        "Principios del Código de Ética (10 principios institucionales).",
+        "Definiciones de principios, pautas éticas y valores.",
+        "Valores aspiracionales: Valentía/oso, Objetividad/lechuza, Templanza/jaguar, Providencia/colibrí.",
+        "Dilemas en cobro, devoluciones, manejo de información y conflicto de interés.",
+        "Toma de decisión con evidencia, legalidad y bien común.",
       ],
       quickSummary: [
-        "Esta fase no se responde por intuición personal: se responde con criterio de integridad pública.",
-        "Cuando tengas duda en una pregunta situacional, prioriza legalidad, transparencia y bien común.",
+        "La respuesta ética correcta debe ser defendible y auditable, no solo " + '"bien intencionada"' + ".",
+        "En dilemas, prioriza interés general, transparencia y debido proceso.",
+        "No confundas principios éticos con competencias funcionales del cargo.",
+        "Recuerda: en Analista V la fase de antecedentes (10%) es independiente de esta prueba de integridad.",
       ],
       checkpoints: [
         {
           id: "an-f3-1",
-          prompt: "¿Cuál es la lista completa de valores institucionales que debes dominar textual?",
+          prompt: "¿Qué lista de valores debes memorizar textual para esta fase?",
           answer: "Honestidad, Respeto, Compromiso, Diligencia y Justicia.",
           source: "Código de Integridad DIAN",
         },
         {
           id: "an-f3-2",
-          prompt:
-            "Si detectas un conflicto de interés en un trámite, ¿qué paso inicial es obligatorio en términos éticos?",
-          answer:
-            "Declararlo oportunamente y actuar según los canales formales de prevención/gestión.",
-          source: "Código de Integridad y Código de Ética DIAN",
+          prompt: "Si aparece conflicto de interés en una devolución, ¿cuál es el paso obligatorio?",
+          answer: "Declararlo oportunamente y apartarse o gestionarlo por el canal formal institucional.",
+          source: "Código de Integridad + Código de Ética DIAN",
         },
         {
           id: "an-f3-3",
-          prompt:
-            "¿Qué criterio debe prevalecer frente a una presión para " +
-            '"agilizar"' + " un caso sin soporte?",
-          answer: "Interés general, legalidad y trazabilidad de la actuación.",
-          source: "Código de Integridad DIAN",
+          prompt: "¿Qué pilar destaca el preámbulo del Código de Ética?",
+          answer: "La libertad de decisión, asociada a responsabilidad por la elección.",
+          source: "Código de Ética DIAN (2021)",
         },
         {
           id: "an-f3-4",
-          prompt:
-            "¿Aceptar un beneficio por acelerar un trámite puede justificarse si el resultado final es correcto?",
-          answer: "No. Sigue siendo una ventaja indebida y contraria al marco ético institucional.",
-          source: "Código de Ética DIAN",
+          prompt: "¿Cómo se define principio ético en el Código de Ética DIAN?",
+          answer: "Como expresión del deber ser que orienta interpretación y conducta.",
+          source: "Código de Ética DIAN (2021)",
+        },
+        {
+          id: "an-f3-5",
+          prompt: "¿Qué hacer ante ofrecimiento de ventaja indebida en cobro coactivo?",
+          answer: "Rechazar, documentar y reportar por conducto institucional.",
+          source: "Código de Integridad · Honestidad",
+        },
+        {
+          id: "an-f3-6",
+          prompt: "¿Qué valor exige decidir con evidencia y sin parcialidad?",
+          answer: "Justicia.",
+          source: "Código de Integridad DIAN",
+        },
+        {
+          id: "an-f3-7",
+          prompt: "¿Cuáles son los valores aspiracionales y su símbolo animal?",
+          answer:
+            "Valentía (oso de anteojos), Objetividad (lechuza), Templanza (jaguar), Providencia (colibrí).",
+          source: "Código de Integridad DIAN",
+        },
+        {
+          id: "an-f3-8",
+          prompt: "Si dos respuestas parecen viables en un dilema ético, ¿qué criterio final usas?",
+          answer:
+            "Elegir la opción que mejor preserve legalidad, imparcialidad, trazabilidad y protección del interés general.",
+          source: "Código de Ética + Código de Integridad",
         },
       ],
       sources: [
@@ -235,7 +337,7 @@ export const ANALISTA_STUDY_CONTENT: CargoStudyContent = {
 export const GESTOR_STUDY_CONTENT: CargoStudyContent = {
   slug: "gestor-i",
   cargo: "Gestor I",
-  subtitle: "Ruta integrada de estudio para DIAN 2676",
+  subtitle: "Ruta integrada de estudio oficial para DIAN 2676",
   opec: "236741",
   level: "Profesional",
   codeGrade: "Código 301 · Grado 1",
@@ -243,112 +345,198 @@ export const GESTOR_STUDY_CONTENT: CargoStudyContent = {
   salary: "$6.811.546",
   salaryYear: "Vigencia salarial 2025",
   enrollmentWindow:
-    "Inscripciones DIAN 2676: del 28-ene-2026 al 6-feb-2026. La CNSC amplió cierre hasta el 7-feb-2026.",
+    "Inscripciones DIAN 2676: del 28-ene-2026 al 6-feb-2026, con ampliación oficial CNSC hasta el 7-feb-2026.",
   lastUpdate: "11-feb-2026",
   sources: [
-    { label: "SIMO oferta empleo", href: "https://simo.cnsc.gov.co/#/ofertaEmpleo" },
-    { label: "CNSC Convocatoria DIAN 2676", href: "https://www.cnsc.gov.co/node/59797" },
+    { label: "SIMO · Oferta de empleo", href: "https://simo.cnsc.gov.co/#/ofertaEmpleo" },
+    { label: "CNSC · Convocatoria DIAN 2676", href: "https://www.cnsc.gov.co/node/59797" },
     {
-      label: "DIAN comunicado de inscripciones (28-ene-2026)",
+      label: "CNSC · Acuerdo 21 (PDF)",
+      href: "https://historico.cnsc.gov.co/docs/DIAN_4.5._Acuerdo_No_21_del_31_de_enero_del_2025.pdf",
+    },
+    {
+      label: "CNSC · Anexo técnico (PDF)",
+      href: "https://historico.cnsc.gov.co/docs/DIAN_4.6._Anexo_del_31_de_enero_del_2025.pdf",
+    },
+    {
+      label: "DIAN · Comunicado de inicio de inscripciones",
       href: "https://www.dian.gov.co/Prensa/Paginas/NG-Inician-inscripciones-en-la-modalidad-abierta-del-concurso-de-meritos-DIAN-2676.aspx",
     },
-    { label: "CNSC ampliación al 7-feb-2026", href: "https://www.cnsc.gov.co/node/59797" },
   ],
   phases: [
     {
       id: "fase-1",
       title: "Competencias básicas y funcionales",
       character: "Eliminatoria",
-      weight: "~60%",
+      weight: "70% (mínimo aprobatorio: 70/100)",
       whatEvaluates:
-        "Dominio del manual de funciones Gestor I, especialmente en recursos administrativos, logística, compras y contratos.",
+        "Aplicación del manual funcional del Gestor I en recursos administrativos, logística, compras y contratos; incluye SIIF Nación II, gestión documental, custodia de mercancías, infraestructura y soporte normativo de contratación y actuación administrativa.",
       thematicAxes: [
-        "Proceso administrativo y financiero.",
-        "Subproceso: recursos administrativos, operación logística, compras y contratos.",
-        "Gestión documental, SIIF Nación II, infraestructura y servicios.",
-        "Reglas de contratación pública, control de ingresos y gestión de mercancías.",
+        "Manual de funciones Gestor I: propósito, proceso y subproceso del cargo.",
+        "Contratación pública: Ley 80 de 1993 y Ley 1150 de 2007.",
+        "Modalidades de selección y trazabilidad en SECOP II.",
+        "Operación financiera y presupuestal en SIIF Nación II.",
+        "Gestión documental, TRD y conservación de evidencia administrativa.",
+        "Custodia, registro, disposición y control de mercancías DIAN.",
+        "Infraestructura, servicios generales y soporte logístico institucional.",
+        "Constitución, CPACA, MIPG, transparencia y PQRSF.",
       ],
       quickSummary: [
-        "En Gestor I debes priorizar comprensión operativa de procesos administrativos y su soporte normativo.",
-        "El examen exige que conectes procedimiento, trazabilidad y control institucional en escenarios aplicados.",
+        "Es la fase más pesada del Gestor I y también eliminatoria: exige 70/100 mínimo.",
+        "No basta saber conceptos de contratación; debes resolver escenarios de operación real.",
+        "Cruza siempre procedimiento, soporte documental y control interno.",
+        "Prioriza bancos de preguntas con distractores normativos plausibles.",
       ],
       checkpoints: [
         {
           id: "ge-f1-1",
-          prompt: "¿Cuál es el subproceso funcional más crítico que debes dominar en Gestor I?",
-          answer: "Recursos administrativos, logística, compras y contratos.",
-          source: "Manual de funciones Gestor I",
+          prompt: "¿Cuál es el núcleo funcional del Gestor I que más preguntas concentra?",
+          answer:
+            "Recursos administrativos, operación logística, compras y contratos, incluyendo SIIF y gestión documental.",
+          source: "Manual Gestor I (Res. DIAN 0067 de 2024)",
         },
         {
           id: "ge-f1-2",
-          prompt: "¿Gestor I exige experiencia previa para esta convocatoria?",
-          answer: "No. La ficha del empleo reporta que no requiere experiencia.",
-          source: "Manual de funciones Gestor I",
+          prompt: "¿Qué ley es base del Estatuto General de Contratación Pública?",
+          answer: "La Ley 80 de 1993.",
+          source: "Ley 80 de 1993",
         },
         {
           id: "ge-f1-3",
-          prompt:
-            "¿Por qué SIIF Nación II y gestión documental son relevantes en esta fase?",
+          prompt: "¿Para qué se usa SECOP II en un proceso contractual?",
           answer:
-            "Porque hacen parte de la operación administrativa y del control institucional evaluado en competencias funcionales.",
-          source: "Manual de funciones Gestor I",
+            "Para gestionar y publicar etapas del ciclo contractual con trazabilidad y transparencia.",
+          source: "Marco Colombia Compra Eficiente + Ley 1150 de 2007",
         },
         {
           id: "ge-f1-4",
-          prompt: "¿Cuál fue la fecha de cierre oficial ampliada para inscripciones DIAN 2676?",
-          answer: "7 de febrero de 2026.",
-          source: "CNSC aviso de ampliación 7-feb-2026",
+          prompt: "¿Qué función cumple SIIF Nación II en el trabajo del Gestor I?",
+          answer:
+            "Registrar y controlar operaciones presupuestales, contables y de tesorería del gasto público.",
+          source: "Manual Gestor I + lineamientos SIIF",
+        },
+        {
+          id: "ge-f1-5",
+          prompt: "¿Por qué gestión documental es crítica para esta fase?",
+          answer:
+            "Porque soporta legalidad, auditoría, defensa jurídica y continuidad operativa de los procesos administrativos.",
+          source: "Manual Gestor I + normativa archivística",
+        },
+        {
+          id: "ge-f1-6",
+          prompt: "¿Cuál término general debes recordar para peticiones en CPACA?",
+          answer: "15 días hábiles (con términos especiales para documentos y consultas).",
+          source: "Ley 1437 de 2011, art. 14 (mod. Ley 1755 de 2015)",
+        },
+        {
+          id: "ge-f1-7",
+          prompt: "¿Qué fecha cerró oficialmente la inscripción de DIAN 2676?",
+          answer: "El 7 de febrero de 2026, por ampliación oficial de la CNSC.",
+          source: "CNSC · aviso de ampliación DIAN 2676",
+        },
+        {
+          id: "ge-f1-8",
+          prompt: "¿Qué error elimina más puntaje en simulacros funcionales de Gestor I?",
+          answer:
+            "Confundir rapidez operativa con cumplimiento normativo y omitir trazabilidad documental en decisiones.",
+          source: "Ley 80/1993 + Ley 1150/2007 + CPACA",
         },
       ],
       sources: [
         { label: "Manual Gestor I (PDF)", href: "/recursos/manual-funciones-gestor-i.pdf" },
-        { label: "DIAN naturaleza jurídica", href: "/recursos/dian-naturaleza-juridica.pdf" },
+        {
+          label: "Ley 80 de 1993",
+          href: "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=304",
+        },
+        {
+          label: "Ley 1150 de 2007",
+          href: "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=25806",
+        },
+        {
+          label: "Ley 1437 de 2011",
+          href: "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=41249",
+        },
       ],
     },
     {
       id: "fase-2",
       title: "Competencias comportamentales",
       character: "Clasificatoria",
-      weight: "~20%",
+      weight: "20%",
       whatEvaluates:
-        "Comportamientos de innovación, adaptabilidad, solución de problemas y comportamiento ético, con base en diccionario oficial.",
+        "Conductas del diccionario oficial para Gestor I: Comportamiento ético (N4), Innovación (N3), Adaptabilidad (N3) y Solución de problemas (N3), con situaciones de logística, contratación y operación administrativa.",
       thematicAxes: [
-        "Resolución estructurada de situaciones operativas.",
-        "Mejora continua de procesos con enfoque institucional.",
-        "Decisión colaborativa y comunicación clara bajo presión.",
+        "Comportamiento ético N4 en decisiones de compras y manejo de información.",
+        "Innovación N3: mejora de procesos con sustento técnico.",
+        "Adaptabilidad N3 ante cambios de herramienta, norma o carga operativa.",
+        "Solución de problemas N3 en incidentes críticos de operación.",
+        "Gestión de riesgos y control de ejecución de planes de acción.",
+        "Balance entre oportunidad del servicio y cumplimiento de controles.",
+        "Escenarios interáreas (almacén, contratación, financiero, soporte).",
+        "Diferenciación entre conducta aceptable y atajo informal.",
       ],
       quickSummary: [
-        "El evaluador no premia respuestas heroicas sino conductas consistentes y sostenibles dentro de la entidad.",
-        "En cada caso, piensa en impacto colectivo, legalidad y calidad del servicio.",
+        "La respuesta correcta suele combinar criterio técnico y conducta observable por nivel.",
+        "Innovar no es improvisar: debe existir soporte, viabilidad e impacto medible.",
+        "Adaptabilidad N3 evalúa ajuste proactivo, no obediencia pasiva.",
+        "En dilemas de presión, la opción ética y trazable predomina sobre la opción rápida.",
       ],
       checkpoints: [
         {
           id: "ge-f2-1",
-          prompt:
-            "Si detectas una ineficiencia repetida del proceso, ¿qué refleja mejor la competencia innovación?",
-          answer: "Proponer mejora viable, con soporte y seguimiento de implementación.",
-          source: "Diccionario de competencias DIAN",
+          prompt: "¿Qué distingue Innovación N3 de una idea aislada?",
+          answer:
+            "Que incorpora sustento conceptual, evaluación de impacto y ruta de implementación verificable.",
+          source: "Diccionario comportamental DIAN (Res. 065 de 2024)",
         },
         {
           id: "ge-f2-2",
-          prompt:
-            "En solución de problemas, ¿qué orden es más sólido: improvisar o analizar-causas-decidir-ejecutar?",
-          answer: "Analizar causas, decidir alternativa y ejecutar con trazabilidad.",
-          source: "Diccionario de competencias DIAN",
+          prompt: "En Adaptabilidad N3, ¿qué debes demostrar en un cambio de sistema?",
+          answer:
+            "Ajuste proactivo de conducta, actitud positiva e identificación de repercusiones operativas.",
+          source: "Res. 065 de 2024",
         },
         {
           id: "ge-f2-3",
-          prompt:
-            "¿Qué muestra adaptabilidad real cuando cambia una herramienta institucional?",
+          prompt: "¿Qué evidencia Solución de problemas N3 en un caso crítico?",
           answer:
-            "Apropiación rápida del cambio y apoyo al equipo para sostener el nuevo estándar.",
-          source: "Diccionario de competencias DIAN",
+            "Diagnóstico causal, selección de alternativa viable y control de ejecución con autocontrol.",
+          source: "Diccionario comportamental DIAN",
         },
         {
           id: "ge-f2-4",
-          prompt: "¿Qué elemento nunca debe perderse en comportamiento ético durante una presión operativa?",
-          answer: "Imparcialidad y cumplimiento normativo con evidencia de la actuación.",
-          source: "Diccionario + Código de Integridad DIAN",
+          prompt: "¿Cómo se expresa Comportamiento ético N4 en contratación?",
+          answer:
+            "Defendiendo imparcialidad, transparencia y rechazo de presiones indebidas, incluso bajo urgencia.",
+          source: "Diccionario + Código de Integridad",
+        },
+        {
+          id: "ge-f2-5",
+          prompt: "¿Qué error comportamental es frecuente en esta fase?",
+          answer:
+            "Escoger respuestas eficaces operativamente pero contrarias a transparencia o control institucional.",
+          source: "Diccionario comportamental DIAN",
+        },
+        {
+          id: "ge-f2-6",
+          prompt: "¿Qué pesa más en escenarios de equipo interáreas?",
+          answer:
+            "Coordinación efectiva con seguimiento de acuerdos, no solución individual aislada.",
+          source: "Diccionario comportamental DIAN",
+        },
+        {
+          id: "ge-f2-7",
+          prompt: "Si dos opciones son técnicamente posibles, ¿cómo desempatas?",
+          answer:
+            "Con la que refleje mejor la conducta observable del nivel exigido y preserve integridad pública.",
+          source: "Res. 065 de 2024 + Código de Integridad",
+        },
+        {
+          id: "ge-f2-8",
+          prompt: "¿Qué práctica eleva puntaje en preguntas situacionales?",
+          answer:
+            "Leer primero el verbo de conducta (promueve, ajusta, controla, decide) y luego validar impacto institucional.",
+          source: "Guía de lectura de competencias DIAN",
         },
       ],
       sources: [
@@ -366,46 +554,76 @@ export const GESTOR_STUDY_CONTENT: CargoStudyContent = {
       id: "fase-3",
       title: "Integridad y ética pública",
       character: "Clasificatoria",
-      weight: "~10-20%",
+      weight: "10%",
       whatEvaluates:
-        "Criterio ético en dilemas de servicio público: conflicto de interés, transparencia, trato justo y responsabilidad institucional.",
+        "Aplicación práctica de valores y principios éticos DIAN en dilemas de logística, contratación, custodia de bienes y manejo de información pública.",
       thematicAxes: [
-        "Aplicación práctica de los cinco valores del Código de Integridad.",
-        "Prevención de corrupción y rechazo de beneficios indebidos.",
-        "Decisiones objetivas en beneficio del interés general.",
+        "Código de Integridad: 5 valores y conductas esperadas/prohibidas.",
+        "Código de Ética: 10 principios institucionales.",
+        "Autocuidado, cuidado del otro y cuidado de la función pública.",
+        "Responsabilidad por la elección y prevalencia del ser.",
+        "Conflicto de interés y rechazo de beneficios indebidos.",
+        "Transparencia y trazabilidad en compras, pagos y custodia.",
+        "Relación entre dignidad humana, respeto e igualdad de trato.",
+        "Decisión ética bajo presión operativa.",
       ],
       quickSummary: [
-        "Aquí se evalúa consistencia ética real, no discursos. Tu decisión debe poder explicarse y auditarse.",
-        "La mejor respuesta suele ser la que protege legalidad, transparencia y equidad del trámite público.",
+        "La mejor respuesta ética es la que podrías defender en auditoría y control disciplinario.",
+        "No normalices atajos " + '"porque todos lo hacen"' + ": ese distractor aparece con frecuencia.",
+        "Integra valor + principio + procedimiento; no respondas solo desde intuición personal.",
+        "Memoriza definiciones base (principio, pauta ética, valor) para evitar confusiones conceptuales.",
       ],
       checkpoints: [
         {
           id: "ge-f3-1",
-          prompt: "¿Qué valor exige aplicar reglas de forma equitativa sin favorecer personas?",
-          answer: "Justicia.",
+          prompt: "¿Qué valor prohíbe aceptar incentivos para favorecer proveedores o trámites?",
+          answer: "Honestidad.",
           source: "Código de Integridad DIAN",
         },
         {
           id: "ge-f3-2",
-          prompt:
-            "Si te ofrecen una ventaja por priorizar un trámite, ¿qué decisión es compatible con integridad pública?",
-          answer: "Rechazar, documentar y reportar por el canal institucional.",
-          source: "Código de Ética DIAN",
-        },
-        {
-          id: "ge-f3-3",
-          prompt:
-            "¿Qué hacer cuando un caso puede comprometer tu imparcialidad personal?",
-          answer:
-            "Gestionar el conflicto de interés de forma oportuna y transparente según reglas institucionales.",
+          prompt: "Si surge conflicto de interés en una decisión contractual, ¿qué corresponde?",
+          answer: "Declararlo y gestionarlo de manera formal, apartándose cuando proceda.",
           source: "Código de Integridad + Código de Ética",
         },
         {
+          id: "ge-f3-3",
+          prompt: "¿Qué principio del Código de Ética enfatiza la consecuencia de decidir?",
+          answer: "Responsabilidad por la elección.",
+          source: "Código de Ética DIAN (2021)",
+        },
+        {
           id: "ge-f3-4",
-          prompt: "¿Qué criterio final debes usar si dos respuestas parecen correctas en un dilema ético?",
+          prompt: "¿Qué conducta refleja cuidado de la función pública?",
           answer:
-            "Elegir la opción que mejor proteja el bien público, la transparencia y la legalidad.",
-          source: "Código de Integridad DIAN",
+            "Actuar con prudencia y transparencia para proteger legitimidad institucional en lo público y lo privado.",
+          source: "Código de Ética DIAN",
+        },
+        {
+          id: "ge-f3-5",
+          prompt: "¿Qué hacer ante ofrecimiento de regalo por agilizar un pago?",
+          answer: "Rechazar, documentar y reportar por el canal institucional correspondiente.",
+          source: "Código de Integridad · Honestidad",
+        },
+        {
+          id: "ge-f3-6",
+          prompt: "¿Qué error ético suele confundir en simulacros de Gestor I?",
+          answer:
+            "Elegir opción aparentemente eficiente que omite soporte documental o igualdad de trato en el proceso.",
+          source: "Código de Ética + Código de Integridad",
+        },
+        {
+          id: "ge-f3-7",
+          prompt: "¿Cuál es el pilar del preámbulo del Código de Ética DIAN?",
+          answer: "La libertad de decisión, asociada a responsabilidad individual.",
+          source: "Código de Ética DIAN (2021)",
+        },
+        {
+          id: "ge-f3-8",
+          prompt: "Si dos respuestas parecen correctas en un dilema, ¿qué criterio final priorizas?",
+          answer:
+            "La que mejor proteja interés general, legalidad, imparcialidad y trazabilidad verificable.",
+          source: "Código de Integridad + principios éticos DIAN",
         },
       ],
       sources: [
@@ -415,4 +633,3 @@ export const GESTOR_STUDY_CONTENT: CargoStudyContent = {
     },
   ],
 };
-

@@ -90,33 +90,42 @@ type PhaseSummary = {
   score: number;
 };
 
+function extractWeightFromLabel(label: string, fallback: number): number {
+  const match = label.match(/(\d+(?:[.,]\d+)?)\s*%/);
+  if (!match) return fallback;
+  const parsed = Number(match[1].replace(",", "."));
+  if (!Number.isFinite(parsed) || parsed <= 0) return fallback;
+  return parsed / 100;
+}
+
 function resolvePhase(question: Question): { key: PhaseKey; label: string; weight: number } {
-  const label = question.groupLabel?.toLowerCase() ?? "";
+  const sourceLabel = question.groupLabel ?? "";
+  const label = sourceLabel.toLowerCase();
   if (label.includes("fase 1")) {
+    const fallbackWeight = 0.6;
+    const resolvedWeight = extractWeightFromLabel(sourceLabel, fallbackWeight);
     return {
       key: "fase-1",
-      label:
-        question.groupLabel ??
-        "Fase 1 · Competencias básicas y funcionales (eliminatoria)",
-      weight: 0.6,
+      label: sourceLabel || "Fase 1 · Competencias básicas y funcionales (eliminatoria)",
+      weight: resolvedWeight,
     };
   }
   if (label.includes("fase 2")) {
+    const fallbackWeight = 0.2;
+    const resolvedWeight = extractWeightFromLabel(sourceLabel, fallbackWeight);
     return {
       key: "fase-2",
-      label:
-        question.groupLabel ??
-        "Fase 2 · Competencias comportamentales (clasificatoria)",
-      weight: 0.2,
+      label: sourceLabel || "Fase 2 · Competencias comportamentales (clasificatoria)",
+      weight: resolvedWeight,
     };
   }
   if (label.includes("fase 3")) {
+    const fallbackWeight = 0.2;
+    const resolvedWeight = extractWeightFromLabel(sourceLabel, fallbackWeight);
     return {
       key: "fase-3",
-      label:
-        question.groupLabel ??
-        "Fase 3 · Integridad y ética pública (clasificatoria)",
-      weight: 0.2,
+      label: sourceLabel || "Fase 3 · Integridad y ética pública (clasificatoria)",
+      weight: resolvedWeight,
     };
   }
 
@@ -369,11 +378,26 @@ export default function SimulacroExam({
 
   const phaseOneScore =
     phaseSummaries.find((phase) => phase.key === "fase-1")?.score ?? score;
+  const totalConfiguredWeight = phaseSummaries.reduce(
+    (acc, phase) => acc + (phase.weight > 0 ? phase.weight : 0),
+    0
+  );
+  const weightedRawScore = phaseSummaries.reduce(
+    (acc, phase) => acc + phase.score * (phase.weight > 0 ? phase.weight : 0),
+    0
+  );
   const simulatedWeightedScore = Math.round(
-    phaseSummaries.reduce((acc, phase) => acc + phase.score * phase.weight, 0)
+    totalConfiguredWeight > 0 ? weightedRawScore / totalConfiguredWeight : score
   );
   const hasWeightedModel = phaseSummaries.some((phase) => phase.weight > 0);
   const displayScore = hasWeightedModel ? simulatedWeightedScore : score;
+  const weightBreakdown = hasWeightedModel
+    ? phaseSummaries
+        .filter((phase) => phase.weight > 0)
+        .map((phase) => `${Math.round(phase.weight * 100)}%`)
+        .join("/")
+    : "N/A";
+  const hasExternalWeightedStage = totalConfiguredWeight > 0 && totalConfiguredWeight < 0.99;
 
   if (questionOrder.length === 0 || questions.length === 0) {
     return (
@@ -474,8 +498,12 @@ export default function SimulacroExam({
                 ))}
               </div>
               <p className="text-[11px] text-gray-500">
-                Resultado orientativo basado en pesos referenciales (60/20/20). La
-                calificación oficial siempre la define CNSC según anexos y reglas vigentes.
+                Resultado orientativo basado en pesos referenciales ({weightBreakdown}).
+                La calificación oficial siempre la define CNSC según anexos y reglas
+                vigentes.
+                {hasExternalWeightedStage
+                  ? " Este simulador no incluye fases documentales externas (por ejemplo, valoración de antecedentes)."
+                  : ""}
               </p>
             </div>
 
@@ -798,7 +826,7 @@ export default function SimulacroExam({
       </AnimatePresence>
 
       {/* Question */}
-      <div className="flex-1 max-w-4xl mx-auto px-4 py-6 w-full">
+      <div className="flex-1 max-w-4xl mx-auto px-4 pt-4 pb-28 sm:pb-24 w-full">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentQ.id}

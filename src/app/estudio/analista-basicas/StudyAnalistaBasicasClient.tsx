@@ -16,7 +16,7 @@ export default function StudyAnalistaBasicasClient() {
       areaId="analista-basicas"
       areaLabel="Analista V · Básicas y funcionales"
       areaDescription="Normativa, funciones y competencias eliminatorias del cargo Analista V."
-      totalQuestions={12}
+      totalQuestions={25}
       icon={ClipboardCheck}
       iconGradient="from-emerald-500 to-teal-600"
       loadQuestions={loadAnalistaBasicasQuestions}
@@ -24,3 +24,4 @@ export default function StudyAnalistaBasicasClient() {
     />
   );
 }
+

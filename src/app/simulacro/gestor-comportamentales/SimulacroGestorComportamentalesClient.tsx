@@ -15,10 +15,11 @@ export default function SimulacroGestorComportamentalesClient() {
       areaId="gestor-comportamentales"
       areaLabel="Gestor I · Comportamentales"
       areaDescription="Escenarios conductuales basados en el diccionario oficial DIAN."
-      totalQuestions={12}
+      totalQuestions={25}
       icon={Users}
       iconGradient="from-amber-500 to-orange-600"
       loadQuestions={loadGestorComportamentalesQuestions}
     />
   );
 }
+
