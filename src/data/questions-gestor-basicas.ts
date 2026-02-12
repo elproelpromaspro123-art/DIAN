@@ -3,7 +3,7 @@
 export const gestorBasicasQuestions: Question[] = [
   {
     id: 1,
-    text: "Según el manual de funciones del Gestor I (OPEC 236741), el subproceso principal del empleo corresponde a:",
+    text: "Según el manual de funciones del Gestor I (OPEC 236741 y 236767), el subproceso principal del empleo corresponde a:",
     options: [
       { letter: "A", text: "Administración de cartera y cobro coactivo." },
       { letter: "B", text: "Fiscalización y liquidación tributaria." },

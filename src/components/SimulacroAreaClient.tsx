@@ -407,7 +407,8 @@ export default function SimulacroAreaClient({
                   Aleatorización de preguntas
                 </p>
                 <p className="text-xs text-gray-400">
-                  Las preguntas se mostrarán en orden aleatorio
+                  Las preguntas se mostrarán en orden aleatorio. Si está apagado,
+                  los modos cortos mantienen balance por fase.
                 </p>
               </div>
             </div>

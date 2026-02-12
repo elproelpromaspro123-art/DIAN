@@ -1,4 +1,11 @@
-﻿export type StudySource = {
+import {
+  ANALISTA_V_OFFICIAL_SNAPSHOT,
+  GESTOR_I_OFFICIAL_SNAPSHOT,
+  OFFICIAL_SIMO_SNAPSHOT_LABEL,
+  OFFICIAL_SIMO_SOURCE_URL,
+} from "@/data/official-dian2676";
+
+export type StudySource = {
   label: string;
   href: string;
 };
@@ -42,16 +49,17 @@ export const ANALISTA_STUDY_CONTENT: CargoStudyContent = {
   slug: "analista-v",
   cargo: "Analista V",
   subtitle: "Ruta integrada de estudio oficial para DIAN 2676",
-  opec: "236732",
+  opec: ANALISTA_V_OFFICIAL_SNAPSHOT.opecs.join(" / "),
   level: "Técnico",
   codeGrade: "Código 205 · Grado 5",
-  vacancies: "4 vacantes",
-  salary: "$7.171.627",
+  vacancies: `${ANALISTA_V_OFFICIAL_SNAPSHOT.vacantesTotal} vacantes oficiales (236732: 4 + 236756: 10)`,
+  salary: ANALISTA_V_OFFICIAL_SNAPSHOT.salario2025,
   salaryYear: "Vigencia salarial 2025",
   enrollmentWindow:
     "Inscripciones DIAN 2676: del 28-ene-2026 al 6-feb-2026, con ampliación oficial CNSC hasta el 7-feb-2026.",
-  lastUpdate: "11-feb-2026",
+  lastUpdate: `Corte oficial SIMO: ${OFFICIAL_SIMO_SNAPSHOT_LABEL}`,
   sources: [
+    { label: "SIMO API · ofertaPublica (corte oficial)", href: OFFICIAL_SIMO_SOURCE_URL },
     { label: "SIMO · Oferta de empleo", href: "https://simo.cnsc.gov.co/#/ofertaEmpleo" },
     { label: "CNSC · Convocatoria DIAN 2676", href: "https://www.cnsc.gov.co/node/59797" },
     {
@@ -338,16 +346,17 @@ export const GESTOR_STUDY_CONTENT: CargoStudyContent = {
   slug: "gestor-i",
   cargo: "Gestor I",
   subtitle: "Ruta integrada de estudio oficial para DIAN 2676",
-  opec: "236741",
+  opec: GESTOR_I_OFFICIAL_SNAPSHOT.opecs.join(" / "),
   level: "Profesional",
   codeGrade: "Código 301 · Grado 1",
-  vacancies: "8 vacantes",
-  salary: "$6.811.546",
+  vacancies: `${GESTOR_I_OFFICIAL_SNAPSHOT.vacantesTotal} vacantes oficiales (236741: 8 + 236767: 189)`,
+  salary: GESTOR_I_OFFICIAL_SNAPSHOT.salario2025,
   salaryYear: "Vigencia salarial 2025",
   enrollmentWindow:
     "Inscripciones DIAN 2676: del 28-ene-2026 al 6-feb-2026, con ampliación oficial CNSC hasta el 7-feb-2026.",
-  lastUpdate: "11-feb-2026",
+  lastUpdate: `Corte oficial SIMO: ${OFFICIAL_SIMO_SNAPSHOT_LABEL}`,
   sources: [
+    { label: "SIMO API · ofertaPublica (corte oficial)", href: OFFICIAL_SIMO_SOURCE_URL },
     { label: "SIMO · Oferta de empleo", href: "https://simo.cnsc.gov.co/#/ofertaEmpleo" },
     { label: "CNSC · Convocatoria DIAN 2676", href: "https://www.cnsc.gov.co/node/59797" },
     {

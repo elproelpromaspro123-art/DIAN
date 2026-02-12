@@ -6,7 +6,7 @@ import { analistaIntegridadQuestions } from "./questions-analista-integridad";
 const FASE_1_LABEL =
   "Fase 1 · Competencias funcionales (Eliminatoria · 65%)";
 const FASE_1_TEXT =
-  "Base oficial: Manual de funciones Analista V (OPEC 236732), Acuerdo 21 DIAN 2676, Estatuto Tributario. Puntaje mínimo aprobatorio: 70/100.";
+  "Base oficial: Manual de funciones Analista V (OPEC 236732 y 236756), Acuerdo 21 DIAN 2676, Estatuto Tributario. Puntaje mínimo aprobatorio: 70/100.";
 
 const FASE_2_LABEL =
   "Fase 2 · Competencias comportamentales (Clasificatoria · 15%)";
@@ -36,7 +36,7 @@ const analistaExtraQuestions: Question[] = [
     id: 0,
     groupLabel: FASE_1_LABEL,
     groupText: FASE_1_TEXT,
-    text: "En SIMO, el empleo Analista V de esta convocatoria corresponde a la OPEC:",
+    text: "En SIMO, una OPEC oficial vigente del empleo Analista V (ingreso DIAN 2676) es:",
     options: [
       { letter: "A", text: "236741" },
       { letter: "B", text: "236732" },
@@ -45,7 +45,7 @@ const analistaExtraQuestions: Question[] = [
     ],
     correctAnswer: "B",
     explanation:
-      "La oferta oficial del cargo Analista V en la convocatoria DIAN 2676 corresponde a OPEC 236732.",
+      "La oferta oficial de Analista V en ingreso DIAN 2676 incluye OPEC 236732 y OPEC 236756; esta pregunta valida una de ellas (236732).",
   },
   // ── 2. Nivel del empleo ───────────────────────────────────────────
   {
@@ -84,16 +84,16 @@ const analistaExtraQuestions: Question[] = [
     id: 0,
     groupLabel: FASE_1_LABEL,
     groupText: FASE_1_TEXT,
-    text: "En la oferta del Analista V, el número total de vacantes reportadas es:",
+    text: "En la oferta consolidada del Analista V (OPEC 236732 + 236756), el total de vacantes es:",
     options: [
       { letter: "A", text: "4" },
-      { letter: "B", text: "8" },
-      { letter: "C", text: "12" },
-      { letter: "D", text: "16" },
+      { letter: "B", text: "10" },
+      { letter: "C", text: "14" },
+      { letter: "D", text: "24" },
     ],
-    correctAnswer: "A",
+    correctAnswer: "C",
     explanation:
-      "La información consolidada del cargo Analista V para esta convocatoria reporta 4 vacantes.",
+      "El consolidado oficial SIMO para Analista V en ingreso DIAN 2676 es 14 vacantes (236732: 4 y 236756: 10).",
   },
   // ── 5. Experiencia ────────────────────────────────────────────────
   {

@@ -6,7 +6,7 @@ import { gestorIntegridadQuestions } from "./questions-gestor-integridad";
 const FASE_1_LABEL =
   "Fase 1 · Competencias funcionales (Eliminatoria · 70%)";
 const FASE_1_TEXT =
-  "Base oficial: Manual de funciones Gestor I (OPEC 236741), Acuerdo 21 DIAN 2676, Ley 80/1993, Ley 1150/2007. Puntaje mínimo aprobatorio: 70/100.";
+  "Base oficial: Manual de funciones Gestor I (OPEC 236741 y 236767), Acuerdo 21 DIAN 2676, Ley 80/1993, Ley 1150/2007. Puntaje mínimo aprobatorio: 70/100.";
 
 const FASE_2_LABEL =
   "Fase 2 · Competencias comportamentales (Clasificatoria · 20%)";
@@ -36,16 +36,16 @@ const gestorExtraQuestions: Question[] = [
     id: 0,
     groupLabel: FASE_1_LABEL,
     groupText: FASE_1_TEXT,
-    text: "En SIMO, el empleo Gestor I de esta convocatoria corresponde a la OPEC:",
+    text: "En SIMO, una OPEC oficial vigente del empleo Gestor I (ingreso DIAN 2676) es:",
     options: [
       { letter: "A", text: "236732" },
-      { letter: "B", text: "236741" },
-      { letter: "C", text: "236819" },
-      { letter: "D", text: "236701" },
+      { letter: "B", text: "236819" },
+      { letter: "C", text: "236701" },
+      { letter: "D", text: "236767" },
     ],
-    correctAnswer: "B",
+    correctAnswer: "D",
     explanation:
-      "La oferta oficial del cargo Gestor I en la convocatoria DIAN 2676 corresponde a OPEC 236741.",
+      "La oferta oficial de Gestor I en ingreso DIAN 2676 incluye OPEC 236741 y OPEC 236767; esta pregunta valida una de ellas (236767).",
   },
   // ── 2. Nivel del empleo ───────────────────────────────────────────
   {
@@ -100,16 +100,16 @@ const gestorExtraQuestions: Question[] = [
     id: 0,
     groupLabel: FASE_1_LABEL,
     groupText: FASE_1_TEXT,
-    text: "En esta convocatoria, el total de vacantes del Gestor I es:",
+    text: "En esta convocatoria, el total consolidado de vacantes de Gestor I (OPEC 236741 + 236767) es:",
     options: [
-      { letter: "A", text: "8" },
-      { letter: "B", text: "4" },
-      { letter: "C", text: "12" },
-      { letter: "D", text: "16" },
+      { letter: "A", text: "189" },
+      { letter: "B", text: "197" },
+      { letter: "C", text: "14" },
+      { letter: "D", text: "236" },
     ],
-    correctAnswer: "A",
+    correctAnswer: "B",
     explanation:
-      "La información oficial consolidada reporta 8 vacantes para el empleo Gestor I.",
+      "El consolidado oficial SIMO para Gestor I en ingreso DIAN 2676 es 197 vacantes (236741: 8 y 236767: 189).",
   },
   // ── 6. Peso Fase 1 (Acuerdo 21) ──────────────────────────────────
   {

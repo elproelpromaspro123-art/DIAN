@@ -66,7 +66,7 @@ export const studyGuides: Record<string, StudyGuide> = {
       {
         title: "Datos clave para memorizar",
         bullets: [
-          "OPEC 236732 · Codigo 205 · Grado 5 · Nivel tecnico.",
+          "OPEC 236732 y 236756 · Codigo 205 · Grado 5 · Nivel tecnico.",
           "Peso fase: 65% (eliminatoria) · minimo 70/100.",
           "DIAN: UAE adscrita a MinHacienda con personeria juridica y autonomia.",
           "Cierre oficial de inscripciones DIAN 2676: 7-feb-2026.",
@@ -252,7 +252,7 @@ export const studyGuides: Record<string, StudyGuide> = {
       {
         title: "Datos clave para memorizar",
         bullets: [
-          "OPEC 236741 · Codigo 301 · Grado 1 · Nivel profesional.",
+          "OPEC 236741 y 236767 · Codigo 301 · Grado 1 · Nivel profesional.",
           "No requiere experiencia para esta convocatoria.",
           "Peso fase funcional: 70% (eliminatoria).",
           "Cierre oficial DIAN 2676: 7-feb-2026.",

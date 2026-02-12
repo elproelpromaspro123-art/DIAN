@@ -3,7 +3,7 @@
 export const analistaBasicasQuestions: Question[] = [
   {
     id: 1,
-    text: "Según el manual de funciones del cargo Analista V (OPEC 236732), ¿en qué subproceso se concentra el empleo?",
+    text: "Según el manual de funciones del cargo Analista V (OPEC 236732 y 236756), ¿en qué subproceso se concentra el empleo?",
     options: [
       { letter: "A", text: "Operación logística, compras y contratos." },
       { letter: "B", text: "Administración de cartera y recaudo/devoluciones." },

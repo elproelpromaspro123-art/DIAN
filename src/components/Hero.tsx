@@ -11,8 +11,14 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import {
+  OFFICIAL_SIMO_SNAPSHOT_LABEL, OFFICIAL_SIMO_SOURCE_URL,
+  formatTodayBogotaLabel,
+} from "@/data/official-dian2676";
 
 export default function Hero() {
+  const verificationDate = formatTodayBogotaLabel();
+
   return (
     <section className="relative bg-gradient-to-br from-dian-navy via-dian-navy-light to-dian-navy overflow-hidden">
       <div className="absolute inset-0 opacity-15">
@@ -127,9 +133,17 @@ export default function Hero() {
               Inscripciones cerradas
             </p>
             <p className="text-xs text-white/80">
-              La CNSC confirmó ampliación hasta el 7 de febrero de 2026. Hoy
-              (11 de febrero de 2026) el proceso está en etapa posterior a inscripciones.
+              La CNSC confirmó ampliación hasta el 7 de febrero de 2026. Verificación automática:
+              {" "}{verificationDate}. Corte oficial de oferta SIMO: {OFFICIAL_SIMO_SNAPSHOT_LABEL}.
             </p>
+            <a
+              href={OFFICIAL_SIMO_SOURCE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex mt-2 text-xs font-semibold text-dian-gold hover:underline"
+            >
+              Fuente técnica: API SIMO ofertaPublica (convocatoria 1011914855)
+            </a>
           </div>
         </motion.div>
 

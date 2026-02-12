@@ -136,6 +136,134 @@ function resolvePhase(question: Question): { key: PhaseKey; label: string; weigh
   };
 }
 
+type PhaseBucket = {
+  key: PhaseKey;
+  weight: number;
+  questions: Question[];
+};
+
+function buildBalancedQuestionSet(
+  allQuestions: Question[],
+  questionCount: number,
+  randomize: boolean
+): Question[] {
+  if (allQuestions.length === 0 || questionCount <= 0) return [];
+
+  const limit = Math.min(questionCount, allQuestions.length);
+  if (limit === allQuestions.length) {
+    return randomize ? shuffleArray(allQuestions) : [...allQuestions];
+  }
+
+  const orderedKeys: PhaseKey[] = ["fase-1", "fase-2", "fase-3", "otros"];
+  const bucketMap = new Map<PhaseKey, PhaseBucket>();
+
+  for (const key of orderedKeys) {
+    bucketMap.set(key, { key, weight: 0, questions: [] });
+  }
+
+  for (const question of allQuestions) {
+    const phase = resolvePhase(question);
+    const bucket = bucketMap.get(phase.key);
+    if (!bucket) continue;
+    bucket.weight = Math.max(bucket.weight, phase.weight);
+    bucket.questions.push(question);
+  }
+
+  const buckets = orderedKeys
+    .map((key) => bucketMap.get(key))
+    .filter(Boolean)
+    .filter((bucket) => (bucket?.questions.length ?? 0) > 0) as PhaseBucket[];
+
+  if (buckets.length === 1) {
+    const only = randomize ? shuffleArray(buckets[0].questions) : buckets[0].questions;
+    return only.slice(0, limit);
+  }
+
+  const counts = new Map<PhaseKey, number>();
+  for (const bucket of buckets) counts.set(bucket.key, 0);
+
+  let assigned = 0;
+  if (limit >= buckets.length) {
+    for (const bucket of buckets) {
+      counts.set(bucket.key, 1);
+      assigned += 1;
+    }
+  }
+
+  const remaining = limit - assigned;
+  if (remaining > 0) {
+    const weightSum = buckets.reduce((acc, bucket) => {
+      const baseWeight = bucket.weight > 0 ? bucket.weight : bucket.questions.length;
+      return acc + baseWeight;
+    }, 0);
+
+    const remainders = new Map<PhaseKey, number>();
+    let distributed = 0;
+
+    for (const bucket of buckets) {
+      const current = counts.get(bucket.key) ?? 0;
+      const capacityLeft = bucket.questions.length - current;
+      if (capacityLeft <= 0) {
+        remainders.set(bucket.key, -1);
+        continue;
+      }
+
+      const baseWeight = bucket.weight > 0 ? bucket.weight : bucket.questions.length;
+      const raw = weightSum > 0 ? (remaining * baseWeight) / weightSum : 0;
+      const extra = Math.min(capacityLeft, Math.floor(raw));
+
+      counts.set(bucket.key, current + extra);
+      distributed += extra;
+      remainders.set(bucket.key, raw - extra);
+    }
+
+    while (distributed < remaining) {
+      let picked: PhaseBucket | null = null;
+      let bestRemainder = Number.NEGATIVE_INFINITY;
+
+      for (const bucket of buckets) {
+        const current = counts.get(bucket.key) ?? 0;
+        const capacityLeft = bucket.questions.length - current;
+        if (capacityLeft <= 0) continue;
+
+        const remainder = remainders.get(bucket.key) ?? 0;
+        if (remainder > bestRemainder) {
+          bestRemainder = remainder;
+          picked = bucket;
+        }
+      }
+
+      if (!picked) break;
+      const current = counts.get(picked.key) ?? 0;
+      counts.set(picked.key, current + 1);
+      distributed += 1;
+      remainders.set(picked.key, (remainders.get(picked.key) ?? 0) - 1);
+    }
+  }
+
+  const selectedByPhase = new Map<PhaseKey, Question[]>();
+  for (const bucket of buckets) {
+    const count = counts.get(bucket.key) ?? 0;
+    if (count <= 0) continue;
+    const source = randomize ? shuffleArray(bucket.questions) : bucket.questions;
+    selectedByPhase.set(bucket.key, source.slice(0, count));
+  }
+
+  const selectedFlat = orderedKeys.flatMap((key) => selectedByPhase.get(key) ?? []);
+  if (randomize) return shuffleArray(selectedFlat);
+
+  const queues = orderedKeys.map((key) => [...(selectedByPhase.get(key) ?? [])]);
+  const interleaved: Question[] = [];
+  while (queues.some((queue) => queue.length > 0)) {
+    for (const queue of queues) {
+      const next = queue.shift();
+      if (next) interleaved.push(next);
+    }
+  }
+
+  return interleaved.slice(0, limit);
+}
+
 type InitialExamState = {
   order: number[];
   answers: Record<number, string>;
@@ -178,10 +306,12 @@ function buildInitialExamState(params: {
     };
   }
 
-  const base = randomize ? shuffleArray(allQuestions) : [...allQuestions];
-  const order = base
-    .slice(0, Math.min(questionCount, allQuestions.length))
-    .map((q) => q.id);
+  const selected = buildBalancedQuestionSet(
+    allQuestions,
+    questionCount,
+    randomize
+  );
+  const order = selected.map((q) => q.id);
 
   return { order, answers: {}, currentIndex: 0, elapsed: 0 };
 }
@@ -398,6 +528,35 @@ export default function SimulacroExam({
         .join("/")
     : "N/A";
   const hasExternalWeightedStage = totalConfiguredWeight > 0 && totalConfiguredWeight < 0.99;
+  const thematicWeaknesses = useMemo(() => {
+    const bucket = new Map<
+      string,
+      { label: string; total: number; incorrect: number }
+    >();
+
+    for (const question of questions) {
+      const label = question.groupLabel ?? resolvePhase(question).label;
+      const entry = bucket.get(label) ?? { label, total: 0, incorrect: 0 };
+      entry.total += 1;
+      if (answers[question.id] !== question.correctAnswer) {
+        entry.incorrect += 1;
+      }
+      bucket.set(label, entry);
+    }
+
+    return Array.from(bucket.values())
+      .map((entry) => ({
+        ...entry,
+        errorRate: entry.total > 0 ? entry.incorrect / entry.total : 0,
+      }))
+      .sort((a, b) => {
+        if (b.incorrect !== a.incorrect) return b.incorrect - a.incorrect;
+        return b.errorRate - a.errorRate;
+      });
+  }, [questions, answers]);
+  const topWeaknesses = thematicWeaknesses
+    .filter((item) => item.incorrect > 0)
+    .slice(0, 3);
 
   if (questionOrder.length === 0 || questions.length === 0) {
     return (
@@ -505,6 +664,51 @@ export default function SimulacroExam({
                   ? " Este simulador no incluye fases documentales externas (por ejemplo, valoración de antecedentes)."
                   : ""}
               </p>
+            </div>
+
+            <div className="text-left bg-white border border-gray-200 rounded-xl p-4 mb-6">
+              <p className="text-sm font-semibold text-dian-navy mb-2">
+                Debilidades por eje temático
+              </p>
+              {topWeaknesses.length === 0 ? (
+                <p className="text-xs text-gray-600">
+                  No se detectaron debilidades críticas en este intento. Mantén repaso de
+                  precisión y velocidad.
+                </p>
+              ) : (
+                <div className="space-y-2">
+                  {topWeaknesses.map((item, index) => (
+                    <div
+                      key={`weak-${item.label}`}
+                      className="rounded-lg border border-gray-200 bg-dian-gray/40 p-3"
+                    >
+                      <p className="text-xs font-semibold text-gray-700">
+                        Debilidad {index + 1}: {item.label}
+                      </p>
+                      <p className="text-xs text-gray-600 mt-1">
+                        {item.incorrect}/{item.total} incorrectas (
+                        {Math.round(item.errorRate * 100)}% de error en este eje).
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {topWeaknesses.length > 0 && (
+                <div className="mt-3 rounded-lg border border-dian-navy/15 bg-dian-mint/40 p-3">
+                  <p className="text-xs font-semibold text-dian-navy mb-1">
+                    Plan automático de reestudio (próximas 48 horas)
+                  </p>
+                  <div className="text-xs text-gray-700 space-y-1">
+                    {topWeaknesses.map((item, index) => (
+                      <p key={`plan-${item.label}`}>
+                        {index + 1}. Repasa el eje <strong>{item.label}</strong>, resuelve
+                        10-15 preguntas enfocadas y vuelve a simular ese bloque.
+                      </p>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
 
             <div className="flex flex-wrap justify-center gap-3">

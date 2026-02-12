@@ -14,6 +14,13 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import {
+  ANALISTA_V_OFFICIAL_SNAPSHOT,
+  GESTOR_I_OFFICIAL_SNAPSHOT,
+  OFFICIAL_SIMO_SNAPSHOT_LABEL,
+  OFFICIAL_SIMO_SOURCE_URL,
+  formatTodayBogotaLabel,
+} from "@/data/official-dian2676";
 
 const pruebas = [
   {
@@ -44,15 +51,16 @@ const cargos = [
     id: "analista",
     title: "Analista V",
     subtitle: "Nivel técnico · Código 205 · Grado 5",
-    opec: "OPEC 236732",
-    entidad: "ID entidad 117",
-    salario: "$7.171.627 (vigencia 2025)",
-    vacantes: "4 vacantes",
+    opec: "OPEC 236732 y 236756",
+    entidad: "Ingreso DIAN 2676 · Convocatoria 1011914855",
+    salario: `${ANALISTA_V_OFFICIAL_SNAPSHOT.salario2025} (vigencia 2025)`,
+    vacantes: `${ANALISTA_V_OFFICIAL_SNAPSHOT.vacantesTotal} vacantes`,
     cierre: "Cierre de inscripciones: 7 de febrero de 2026",
     manual: "/recursos/manual-funciones-analista-v.pdf",
     highlights: [
       "Proceso misional: cumplimiento de obligaciones tributarias",
       "Subproceso: administración de cartera y recaudo/devoluciones",
+      "Vacantes SIMO: OPEC 236732 (4) + OPEC 236756 (10)",
       "Experiencia: 3 años (2 laboral + 1 relacionada)",
     ],
     funcionales: [
@@ -78,15 +86,16 @@ const cargos = [
     id: "gestor",
     title: "Gestor I",
     subtitle: "Nivel profesional · Código 301 · Grado 1",
-    opec: "OPEC 236741",
-    entidad: "ID entidad 134",
-    salario: "$6.811.546 (vigencia 2025)",
-    vacantes: "8 vacantes",
+    opec: "OPEC 236741 y 236767",
+    entidad: "Ingreso DIAN 2676 · Convocatoria 1011914855",
+    salario: `${GESTOR_I_OFFICIAL_SNAPSHOT.salario2025} (vigencia 2025)`,
+    vacantes: `${GESTOR_I_OFFICIAL_SNAPSHOT.vacantesTotal} vacantes`,
     cierre: "Cierre de inscripciones: 7 de febrero de 2026",
     manual: "/recursos/manual-funciones-gestor-i.pdf",
     highlights: [
       "Proceso: administrativo y financiero",
       "Subproceso: recursos administrativos, logística, compras y contratos",
+      "Vacantes SIMO: OPEC 236741 (8) + OPEC 236767 (189)",
       "Experiencia: no requiere",
     ],
     funcionales: [
@@ -120,6 +129,8 @@ const fadeUp = {
 };
 
 export default function InfoSection() {
+  const verificationDate = formatTodayBogotaLabel();
+
   return (
     <section
       id="resumen"
@@ -134,7 +145,7 @@ export default function InfoSection() {
         >
           <div className="inline-flex items-center gap-2 bg-dian-mint text-dian-navy text-xs font-semibold px-4 py-1.5 rounded-full mb-4">
             <Gauge className="w-3.5 h-3.5" />
-            Actualizado al 11 de febrero de 2026
+            Verificación automática: {verificationDate}
           </div>
           <h2 className="text-2xl sm:text-3xl font-bold text-dian-navy mb-3 font-[family:var(--font-display)]">
             Resumen del proceso DIAN 2676
@@ -182,7 +193,24 @@ export default function InfoSection() {
                 <CheckCircle2 className="w-4 h-4 text-dian-success mt-0.5" />
                 <p>
                   La prueba de competencias básicas y funcionales es eliminatoria;
-                  las otras dos determinan tu posición en la lista de elegibles.
+                  para Analista V se suman además la fase comportamental (15%),
+                  integridad (10%) y valoración de antecedentes (10% documental).
+                </p>
+              </div>
+              <div className="flex items-start gap-2">
+                <CheckCircle2 className="w-4 h-4 text-dian-success mt-0.5" />
+                <p>
+                  Corte oficial de oferta SIMO: {OFFICIAL_SIMO_SNAPSHOT_LABEL}
+                  {" · "}
+                  <a
+                    href={OFFICIAL_SIMO_SOURCE_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-dian-navy hover:underline font-medium"
+                  >
+                    API ofertaPublica (convocatoria 1011914855)
+                  </a>
+                  .
                 </p>
               </div>
             </div>
@@ -265,53 +293,83 @@ export default function InfoSection() {
           className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8 mb-14"
         >
           <h3 className="text-lg font-semibold text-dian-navy mb-4">
-            Tabla oficial de pruebas
+            Tabla oficial por cargo
           </h3>
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-sm">
-              <thead className="text-xs uppercase text-gray-500 border-b">
-                <tr>
-                  <th className="py-2 pr-4">Tipo de prueba</th>
-                  <th className="py-2 pr-4">Carácter</th>
-                  <th className="py-2 pr-4">Peso</th>
-                  <th className="py-2">¿Qué evalúa?</th>
-                </tr>
-              </thead>
-              <tbody className="text-gray-600">
-                <tr className="border-b">
-                  <td className="py-3 pr-4 font-medium text-gray-900">
-                    Competencias básicas y funcionales
-                  </td>
-                  <td className="py-3 pr-4">Eliminatorio</td>
-                  <td className="py-3 pr-4">65% / 70%</td>
-                  <td className="py-3">
-                    Conocimientos de ley, tributos, aduanas y manual de funciones.
-                    Si no superas el mínimo, quedas fuera del proceso.
-                  </td>
-                </tr>
-                <tr className="border-b">
-                  <td className="py-3 pr-4 font-medium text-gray-900">
-                    Competencias comportamentales
-                  </td>
-                  <td className="py-3 pr-4">Clasificatorio</td>
-                  <td className="py-3 pr-4">15% / 20%</td>
-                  <td className="py-3">
-                    Forma de actuar basada en el Diccionario de Competencias
-                    (adaptabilidad, comunicación, etc.).
-                  </td>
-                </tr>
-                <tr>
-                  <td className="py-3 pr-4 font-medium text-gray-900">
-                    Prueba de integridad
-                  </td>
-                  <td className="py-3 pr-4">Clasificatorio</td>
-                  <td className="py-3 pr-4">10%</td>
-                  <td className="py-3">
-                    Valores éticos y honestidad frente a dilemas del servicio público.
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+          <div className="grid lg:grid-cols-2 gap-6">
+            <div className="rounded-xl border border-gray-200 overflow-hidden">
+              <div className="bg-dian-mint px-4 py-2">
+                <p className="text-sm font-semibold text-dian-navy">Analista V</p>
+                <p className="text-[11px] text-gray-600">65% / 15% / 10% + valoración de antecedentes 10% (documental)</p>
+              </div>
+              <div className="overflow-x-auto">
+                <table className="w-full text-left text-sm">
+                  <thead className="text-xs uppercase text-gray-500 border-b bg-white">
+                    <tr>
+                      <th className="py-2 px-4">Prueba</th>
+                      <th className="py-2 px-4">Carácter</th>
+                      <th className="py-2 px-4">Peso</th>
+                    </tr>
+                  </thead>
+                  <tbody className="text-gray-600">
+                    <tr className="border-b">
+                      <td className="py-3 px-4 font-medium text-gray-900">Básicas y funcionales</td>
+                      <td className="py-3 px-4">Eliminatoria</td>
+                      <td className="py-3 px-4">65%</td>
+                    </tr>
+                    <tr className="border-b">
+                      <td className="py-3 px-4 font-medium text-gray-900">Comportamentales</td>
+                      <td className="py-3 px-4">Clasificatoria</td>
+                      <td className="py-3 px-4">15%</td>
+                    </tr>
+                    <tr className="border-b">
+                      <td className="py-3 px-4 font-medium text-gray-900">Integridad</td>
+                      <td className="py-3 px-4">Clasificatoria</td>
+                      <td className="py-3 px-4">10%</td>
+                    </tr>
+                    <tr>
+                      <td className="py-3 px-4 font-medium text-gray-900">Valoración de antecedentes</td>
+                      <td className="py-3 px-4">Clasificatoria (documental)</td>
+                      <td className="py-3 px-4">10%</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div className="rounded-xl border border-gray-200 overflow-hidden">
+              <div className="bg-dian-sand px-4 py-2">
+                <p className="text-sm font-semibold text-dian-navy">Gestor I</p>
+                <p className="text-[11px] text-gray-600">70% / 20% / 10%</p>
+              </div>
+              <div className="overflow-x-auto">
+                <table className="w-full text-left text-sm">
+                  <thead className="text-xs uppercase text-gray-500 border-b bg-white">
+                    <tr>
+                      <th className="py-2 px-4">Prueba</th>
+                      <th className="py-2 px-4">Carácter</th>
+                      <th className="py-2 px-4">Peso</th>
+                    </tr>
+                  </thead>
+                  <tbody className="text-gray-600">
+                    <tr className="border-b">
+                      <td className="py-3 px-4 font-medium text-gray-900">Básicas y funcionales</td>
+                      <td className="py-3 px-4">Eliminatoria</td>
+                      <td className="py-3 px-4">70%</td>
+                    </tr>
+                    <tr className="border-b">
+                      <td className="py-3 px-4 font-medium text-gray-900">Comportamentales</td>
+                      <td className="py-3 px-4">Clasificatoria</td>
+                      <td className="py-3 px-4">20%</td>
+                    </tr>
+                    <tr>
+                      <td className="py-3 px-4 font-medium text-gray-900">Integridad</td>
+                      <td className="py-3 px-4">Clasificatoria</td>
+                      <td className="py-3 px-4">10%</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
         </motion.div>
 
