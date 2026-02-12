@@ -63,12 +63,12 @@ export const ANALISTA_STUDY_CONTENT: CargoStudyContent = {
     { label: "SIMO · Oferta de empleo", href: "https://simo.cnsc.gov.co/#/ofertaEmpleo" },
     { label: "CNSC · Convocatoria DIAN 2676", href: "https://www.cnsc.gov.co/node/59797" },
     {
-      label: "CNSC · Acuerdo 21 (PDF)",
-      href: "https://historico.cnsc.gov.co/docs/DIAN_4.5._Acuerdo_No_21_del_31_de_enero_del_2025.pdf",
+      label: "CNSC · Acuerdo 205 de 2025",
+      href: "https://www.cnsc.gov.co/convocatorias/dian-2022?field_tipo_de_contenido_convocat_target_id=65",
     },
     {
-      label: "CNSC · Anexo técnico (PDF)",
-      href: "https://historico.cnsc.gov.co/docs/DIAN_4.6._Anexo_del_31_de_enero_del_2025.pdf",
+      label: "CNSC · Anexo DIAN 2676 de 2025",
+      href: "https://www.cnsc.gov.co/convocatorias/dian-2022?field_tipo_de_contenido_convocat_target_id=65",
     },
     {
       label: "DIAN · Comunicado de inicio de inscripciones",
@@ -360,12 +360,12 @@ export const GESTOR_STUDY_CONTENT: CargoStudyContent = {
     { label: "SIMO · Oferta de empleo", href: "https://simo.cnsc.gov.co/#/ofertaEmpleo" },
     { label: "CNSC · Convocatoria DIAN 2676", href: "https://www.cnsc.gov.co/node/59797" },
     {
-      label: "CNSC · Acuerdo 21 (PDF)",
-      href: "https://historico.cnsc.gov.co/docs/DIAN_4.5._Acuerdo_No_21_del_31_de_enero_del_2025.pdf",
+      label: "CNSC · Acuerdo 205 de 2025",
+      href: "https://www.cnsc.gov.co/convocatorias/dian-2022?field_tipo_de_contenido_convocat_target_id=65",
     },
     {
-      label: "CNSC · Anexo técnico (PDF)",
-      href: "https://historico.cnsc.gov.co/docs/DIAN_4.6._Anexo_del_31_de_enero_del_2025.pdf",
+      label: "CNSC · Anexo DIAN 2676 de 2025",
+      href: "https://www.cnsc.gov.co/convocatorias/dian-2022?field_tipo_de_contenido_convocat_target_id=65",
     },
     {
       label: "DIAN · Comunicado de inicio de inscripciones",

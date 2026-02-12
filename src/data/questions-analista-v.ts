@@ -6,7 +6,7 @@ import { analistaIntegridadQuestions } from "./questions-analista-integridad";
 const FASE_1_LABEL =
   "Fase 1 · Competencias funcionales (Eliminatoria · 65%)";
 const FASE_1_TEXT =
-  "Base oficial: Manual de funciones Analista V (OPEC 236732 y 236756), Acuerdo 21 DIAN 2676, Estatuto Tributario. Puntaje mínimo aprobatorio: 70/100.";
+  "Base oficial: Manual de funciones Analista V (OPEC 236732 y 236756), Acuerdo 205 de 2025 DIAN 2676, Estatuto Tributario. Puntaje mínimo aprobatorio: 70/100.";
 
 const FASE_2_LABEL =
   "Fase 2 · Competencias comportamentales (Clasificatoria · 15%)";
@@ -111,12 +111,12 @@ const analistaExtraQuestions: Question[] = [
     explanation:
       "El manual de funciones del Analista V señala como requisito tres años (dos laborales y uno relacionado).",
   },
-  // ── 6. Peso Fase 1 (Acuerdo 21) ──────────────────────────────────
+  // ── 6. Peso Fase 1 (Acuerdo 205 de 2025) ─────────────────────────
   {
     id: 0,
     groupLabel: FASE_1_LABEL,
     groupText: FASE_1_TEXT,
-    text: "Según el Acuerdo 21 DIAN 2676, ¿cuál es el peso de la Fase 1 (Competencias Funcionales) para el Analista V?",
+    text: "Según el Acuerdo 205 de 2025 DIAN 2676, ¿cuál es el peso de la Fase 1 (Competencias Funcionales) para el Analista V?",
     options: [
       { letter: "A", text: "70%" },
       { letter: "B", text: "60%" },
@@ -125,14 +125,14 @@ const analistaExtraQuestions: Question[] = [
     ],
     correctAnswer: "C",
     explanation:
-      "El Acuerdo 21 establece que para cargos con experiencia (Tabla 7), la Fase 1 tiene peso de 65%.",
+      "El Acuerdo 205 de 2025 establece que para cargos con experiencia (Tabla 7), la Fase 1 tiene peso de 65%.",
   },
   // ── 7. Carácter eliminatorio ──────────────────────────────────────
   {
     id: 0,
     groupLabel: FASE_1_LABEL,
     groupText: FASE_1_TEXT,
-    text: "En el Acuerdo 21, la Fase 1 del Analista V tiene carácter:",
+    text: "En el Acuerdo 205 de 2025, la Fase 1 del Analista V tiene carácter:",
     options: [
       { letter: "A", text: "Clasificatorio" },
       { letter: "B", text: "Eliminatorio" },
@@ -157,14 +157,14 @@ const analistaExtraQuestions: Question[] = [
     ],
     correctAnswer: "D",
     explanation:
-      "El Acuerdo 21 fija un mínimo aprobatorio de 70/100 en la prueba eliminatoria de competencias funcionales.",
+      "El Acuerdo 205 de 2025 fija un mínimo aprobatorio de 70/100 en la prueba eliminatoria de competencias funcionales.",
   },
   // ── 9. Peso Fase 2 ────────────────────────────────────────────────
   {
     id: 0,
     groupLabel: FASE_2_LABEL,
     groupText: FASE_2_TEXT,
-    text: "Según el Acuerdo 21, el peso de la Fase 2 (Competencias Comportamentales) para el Analista V es:",
+    text: "Según el Acuerdo 205 de 2025, el peso de la Fase 2 (Competencias Comportamentales) para el Analista V es:",
     options: [
       { letter: "A", text: "15%" },
       { letter: "B", text: "20%" },
@@ -180,7 +180,7 @@ const analistaExtraQuestions: Question[] = [
     id: 0,
     groupLabel: FASE_3_LABEL,
     groupText: FASE_3_TEXT,
-    text: "El peso de la Fase 3 (Prueba de Integridad) para el Analista V según el Acuerdo 21 es:",
+    text: "El peso de la Fase 3 (Prueba de Integridad) para el Analista V según el Acuerdo 205 de 2025 es:",
     options: [
       { letter: "A", text: "20%" },
       { letter: "B", text: "5%" },
@@ -189,7 +189,7 @@ const analistaExtraQuestions: Question[] = [
     ],
     correctAnswer: "C",
     explanation:
-      "La Prueba de Integridad tiene peso de 10% y carácter clasificatorio según la Tabla 7 del Acuerdo 21.",
+      "La Prueba de Integridad tiene peso de 10% y carácter clasificatorio según la Tabla 7 del Acuerdo 205 de 2025.",
   },
   // ── 11. Decreto Ley 927 de 2023 ───────────────────────────────────
   {

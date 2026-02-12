@@ -95,7 +95,7 @@ export default function RootLayout({
   return (
     <html lang="es" suppressHydrationWarning>
       <body
-        className={`${sora.variable} ${fraunces.variable} antialiased`}
+        className={`${sora.variable} ${fraunces.variable} antialiased theme-dark`}
         suppressHydrationWarning
       >
         {children}

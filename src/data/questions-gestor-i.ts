@@ -6,7 +6,7 @@ import { gestorIntegridadQuestions } from "./questions-gestor-integridad";
 const FASE_1_LABEL =
   "Fase 1 · Competencias funcionales (Eliminatoria · 70%)";
 const FASE_1_TEXT =
-  "Base oficial: Manual de funciones Gestor I (OPEC 236741 y 236767), Acuerdo 21 DIAN 2676, Ley 80/1993, Ley 1150/2007. Puntaje mínimo aprobatorio: 70/100.";
+  "Base oficial: Manual de funciones Gestor I (OPEC 236741 y 236767), Acuerdo 205 de 2025 DIAN 2676, Ley 80/1993, Ley 1150/2007. Puntaje mínimo aprobatorio: 70/100.";
 
 const FASE_2_LABEL =
   "Fase 2 · Competencias comportamentales (Clasificatoria · 20%)";
@@ -111,12 +111,12 @@ const gestorExtraQuestions: Question[] = [
     explanation:
       "El consolidado oficial SIMO para Gestor I en ingreso DIAN 2676 es 197 vacantes (236741: 8 y 236767: 189).",
   },
-  // ── 6. Peso Fase 1 (Acuerdo 21) ──────────────────────────────────
+  // ── 6. Peso Fase 1 (Acuerdo 205 de 2025) ─────────────────────────
   {
     id: 0,
     groupLabel: FASE_1_LABEL,
     groupText: FASE_1_TEXT,
-    text: "Según el Acuerdo 21 DIAN 2676, ¿cuál es el peso de la Fase 1 (Competencias Funcionales) para el Gestor I?",
+    text: "Según el Acuerdo 205 de 2025 DIAN 2676, ¿cuál es el peso de la Fase 1 (Competencias Funcionales) para el Gestor I?",
     options: [
       { letter: "A", text: "65%" },
       { letter: "B", text: "70%" },
@@ -125,14 +125,14 @@ const gestorExtraQuestions: Question[] = [
     ],
     correctAnswer: "B",
     explanation:
-      "El Acuerdo 21 establece que para cargos sin experiencia (Tabla 8), la Fase 1 tiene peso de 70%.",
+      "El Acuerdo 205 de 2025 establece que para cargos sin experiencia (Tabla 8), la Fase 1 tiene peso de 70%.",
   },
   // ── 7. Carácter eliminatorio ──────────────────────────────────────
   {
     id: 0,
     groupLabel: FASE_1_LABEL,
     groupText: FASE_1_TEXT,
-    text: "En el Acuerdo 21, la Fase 1 del Gestor I tiene carácter:",
+    text: "En el Acuerdo 205 de 2025, la Fase 1 del Gestor I tiene carácter:",
     options: [
       { letter: "A", text: "Clasificatorio" },
       { letter: "B", text: "Informativo" },
@@ -157,14 +157,14 @@ const gestorExtraQuestions: Question[] = [
     ],
     correctAnswer: "C",
     explanation:
-      "El Acuerdo 21 fija un mínimo aprobatorio de 70/100 en la prueba eliminatoria de competencias funcionales.",
+      "El Acuerdo 205 de 2025 fija un mínimo aprobatorio de 70/100 en la prueba eliminatoria de competencias funcionales.",
   },
   // ── 9. Peso Fase 2 ────────────────────────────────────────────────
   {
     id: 0,
     groupLabel: FASE_2_LABEL,
     groupText: FASE_2_TEXT,
-    text: "Según el Acuerdo 21, el peso de la Fase 2 (Competencias Comportamentales) para el Gestor I es:",
+    text: "Según el Acuerdo 205 de 2025, el peso de la Fase 2 (Competencias Comportamentales) para el Gestor I es:",
     options: [
       { letter: "A", text: "15%" },
       { letter: "B", text: "20%" },
@@ -180,7 +180,7 @@ const gestorExtraQuestions: Question[] = [
     id: 0,
     groupLabel: FASE_3_LABEL,
     groupText: FASE_3_TEXT,
-    text: "El peso de la Fase 3 (Prueba de Integridad) para el Gestor I según el Acuerdo 21 es:",
+    text: "El peso de la Fase 3 (Prueba de Integridad) para el Gestor I según el Acuerdo 205 de 2025 es:",
     options: [
       { letter: "A", text: "10%" },
       { letter: "B", text: "5%" },
@@ -189,7 +189,7 @@ const gestorExtraQuestions: Question[] = [
     ],
     correctAnswer: "A",
     explanation:
-      "La Prueba de Integridad tiene peso de 10% y carácter clasificatorio según la Tabla 8 del Acuerdo 21.",
+      "La Prueba de Integridad tiene peso de 10% y carácter clasificatorio según la Tabla 8 del Acuerdo 205 de 2025.",
   },
   // ── 11. Decreto Ley 927 de 2023 ───────────────────────────────────
   {

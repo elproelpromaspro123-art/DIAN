@@ -161,7 +161,7 @@ export default function Hero() {
               href="https://simo.cnsc.gov.co/#/ofertaEmpleo"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 bg-dian-gold text-dian-navy font-semibold px-5 py-2.5 rounded-lg hover:bg-[#e0b457] transition-colors text-sm w-full sm:w-auto"
+              className="inline-flex items-center justify-center gap-2 bg-dian-gold text-[#101826] font-semibold px-5 py-2.5 rounded-lg hover:bg-[#e0b457] transition-colors text-sm w-full sm:w-auto"
             >
               <ExternalLink className="w-4 h-4" />
               Oferta SIMO
