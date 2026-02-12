@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { Users } from "lucide-react";
 import StudyAreaClient from "@/components/StudyAreaClient";
@@ -18,10 +18,9 @@ export default function StudyGestorComportamentalesClient() {
       areaDescription="Competencias conductuales específicas del Gestor I."
       totalQuestions={25}
       icon={Users}
-      iconGradient="from-amber-500 to-orange-600"
+      iconGradient="from-stone-600 to-stone-800"
       loadQuestions={loadGestorComportamentalesQuestions}
       guide={studyGuides.gestor_comportamentales}
     />
   );
 }
-

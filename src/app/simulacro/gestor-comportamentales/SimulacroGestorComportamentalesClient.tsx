@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { Users } from "lucide-react";
 import SimulacroAreaClient from "@/components/SimulacroAreaClient";
@@ -17,9 +17,8 @@ export default function SimulacroGestorComportamentalesClient() {
       areaDescription="Escenarios conductuales basados en el diccionario oficial DIAN."
       totalQuestions={25}
       icon={Users}
-      iconGradient="from-amber-500 to-orange-600"
+      iconGradient="from-stone-600 to-stone-800"
       loadQuestions={loadGestorComportamentalesQuestions}
     />
   );
 }
-

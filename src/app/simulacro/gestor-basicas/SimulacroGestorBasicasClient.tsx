@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { ClipboardCheck } from "lucide-react";
 import SimulacroAreaClient from "@/components/SimulacroAreaClient";
@@ -17,9 +17,8 @@ export default function SimulacroGestorBasicasClient() {
       areaDescription="Prueba eliminatoria basada en el manual de funciones del Gestor I."
       totalQuestions={25}
       icon={ClipboardCheck}
-      iconGradient="from-indigo-500 to-slate-600"
+      iconGradient="from-neutral-700 to-neutral-900"
       loadQuestions={loadGestorBasicasQuestions}
     />
   );
 }
-

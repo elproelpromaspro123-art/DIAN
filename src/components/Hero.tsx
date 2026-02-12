@@ -20,8 +20,8 @@ export default function Hero() {
   const verificationDate = formatTodayBogotaLabel();
 
   return (
-    <section className="relative bg-gradient-to-br from-[#355261] via-[#446172] to-[#385362] overflow-hidden">
-      <div className="absolute inset-0 opacity-10">
+    <section className="relative bg-gradient-to-br from-[#111111] via-[#191919] to-[#111111] overflow-hidden">
+      <div className="absolute inset-0 opacity-20">
         <div className="absolute top-6 left-12 w-72 h-72 bg-white rounded-full blur-3xl" />
         <div className="absolute bottom-8 right-10 w-96 h-96 bg-dian-gold rounded-full blur-3xl" />
       </div>
@@ -161,7 +161,7 @@ export default function Hero() {
               href="https://simo.cnsc.gov.co/#/ofertaEmpleo"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 bg-dian-gold text-[#101826] font-semibold px-5 py-2.5 rounded-lg hover:bg-[#e0b457] transition-colors text-sm w-full sm:w-auto"
+              className="inline-flex items-center justify-center gap-2 bg-dian-gold text-[#121212] font-semibold px-5 py-2.5 rounded-lg hover:bg-white transition-colors text-sm w-full sm:w-auto"
             >
               <ExternalLink className="w-4 h-4" />
               Oferta SIMO

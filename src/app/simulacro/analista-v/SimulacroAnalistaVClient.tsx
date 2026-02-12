@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { ClipboardCheck } from "lucide-react";
 import SimulacroAreaClient from "@/components/SimulacroAreaClient";
@@ -17,9 +17,8 @@ export default function SimulacroAnalistaVClient() {
       areaDescription="Simulacro completo por fases (eliminatoria + clasificatorias) para Analista V."
       totalQuestions={100}
       icon={ClipboardCheck}
-      iconGradient="from-emerald-500 to-teal-600"
+      iconGradient="from-zinc-700 to-zinc-900"
       loadQuestions={loadAnalistaVQuestions}
     />
   );
 }
-

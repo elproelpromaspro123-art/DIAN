@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { ClipboardCheck } from "lucide-react";
 import StudyAreaClient from "@/components/StudyAreaClient";
@@ -18,10 +18,9 @@ export default function StudyGestorBasicasClient() {
       areaDescription="Funciones administrativas, logística y contratación pública del Gestor I."
       totalQuestions={25}
       icon={ClipboardCheck}
-      iconGradient="from-indigo-500 to-slate-600"
+      iconGradient="from-neutral-700 to-neutral-900"
       loadQuestions={loadGestorBasicasQuestions}
       guide={studyGuides.gestor_basicas}
     />
   );
 }
-

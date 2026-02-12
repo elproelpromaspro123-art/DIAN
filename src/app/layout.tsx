@@ -18,7 +18,7 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://simo-dian.vercel.ap
 const metadataBase = siteUrl ? new URL(siteUrl) : undefined;
 
 export const viewport: Viewport = {
-  themeColor: "#0f2533",
+  themeColor: "#121212",
 };
 
 export const metadata: Metadata = {

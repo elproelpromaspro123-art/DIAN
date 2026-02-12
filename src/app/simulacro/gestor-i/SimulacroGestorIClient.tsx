@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { ClipboardCheck } from "lucide-react";
 import SimulacroAreaClient from "@/components/SimulacroAreaClient";
@@ -17,9 +17,8 @@ export default function SimulacroGestorIClient() {
       areaDescription="Simulacro completo por fases (eliminatoria + clasificatorias) para Gestor I."
       totalQuestions={100}
       icon={ClipboardCheck}
-      iconGradient="from-indigo-500 to-slate-600"
+      iconGradient="from-neutral-700 to-neutral-900"
       loadQuestions={loadGestorIQuestions}
     />
   );
 }
-

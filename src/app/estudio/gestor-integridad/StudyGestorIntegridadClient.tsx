@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { ShieldCheck } from "lucide-react";
 import StudyAreaClient from "@/components/StudyAreaClient";
@@ -18,10 +18,9 @@ export default function StudyGestorIntegridadClient() {
       areaDescription="Código de Ética DIAN y principios de integridad pública."
       totalQuestions={25}
       icon={ShieldCheck}
-      iconGradient="from-teal-500 to-cyan-600"
+      iconGradient="from-zinc-700 to-zinc-900"
       loadQuestions={loadGestorIntegridadQuestions}
       guide={studyGuides.gestor_integridad}
     />
   );
 }
-

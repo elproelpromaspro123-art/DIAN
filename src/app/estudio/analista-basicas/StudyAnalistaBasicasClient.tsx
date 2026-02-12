@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { ClipboardCheck } from "lucide-react";
 import StudyAreaClient from "@/components/StudyAreaClient";
@@ -18,10 +18,9 @@ export default function StudyAnalistaBasicasClient() {
       areaDescription="Normativa, funciones y competencias eliminatorias del cargo Analista V."
       totalQuestions={25}
       icon={ClipboardCheck}
-      iconGradient="from-emerald-500 to-teal-600"
+      iconGradient="from-zinc-700 to-zinc-900"
       loadQuestions={loadAnalistaBasicasQuestions}
       guide={studyGuides.analista_basicas}
     />
   );
 }
-

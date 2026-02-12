@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { ShieldCheck } from "lucide-react";
 import StudyAreaClient from "@/components/StudyAreaClient";
@@ -18,10 +18,9 @@ export default function StudyAnalistaIntegridadClient() {
       areaDescription="Valores públicos y juramento de integridad DIAN."
       totalQuestions={25}
       icon={ShieldCheck}
-      iconGradient="from-rose-500 to-pink-600"
+      iconGradient="from-neutral-600 to-neutral-800"
       loadQuestions={loadAnalistaIntegridadQuestions}
       guide={studyGuides.analista_integridad}
     />
   );
 }
-

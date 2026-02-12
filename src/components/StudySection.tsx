@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import Link from "next/link";
 import { ArrowRight, Briefcase, GraduationCap } from "lucide-react";
@@ -9,7 +9,7 @@ const studyAreas = [
     name: "Analista V · Estudio integrado",
     icon: GraduationCap,
     href: "/estudio/analista-v",
-    color: "from-emerald-500 to-teal-600",
+    color: "from-zinc-700 to-zinc-900",
     total: 3,
     description:
       "Guía completa por fases con lectura crítica, casos situacionales y preguntas de fijación.",
@@ -18,7 +18,7 @@ const studyAreas = [
     name: "Gestor I · Estudio integrado",
     icon: Briefcase,
     href: "/estudio/gestor-i",
-    color: "from-indigo-500 to-slate-600",
+    color: "from-neutral-700 to-neutral-900",
     total: 3,
     description:
       "Ruta por fases con análisis aplicado y talleres para decidir como en examen.",

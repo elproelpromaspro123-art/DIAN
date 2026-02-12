@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { Users } from "lucide-react";
 import StudyAreaClient from "@/components/StudyAreaClient";
@@ -18,10 +18,9 @@ export default function StudyAnalistaComportamentalesClient() {
       areaDescription="Competencias conductuales basadas en el diccionario oficial DIAN."
       totalQuestions={25}
       icon={Users}
-      iconGradient="from-blue-500 to-sky-600"
+      iconGradient="from-zinc-600 to-zinc-800"
       loadQuestions={loadAnalistaComportamentalesQuestions}
       guide={studyGuides.analista_comportamentales}
     />
   );
 }
-

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { ShieldCheck } from "lucide-react";
 import SimulacroAreaClient from "@/components/SimulacroAreaClient";
@@ -17,9 +17,8 @@ export default function SimulacroGestorIntegridadClient() {
       areaDescription="Ética pública y principios del Código de Ética DIAN."
       totalQuestions={25}
       icon={ShieldCheck}
-      iconGradient="from-teal-500 to-cyan-600"
+      iconGradient="from-zinc-700 to-zinc-900"
       loadQuestions={loadGestorIntegridadQuestions}
     />
   );
 }
-

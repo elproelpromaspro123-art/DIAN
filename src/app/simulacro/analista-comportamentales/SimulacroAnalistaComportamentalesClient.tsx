@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { Users } from "lucide-react";
 import SimulacroAreaClient from "@/components/SimulacroAreaClient";
@@ -17,9 +17,8 @@ export default function SimulacroAnalistaComportamentalesClient() {
       areaDescription="Escenarios conductuales basados en el diccionario oficial de competencias."
       totalQuestions={25}
       icon={Users}
-      iconGradient="from-blue-500 to-sky-600"
+      iconGradient="from-zinc-600 to-zinc-800"
       loadQuestions={loadAnalistaComportamentalesQuestions}
     />
   );
 }
-

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import Link from "next/link";
 import { ArrowRight, Briefcase, ClipboardCheck } from "lucide-react";
@@ -9,7 +9,7 @@ const areas = [
     name: "Analista V · Simulacro integral",
     icon: ClipboardCheck,
     href: "/simulacro/analista-v",
-    color: "from-emerald-500 to-teal-600",
+    color: "from-zinc-700 to-zinc-900",
     questions: 100,
     description:
       "Incluye fase eliminatoria y dos fases clasificatorias, con retroalimentación detallada.",
@@ -18,7 +18,7 @@ const areas = [
     name: "Gestor I · Simulacro integral",
     icon: Briefcase,
     href: "/simulacro/gestor-i",
-    color: "from-indigo-500 to-slate-600",
+    color: "from-neutral-700 to-neutral-900",
     questions: 100,
     description:
       "Entrenamiento completo por fases con evaluación de desempeño y mejora por bloque.",
