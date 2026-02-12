@@ -2,6 +2,7 @@
 import { Fraunces, Sora } from "next/font/google";
 import CopyProtection from "@/components/CopyProtection";
 import ServiceWorkerRegistration from "@/components/ServiceWorkerRegistration";
+import ThemeProvider from "@/components/ThemeProvider";
 import "./globals.css";
 
 const sora = Sora({
@@ -18,7 +19,7 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://simo-dian.vercel.ap
 const metadataBase = siteUrl ? new URL(siteUrl) : undefined;
 
 export const viewport: Viewport = {
-  themeColor: "#121212",
+  themeColor: "#ffffff",
 };
 
 export const metadata: Metadata = {
@@ -95,10 +96,12 @@ export default function RootLayout({
   return (
     <html lang="es" suppressHydrationWarning>
       <body
-        className={`${sora.variable} ${fraunces.variable} antialiased theme-dark`}
+        className={`${sora.variable} ${fraunces.variable} antialiased theme-light`}
         suppressHydrationWarning
       >
-        {children}
+        <ThemeProvider>
+          {children}
+        </ThemeProvider>
         <CopyProtection />
         <ServiceWorkerRegistration />
       </body>

@@ -72,6 +72,26 @@ export const studyGuides: Record<string, StudyGuide> = {
           "Cierre oficial de inscripciones DIAN 2676: 7-feb-2026.",
         ],
       },
+      {
+        title: "Estrategia de lectura critica para esta fase",
+        bullets: [
+          "Lee el enunciado completo dos veces antes de ver opciones. Identifica hechos, actores y norma aplicable.",
+          "Subraya verbos clave: 'procede', 'debe', 'puede', 'corresponde'. Cada uno indica diferente grado de obligacion.",
+          "Descarta opciones que asumen competencias de otro cargo o que omiten soporte documental.",
+          "Cuando dos opciones parecen correctas, elige la que tiene mayor soporte normativo y trazabilidad.",
+          "Si el caso menciona 'urgencia' o 'presion', sospecha que el distractor sera la opcion rapida sin garantias.",
+        ],
+      },
+      {
+        title: "Tecnica de descanso activo (tecnica Pomodoro adaptada)",
+        bullets: [
+          "Estudia bloques de 25 minutos con 5 minutos de descanso (levantate, estira, mira lejos).",
+          "Cada 4 bloques toma un descanso de 15-20 minutos. Esto previene fatiga mental acumulada.",
+          "Al volver de cada descanso, resume en voz alta el ultimo concepto estudiado. Si no puedes, repasa.",
+          "Alterna entre lectura normativa (pasivo) y resolucion de casos (activo) para mantener atencion.",
+          "No estudies mas de 3 horas seguidas. La retencion cae drasticamente despues de ese umbral.",
+        ],
+      },
     ],
   },
 
@@ -131,6 +151,26 @@ export const studyGuides: Record<string, StudyGuide> = {
           "N4 evalua capacidad de influir y conducir practicas del equipo.",
           "Respuestas validas siempre combinan legalidad + efectividad + servicio.",
           "La fase tiene peso clasificatorio del 15%.",
+        ],
+      },
+      {
+        title: "Estrategia de lectura critica para esta fase",
+        bullets: [
+          "Antes de leer las opciones, identifica cual competencia evalua el enunciado (etico, adaptabilidad, comunicacion, equipo).",
+          "Busca el verbo rector de la conducta esperada: promueve, lidera, coordina, verifica. El verbo define el nivel.",
+          "En N4, la respuesta correcta siempre implica influir en otros, no solo actuar individualmente.",
+          "Descarta opciones que resuelven el problema pero sin involucrar al equipo o sin documentar la accion.",
+          "Si el escenario menciona presion de un superior, la respuesta correcta nunca es obedecer sin cuestionar ni desobedecer abiertamente.",
+        ],
+      },
+      {
+        title: "Tecnica de descanso activo (tecnica Pomodoro adaptada)",
+        bullets: [
+          "Estudia bloques de 25 minutos con 5 minutos de descanso. Las competencias comportamentales cansan mas porque requieren juicio.",
+          "Cada 4 bloques toma un descanso de 15-20 minutos. Camina, hidratate y desconecta de pantallas.",
+          "Al volver de cada descanso, inventa un escenario y responde en voz alta. Si no puedes justificar tu eleccion, repasa.",
+          "Alterna entre leer el diccionario de competencias (pasivo) y resolver escenarios situacionales (activo).",
+          "No resuelvas mas de 15 escenarios seguidos. La fatiga de decision hace que elijas la opcion mas facil, no la correcta.",
         ],
       },
     ],
@@ -193,6 +233,26 @@ export const studyGuides: Record<string, StudyGuide> = {
           "Honestidad prohíbe incentivos y tratos preferenciales.",
           "Justicia exige decisiones con evidencia e imparcialidad.",
           "En dilemas, prima interes general + legalidad + debido proceso.",
+        ],
+      },
+      {
+        title: "Estrategia de lectura critica para esta fase",
+        bullets: [
+          "Identifica primero que tipo de dilema es: conflicto de interes, presion por resultados, manejo de informacion o trato desigual.",
+          "Busca cual valor del Codigo de Integridad esta en juego (Honestidad, Respeto, Compromiso, Diligencia, Justicia).",
+          "Si el escenario menciona un familiar, amigo o conocido, activa el filtro de conflicto de interes: la declaracion formal siempre es obligatoria.",
+          "La respuesta correcta en integridad nunca es la mas comoda ni la mas rapida, es la mas auditable y defendible.",
+          "Descarta opciones que resuelven el dilema 'en privado' sin documentar ni reportar por canal institucional.",
+        ],
+      },
+      {
+        title: "Tecnica de descanso activo (tecnica Pomodoro adaptada)",
+        bullets: [
+          "Estudia bloques de 25 minutos con 5 minutos de descanso. Los dilemas eticos son emocionalmente demandantes.",
+          "Cada 4 bloques toma un descanso de 15-20 minutos. Haz algo fisico: caminar, estirar, respirar profundo.",
+          "Al volver de cada descanso, plantea un dilema etico y verbaliza tu decision con justificacion. Si no puedes, repasa.",
+          "Alterna entre memorizar valores y conductas (pasivo) y resolver dilemas eticos (activo).",
+          "Si sientes frustacion o confusion, detente. La claridad etica requiere mente descansada, no fuerza bruta.",
         ],
       },
     ],
@@ -258,6 +318,26 @@ export const studyGuides: Record<string, StudyGuide> = {
           "Cierre oficial DIAN 2676: 7-feb-2026.",
         ],
       },
+      {
+        title: "Estrategia de lectura critica para esta fase",
+        bullets: [
+          "Lee el enunciado dos veces. Identifica si el escenario es precontractual, contractual o poscontractual antes de ver opciones.",
+          "Busca la norma aplicable: si habla de modalidades de seleccion, es Ley 80/Ley 1150. Si habla de presupuesto, es SIIF. Si habla de peticiones, es CPACA.",
+          "Verifica que la opcion elegida incluya soporte documental. En contratacion publica, nada existe sin documento.",
+          "Descarta opciones que omiten publicacion en SECOP o que sugieren avanzar sin CDP/RP.",
+          "Si el caso menciona urgencia, verifica si aplica urgencia manifiesta (art. 42 Ley 80). Si no lo menciona expresamente, la urgencia no justifica atajos.",
+        ],
+      },
+      {
+        title: "Tecnica de descanso activo (tecnica Pomodoro adaptada)",
+        bullets: [
+          "Estudia bloques de 25 minutos con 5 minutos de descanso. La normativa de contratacion es densa y requiere pausas frecuentes.",
+          "Cada 4 bloques toma un descanso de 15-20 minutos. Sal del espacio de estudio si puedes.",
+          "Al volver de cada descanso, dibuja la secuencia del ultimo proceso estudiado (ej: CDP > RP > contrato > ejecucion > pago). Si no puedes, repasa.",
+          "Alterna entre lectura normativa (Ley 80, CPACA) y resolucion de casos practicos para mantener la atencion.",
+          "No estudies mas de 3 horas seguidas. La contratacion publica tiene muchos detalles y la fatiga produce errores por confusion de modalidades.",
+        ],
+      },
     ],
   },
 
@@ -317,6 +397,26 @@ export const studyGuides: Record<string, StudyGuide> = {
           "Etico N4 es la unica competencia de nivel 4 del cargo.",
           "Innovacion/Adaptabilidad/Solucion de problemas son N3.",
           "La mejor opcion combina efectividad + legalidad + transparencia.",
+        ],
+      },
+      {
+        title: "Estrategia de lectura critica para esta fase",
+        bullets: [
+          "Identifica la competencia que evalua el escenario antes de ver opciones. Las 4 competencias del Gestor I son: Etico N4, Innovacion N3, Adaptabilidad N3 y Solucion de problemas N3.",
+          "Busca el verbo rector: si dice 'propone mejora', piensa Innovacion. Si dice 'ajusta su conducta', piensa Adaptabilidad. Si dice 'diagnostica la causa', piensa Solucion de problemas.",
+          "En Etico N4, la respuesta siempre incluye influir en otros (promover, orientar, liderar). Si solo actua individualmente, es N3 o menos.",
+          "Descarta opciones que resuelven el problema pero omiten documentacion, seguimiento o coordinacion con el equipo.",
+          "Cuando dos opciones parecen correctas, elige la que mejor combina conducta observable + impacto institucional + trazabilidad.",
+        ],
+      },
+      {
+        title: "Tecnica de descanso activo (tecnica Pomodoro adaptada)",
+        bullets: [
+          "Estudia bloques de 25 minutos con 5 minutos de descanso. Los escenarios situacionales requieren concentracion sostenida.",
+          "Cada 4 bloques toma un descanso de 15-20 minutos. Muevete fisicamente para reactivar la atencion.",
+          "Al volver de cada descanso, crea un escenario propio y verbaliza que competencia evalua y cual seria tu respuesta. Si dudas, repasa.",
+          "Alterna entre estudiar el diccionario de competencias (teoria) y resolver escenarios practicos (aplicacion).",
+          "No resuelvas mas de 12-15 escenarios seguidos. La fatiga de decision reduce la calidad del juicio comportamental.",
         ],
       },
     ],
@@ -380,6 +480,26 @@ export const studyGuides: Record<string, StudyGuide> = {
           "Honestidad: cero tolerancia a incentivos o beneficios indebidos.",
           "Responsabilidad por la eleccion: toda decision tiene consecuencia institucional.",
           "En caso de duda, prioriza legalidad, transparencia y trazabilidad.",
+        ],
+      },
+      {
+        title: "Estrategia de lectura critica para esta fase",
+        bullets: [
+          "Identifica el tipo de dilema etico: conflicto de interes en contratacion, presion por resultados en logistica, manejo de informacion de proveedores o trato desigual.",
+          "Busca cual valor del Codigo de Integridad esta en juego. En contexto de compras y custodia, Honestidad y Justicia son los mas frecuentes.",
+          "Si el escenario involucra un proveedor o contratista conocido, activa el filtro de conflicto de interes. La declaracion formal es obligatoria.",
+          "La respuesta correcta siempre incluye: documentar, reportar y actuar por canal institucional. Resolver 'en privado' nunca es correcto.",
+          "Descarta opciones que normalizan practicas informales con frases como 'siempre se ha hecho asi' o 'es lo mas practico'.",
+        ],
+      },
+      {
+        title: "Tecnica de descanso activo (tecnica Pomodoro adaptada)",
+        bullets: [
+          "Estudia bloques de 25 minutos con 5 minutos de descanso. Los dilemas eticos de logistica y contratacion son emocionalmente agotadores.",
+          "Cada 4 bloques toma un descanso de 15-20 minutos. Desconecta completamente: no pienses en el estudio durante el descanso.",
+          "Al volver de cada descanso, plantea un dilema etico de custodia o compras y responde en voz alta con justificacion. Si no puedes, repasa.",
+          "Alterna entre memorizar valores y conductas del Codigo de Integridad (pasivo) y resolver dilemas situacionales (activo).",
+          "Si un dilema te genera confusion persistente, dejalo y vuelve despues. La claridad etica mejora con descanso, no con repeticion forzada.",
         ],
       },
     ],

@@ -917,7 +917,7 @@ export default function CargoStudyClient({ content }: Props) {
                       const checkpoint = phase.checkpoints[index];
                       const isRead = completedAxes[axisKey] ?? false;
                       const axisExpanded = allExpanded || (expandedAnswers[axisKey] ?? false);
-                      const lesson = explainAxis(axis, phase.title);
+                      const lesson = phase.axisLessons?.[index] ?? explainAxis(axis, phase.title);
 
                       return (
                         <article

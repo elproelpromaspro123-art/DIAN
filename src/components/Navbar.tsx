@@ -10,11 +10,14 @@ import {
   Info,
   Menu,
   MessageSquare,
+  Moon,
   NotebookPen,
+  Sun,
   X,
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTheme } from "@/components/ThemeProvider";
 
 const navItems = [
   { href: "/#resumen", label: "Resumen", icon: Info },
@@ -27,6 +30,7 @@ const navItems = [
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -72,6 +76,13 @@ export default function Navbar() {
                 </Link>
               );
             })}
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-lg hover:bg-dian-navy/10 transition-colors"
+              aria-label={theme === "light" ? "Cambiar a modo oscuro" : "Cambiar a modo claro"}
+            >
+              {theme === "light" ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
+            </button>
             <Link
               href="https://simo.cnsc.gov.co/#/ofertaEmpleo"
               prefetch={false}
@@ -138,6 +149,23 @@ export default function Navbar() {
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: navItems.length * 0.05 }}
+              >
+                <button
+                  onClick={() => {
+                    toggleTheme();
+                    setMenuOpen(false);
+                  }}
+                  role="menuitem"
+                  className="flex items-center gap-3 py-3 px-4 rounded-xl hover:bg-dian-navy/10 transition-colors text-base text-dian-navy w-full"
+                >
+                  {theme === "light" ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />}
+                  {theme === "light" ? "Modo oscuro" : "Modo claro"}
+                </button>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: (navItems.length + 1) * 0.05 }}
               >
                 <Link
                   href="https://simo.cnsc.gov.co/#/ofertaEmpleo"
