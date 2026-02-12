@@ -12,7 +12,7 @@ const studyAreas = [
     color: "from-emerald-500 to-teal-600",
     total: 3,
     description:
-      "Guía completa por fases: básicas/funcionales, comportamentales e integridad.",
+      "Guía completa por fases con lectura crítica, casos situacionales y preguntas de fijación.",
   },
   {
     name: "Gestor I · Estudio integrado",
@@ -21,7 +21,7 @@ const studyAreas = [
     color: "from-indigo-500 to-slate-600",
     total: 3,
     description:
-      "Ruta unificada por fases con ejes temáticos y preguntas de fijación.",
+      "Ruta por fases con análisis aplicado y talleres para decidir como en examen.",
   },
 ];
 
@@ -35,7 +35,7 @@ export default function StudySection() {
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto text-sm">
             Selecciona tu cargo y sigue una guía continua en tres fases. El contenido
-            está resumido para estudiar rápido sin perder soporte oficial.
+            está diseñado para comprender, analizar y decidir con criterio oficial, no solo memorizar.
           </p>
         </div>
 

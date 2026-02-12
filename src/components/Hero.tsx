@@ -20,8 +20,8 @@ export default function Hero() {
   const verificationDate = formatTodayBogotaLabel();
 
   return (
-    <section className="relative bg-gradient-to-br from-dian-navy via-dian-navy-light to-dian-navy overflow-hidden">
-      <div className="absolute inset-0 opacity-15">
+    <section className="relative bg-gradient-to-br from-[#355261] via-[#446172] to-[#385362] overflow-hidden">
+      <div className="absolute inset-0 opacity-10">
         <div className="absolute top-6 left-12 w-72 h-72 bg-white rounded-full blur-3xl" />
         <div className="absolute bottom-8 right-10 w-96 h-96 bg-dian-gold rounded-full blur-3xl" />
       </div>
@@ -42,7 +42,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <div className="inline-flex items-center gap-2 rounded-full bg-white/15 border border-white/20 px-4 py-1.5 text-xs font-semibold uppercase tracking-wide mb-5">
+          <div className="inline-flex items-center gap-2 rounded-full bg-white/18 border border-white/25 px-4 py-1.5 text-xs font-semibold uppercase tracking-wide mb-5">
             <FileBadge className="w-4 h-4 text-dian-gold" />
             Convocatoria DIAN 2676 · Ingreso
           </div>
@@ -64,7 +64,7 @@ export default function Hero() {
               con información oficial
             </span>
           </h1>
-          <p className="text-lg sm:text-xl text-white/90 mb-8 max-w-3xl mx-auto">
+          <p className="text-lg sm:text-xl text-white/92 mb-8 max-w-3xl mx-auto">
             Ruta completa para Analista V y Gestor I: simulacros, estudio guiado y
             documentos verificados para que llegues con claridad a cada prueba.
           </p>
@@ -76,21 +76,21 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="grid sm:grid-cols-3 gap-4 max-w-4xl mx-auto mb-10"
         >
-          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+          <div className="bg-white/14 backdrop-blur-sm rounded-xl p-4 border border-white/25">
             <Target className="w-8 h-8 mx-auto mb-2 text-dian-gold" />
             <h3 className="font-semibold text-sm mb-1">3 pruebas oficiales</h3>
             <p className="text-xs text-white/80">
               Básicas y funcionales, comportamentales e integridad.
             </p>
           </div>
-          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+          <div className="bg-white/14 backdrop-blur-sm rounded-xl p-4 border border-white/25">
             <Users className="w-8 h-8 mx-auto mb-2 text-dian-gold" />
             <h3 className="font-semibold text-sm mb-1">2 cargos activos</h3>
             <p className="text-xs text-white/80">
               Analista V (técnico) y Gestor I (profesional).
             </p>
           </div>
-          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+          <div className="bg-white/14 backdrop-blur-sm rounded-xl p-4 border border-white/25">
             <ShieldCheck className="w-8 h-8 mx-auto mb-2 text-dian-gold" />
             <h3 className="font-semibold text-sm mb-1">Material verificado</h3>
             <p className="text-xs text-white/80">
@@ -103,7 +103,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="bg-white/10 backdrop-blur-sm rounded-xl px-4 py-3 max-w-2xl mx-auto mb-5 border border-white/20 flex items-start gap-3 text-left"
+          className="bg-white/14 backdrop-blur-sm rounded-xl px-4 py-3 max-w-2xl mx-auto mb-5 border border-white/25 flex items-start gap-3 text-left"
         >
           <div className="w-9 h-9 rounded-lg bg-white/15 flex items-center justify-center shrink-0">
             <MonitorSmartphone className="w-5 h-5 text-dian-gold" />
@@ -123,7 +123,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.35 }}
-          className="bg-white/10 backdrop-blur-sm rounded-xl px-4 py-3 max-w-2xl mx-auto mb-8 border border-white/20 flex items-start gap-3 text-left"
+          className="bg-white/14 backdrop-blur-sm rounded-xl px-4 py-3 max-w-2xl mx-auto mb-8 border border-white/25 flex items-start gap-3 text-left"
         >
           <div className="w-9 h-9 rounded-lg bg-white/15 flex items-center justify-center shrink-0">
             <CalendarCheck className="w-5 h-5 text-dian-gold" />
@@ -151,7 +151,7 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="bg-white/5 backdrop-blur-sm rounded-xl p-4 max-w-3xl mx-auto border border-white/10"
+          className="bg-white/8 backdrop-blur-sm rounded-xl p-4 max-w-3xl mx-auto border border-white/15"
         >
           <p className="text-sm text-white/90 mb-3">
             Verifica la información en las fuentes oficiales:

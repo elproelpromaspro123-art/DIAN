@@ -1,17 +1,17 @@
 ﻿@import "tailwindcss";
 
 :root {
-  --dian-navy: #0f2533;
-  --dian-navy-light: #1f3b47;
-  --dian-mint: #e5f4ee;
-  --dian-gold: #d9a441;
-  --dian-sand: #f6f2ec;
-  --dian-gray: #f2f4f6;
+  --dian-navy: #1d3342;
+  --dian-navy-light: #2f4b5b;
+  --dian-mint: #eef6f2;
+  --dian-gold: #b99b6a;
+  --dian-sand: #faf7f2;
+  --dian-gray: #f6f8f9;
   --dian-ink: #11161c;
   --dian-danger: #c2413d;
   --dian-success: #2f7a4a;
   --dian-warning: #d89b2f;
-  --background: #fbfbfa;
+  --background: #fafbf9;
   --foreground: #11161c;
 }
 
@@ -33,8 +33,8 @@
 }
 
 body {
-  background: radial-gradient(circle at 10% 10%, rgba(31, 122, 90, 0.08), transparent 45%),
-    radial-gradient(circle at 90% 20%, rgba(217, 164, 65, 0.12), transparent 40%),
+  background: radial-gradient(circle at 10% 10%, rgba(31, 122, 90, 0.03), transparent 45%),
+    radial-gradient(circle at 90% 20%, rgba(185, 155, 106, 0.05), transparent 42%),
     var(--background);
   color: var(--foreground);
   font-family: var(--font-sora), "Segoe UI", sans-serif;
@@ -201,15 +201,15 @@ html {
 }
 
 .reading-mode {
-  background: #f5f1ea;
+  background: #f8f6f2;
 }
 
 .reading-mode .exam-card {
-  background-color: #fffaf2;
-  border-color: #eadfce;
+  background-color: #fffdf9;
+  border-color: #e7dfd3;
 }
 
 .reading-mode .exam-surface {
-  background-color: #fffaf2;
-  border-color: #eadfce;
+  background-color: #fffdf9;
+  border-color: #e7dfd3;
 }

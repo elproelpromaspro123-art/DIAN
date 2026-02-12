@@ -27,21 +27,21 @@ const pruebas = [
     title: "Competencias básicas y funcionales",
     badge: "Eliminatorio · 65% (Analista) / 70% (Gestor)",
     description:
-      "Evalúa conocimientos normativos, tributarios, aduaneros, cambiarios y el manual de funciones del cargo. No superar el mínimo te excluye del proceso.",
+      "Evalúa conocimientos normativos y manual funcional con situaciones aplicadas de toma de decisión. No superar el mínimo te excluye del proceso.",
     icon: ClipboardCheck,
   },
   {
     title: "Competencias comportamentales",
     badge: "Clasificatorio · 15% (Analista) / 20% (Gestor)",
     description:
-      "Mide tu forma de actuar en el trabajo, alineada con el Diccionario de Competencias y las conductas observables definidas oficialmente.",
+      "Mide tu forma de actuar en escenarios situacionales, alineada con el Diccionario de Competencias y conductas observables oficiales.",
     icon: Users,
   },
   {
     title: "Prueba de integridad",
     badge: "Clasificatorio · 10% (ambos cargos)",
     description:
-      "Valora ética pública, honestidad y coherencia frente a dilemas del servicio, con base en el Código de Integridad y el Código de Ética DIAN.",
+      "Valora ética pública y criterio frente a dilemas del servicio, con base en Código de Integridad y Código de Ética DIAN.",
     icon: ShieldAlert,
   },
 ];
