@@ -134,7 +134,7 @@ export default function InfoSection() {
   return (
     <section
       id="resumen"
-      className="py-20 bg-gradient-to-b from-white via-dian-gray/40 to-white border-t border-dian-navy/10"
+      className="py-20 bg-gradient-to-b from-[#191919] via-[#121212] to-[#191919] border-t border-dian-navy/10"
     >
       <div className="max-w-6xl mx-auto px-4">
         <motion.div

@@ -240,7 +240,7 @@ export default function InfografiaSection() {
   return (
     <section
       id="recursos"
-      className="py-16 bg-gradient-to-b from-white to-dian-gray/60 border-t border-dian-navy/10"
+      className="py-16 bg-gradient-to-b from-[#191919] to-[#131313] border-t border-dian-navy/10"
     >
       <div className="max-w-6xl mx-auto px-4">
         <div className="text-center mb-10">
