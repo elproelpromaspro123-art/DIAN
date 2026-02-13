@@ -8,26 +8,31 @@ interface ConstructionNoticeProps {
 }
 
 export default function ConstructionNotice({ enabled = true }: ConstructionNoticeProps) {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const [showToggleButton, setShowToggleButton] = useState(false);
   const [isStorageLoaded, setIsStorageLoaded] = useState(false);
 
   useEffect(() => {
     // Load from localStorage
     if (typeof window !== 'undefined') {
-      const stored = localStorage.getItem('constructionNoticeEnabled');
-      setIsVisible(stored !== 'false' && enabled);
+      const stored = localStorage.getItem('constructionNoticeClosed');
+      // Si no está cerrado explícitamente, mostrar siempre
+      const wasClosed = stored === 'true';
+      setIsVisible(!wasClosed && enabled);
+      setShowToggleButton(wasClosed && enabled);
       setIsStorageLoaded(true);
     }
   }, [enabled]);
 
   const handleContinue = () => {
     setIsVisible(false);
-    localStorage.setItem('constructionNoticeEnabled', 'false');
+    setShowToggleButton(true);
+    localStorage.setItem('constructionNoticeClosed', 'true');
   };
 
   const handleReshow = () => {
     setIsVisible(true);
-    localStorage.setItem('constructionNoticeEnabled', 'true');
+    setShowToggleButton(false);
   };
 
   // Don't render until storage is loaded (hydration safe)
@@ -92,24 +97,39 @@ export default function ConstructionNotice({ enabled = true }: ConstructionNotic
               <h2 className={styles.progressTitle}>En Desarrollo:</h2>
               <ul className={styles.featureList}>
                 <li className={styles.featureItem}>
-                  <span className={styles.checkmark}>✓</span>
-                  <span>Creando animaciones interactivas en toda la página entera (No terminado)</span>
+                  <span className={styles.progressIndicator}>
+                    <span className={styles.progressDot}></span>
+                    <span className={styles.progressLabel}>En progreso</span>
+                  </span>
+                  <span>Creando animaciones interactivas en toda la página entera</span>
                 </li>
                 <li className={styles.featureItem}>
-                  <span className={styles.checkmark}>✓</span>
-                  <span>Creando estudio interactivo tipo juego con animaciones interactivas (No terminado)</span>
+                  <span className={styles.progressIndicator}>
+                    <span className={styles.progressDot}></span>
+                    <span className={styles.progressLabel}>En progreso</span>
+                  </span>
+                  <span>Creando estudio interactivo tipo juego con animaciones interactivas</span>
                 </li>
                 <li className={styles.featureItem}>
-                  <span className={styles.checkmark}>✓</span>
-                  <span>Creando simulacro interactivo tipo juego con animaciones interactivas (No terminado)</span>
+                  <span className={styles.progressIndicator}>
+                    <span className={styles.progressDot}></span>
+                    <span className={styles.progressLabel}>En progreso</span>
+                  </span>
+                  <span>Creando simulacro interactivo tipo juego con animaciones interactivas</span>
                 </li>
                 <li className={styles.featureItem}>
-                  <span className={styles.checkmark}>✓</span>
-                  <span>Actualizar y verificar TODA la información de la página hasta la fecha actual y validar información oficial y verídica hasta la fecha (No terminado)</span>
+                  <span className={styles.progressIndicator}>
+                    <span className={styles.progressDot}></span>
+                    <span className={styles.progressLabel}>En progreso</span>
+                  </span>
+                  <span>Actualizar y verificar TODA la información de la página hasta la fecha actual y validar información oficial y verídica hasta la fecha</span>
                 </li>
                 <li className={styles.featureItem}>
-                  <span className={styles.checkmark}>✓</span>
-                  <span>Corregir cualquier error de información en estudios y simulacro y arreglar errores técnicos (No terminado)</span>
+                  <span className={styles.progressIndicator}>
+                    <span className={styles.progressDot}></span>
+                    <span className={styles.progressLabel}>En progreso</span>
+                  </span>
+                  <span>Corregir cualquier error de información en estudios y simulacro y arreglar errores técnicos</span>
                 </li>
               </ul>
             </div>
@@ -131,8 +151,8 @@ export default function ConstructionNotice({ enabled = true }: ConstructionNotic
         </div>
       </div>
 
-      {/* Floating Toggle Button (Always Visible) */}
-      {!isVisible && (
+      {/* Floating Toggle Button (When closed) */}
+      {showToggleButton && (
         <button
           onClick={handleReshow}
               className={styles.toggleButton}
@@ -146,10 +166,10 @@ export default function ConstructionNotice({ enabled = true }: ConstructionNotic
             <path d="M7 7h10" />
             <path d="M10 10v10" />
             <path d="M14 10v10" />
-            <rect x="8" y="14" width="2" height="2" fill="currentColor" />
-            <rect x="12" y="14" width="2" height="2" fill="currentColor" />
-            <rect x="8" y="18" width="2" height="2" fill="currentColor" />
-            <rect x="12" y="18" width="2" height="2" fill="currentColor" />
+            <circle cx="9" cy="15" r="1.5" fill="currentColor" />
+            <circle cx="13" cy="15" r="1.5" fill="currentColor" />
+            <circle cx="9" cy="19" r="1.5" fill="currentColor" />
+            <circle cx="13" cy="19" r="1.5" fill="currentColor" />
           </svg>
           <span className={styles.tooltipText}>Aviso de Construcción</span>
         </button>
