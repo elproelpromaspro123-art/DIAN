@@ -1,8 +1,9 @@
-﻿import type { Metadata, Viewport } from "next";
+import type { Metadata, Viewport } from "next";
 import { Fraunces, Sora } from "next/font/google";
 import CopyProtection from "@/components/CopyProtection";
 import ServiceWorkerRegistration from "@/components/ServiceWorkerRegistration";
 import ThemeProvider from "@/components/ThemeProvider";
+import ConstructionNotice from "@/components/ConstructionNotice";
 import "./globals.css";
 
 const sora = Sora({
@@ -104,6 +105,7 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         <ThemeProvider>
+          <ConstructionNotice enabled={true} />
           {children}
         </ThemeProvider>
         <CopyProtection />
