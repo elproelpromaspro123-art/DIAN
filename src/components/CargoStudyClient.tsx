@@ -165,7 +165,7 @@ const PHASE_CRITICAL_PACKS: Record<string, PhaseCriticalPack> = {
         dilemma:
           "¿Permitir doble practica temporal o liderar adopcion completa con acompanamiento?",
         analysisLens: [
-          "Adaptabilidad N4",
+          "Adaptabilidad N3",
           "Comunicacion efectiva N3",
           "Sostenibilidad de la practica institucional",
         ],

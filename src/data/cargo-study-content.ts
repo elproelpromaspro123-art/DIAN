@@ -222,10 +222,10 @@ export const ANALISTA_STUDY_CONTENT: CargoStudyContent = {
       character: "Clasificatoria",
       weight: "15%",
       whatEvaluates:
-        "Conductas observables del cargo Analista V: Comportamiento ético (N4), Adaptabilidad (N4), Comunicación efectiva (N3) y Trabajo en equipo (N3), en escenarios de presión y coordinación interáreas.",
+        "Conductas observables del cargo Analista V: Comportamiento ético (N4), Adaptabilidad (N3), Comunicación efectiva (N3) y Trabajo en equipo (N3), en escenarios de presión y coordinación interáreas.",
       thematicAxes: [
         "Comportamiento ético N4: referente institucional e imparcialidad.",
-        "Adaptabilidad N4: liderazgo de cambio y rediseño metodológico.",
+        "Adaptabilidad N3: ajuste proactivo ante cambios de entorno y proceso.",
         "Comunicación efectiva N3: elección de canal, claridad y reducción de barreras.",
         "Trabajo en equipo N3: coordinación y cumplimiento de acuerdos colectivos.",
         "Gestión de conflictos entre áreas misionales y de apoyo.",
@@ -240,9 +240,9 @@ export const ANALISTA_STUDY_CONTENT: CargoStudyContent = {
           examFocus: "Las preguntas te colocan en situaciones donde un superior o compañero sugiere un atajo. La respuesta correcta en N4 no es solo 'negarte' sino liderar: proponer alternativa legal, comunicar el riesgo y documentar. Espera que la opción 'correcta' parezca la más 'difícil' o confrontativa.",
         },
         {
-          title: "Adaptabilidad N4: liderazgo de cambio y rediseño metodológico",
-          whatIs: "Adaptabilidad en nivel 4 va más allá de adaptarse: implica diseñar la transición. Cuando hay un cambio de procedimiento, sistema o normativa, el Analista V debe anticipar impactos, preparar al equipo, y asegurar que la adopción sea completa y sostenible. No se trata de aceptar el cambio pasivamente sino de liderarlo con metodología y acompañamiento.",
-          examFocus: "La pregunta típica presenta un cambio de sistema y varias reacciones posibles. La trampa es elegir 'adaptarse rápidamente' (que sería N3). Para puntuar N4 debes elegir la opción que incluye: analizar impacto, diseñar plan de transición, capacitar al equipo y medir resultados.",
+          title: "Adaptabilidad N3: ajuste proactivo ante cambios de entorno y proceso",
+          whatIs: "Adaptabilidad en nivel 3 implica ajustarse proactivamente ante cambios de procedimiento, sistema o normativa. El Analista V debe mantener una actitud positiva frente al cambio, identificar las repercusiones operativas que genera y sostener los resultados de su gestión durante la transición. No se trata de aceptar el cambio pasivamente sino de anticipar sus efectos y actuar con disposición constructiva.",
+          examFocus: "La pregunta típica presenta un cambio de sistema y varias reacciones posibles. Para puntuar N3 debes elegir la opción que refleje: ajuste proactivo, actitud constructiva, identificación de repercusiones operativas y mantenimiento de resultados durante el cambio.",
         },
         {
           title: "Comunicación efectiva N3: elección de canal, claridad y reducción de barreras",
@@ -272,7 +272,7 @@ export const ANALISTA_STUDY_CONTENT: CargoStudyContent = {
         {
           title: "Escenarios situacionales de cobro, devoluciones y control extensivo",
           whatIs: "Los escenarios comportamentales no preguntan normas sino cómo actúas ante dilemas. En cobro: presión por embargar sin verificar. En devoluciones: presión por aprobar sin soporte completo. En control extensivo: presión por cumplir metas numéricas sin calidad. La competencia evaluada siempre está en el verbo de la conducta esperada.",
-          examFocus: "Lee primero qué competencia evalúa el escenario (ético, adaptabilidad, comunicación, equipo). Luego identifica el verbo rector de la conducta esperada. La respuesta correcta refleja ese verbo en el nivel exigido (N3 o N4).",
+          examFocus: "Lee primero qué competencia evalúa el escenario (ético, adaptabilidad, comunicación, equipo). Luego identifica el verbo rector de la conducta esperada. La respuesta correcta refleja ese verbo en el nivel exigido (N4 para ético, N3 para las demás).",
         },
       ],
       quickSummary: [
@@ -291,9 +291,9 @@ export const ANALISTA_STUDY_CONTENT: CargoStudyContent = {
         },
         {
           id: "an-f2-2",
-          prompt: "¿Qué diferencia N4 de Adaptabilidad frente a N3?",
+          prompt: "¿Qué evalúa Adaptabilidad N3 en Analista V?",
           answer:
-            "N4 diseña y promueve cambios organizacionales; N3 se centra en ajustarse proactivamente al cambio.",
+            "Ajuste proactivo ante cambios, actitud positiva, identificación de repercusiones operativas y mantenimiento de resultados.",
           source: "Res. 065 de 2024 · niveles de competencia",
         },
         {
@@ -326,9 +326,9 @@ export const ANALISTA_STUDY_CONTENT: CargoStudyContent = {
         },
         {
           id: "an-f2-7",
-          prompt: "¿Qué señal práctica indica Adaptabilidad N4 en un cambio de sistema?",
+          prompt: "¿Qué señal práctica indica Adaptabilidad N3 en un cambio de sistema?",
           answer:
-            "No solo usarlo: diseñar transición, acompañar adopción y medir impacto del cambio.",
+            "Ajustarse proactivamente, identificar repercusiones y mantener actitud constructiva ante el cambio.",
           source: "Res. 065 de 2024",
         },
         {

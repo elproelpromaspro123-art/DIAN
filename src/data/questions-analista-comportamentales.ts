@@ -16,7 +16,7 @@ export const analistaComportamentalesQuestions: Question[] = [
   },
   {
     id: 2,
-    text: "La DIAN cambia el flujo digital de devoluciones y tu equipo está rezagado. Desde Adaptabilidad nivel 4, lo más adecuado es:",
+    text: "La DIAN cambia el flujo digital de devoluciones y tu equipo está rezagado. Desde Adaptabilidad nivel 3, lo más adecuado es:",
     options: [
       { letter: "A", text: "Esperar a que otra dependencia entregue una solución cerrada." },
       { letter: "B", text: "Mantener el método anterior para no afectar la productividad inmediata." },
@@ -25,7 +25,7 @@ export const analistaComportamentalesQuestions: Question[] = [
     ],
     correctAnswer: "D",
     explanation:
-      "Adaptabilidad N4 implica promover cambio proactivo, diseñar nuevas formas de trabajo y actuar como agente de transformación (Res. 065 de 2024).",
+      "Adaptabilidad N3 implica ajustarse proactivamente al cambio, mantener actitud positiva e identificar repercusiones operativas (Res. 065 de 2024).",
   },
   {
     id: 3,
@@ -68,7 +68,7 @@ export const analistaComportamentalesQuestions: Question[] = [
   },
   {
     id: 6,
-    text: "Se implementa nueva herramienta analítica para control extensivo y hay resistencia. En Adaptabilidad N4, la mejor conducta es:",
+    text: "Se implementa nueva herramienta analítica para control extensivo y hay resistencia. En Adaptabilidad N3, la mejor conducta es:",
     options: [
       { letter: "A", text: "Pedir que suspendan la herramienta hasta nuevo aviso." },
       { letter: "B", text: "Aplicarla sin acompañamiento, asumiendo que todos aprenderán solos." },
@@ -77,7 +77,7 @@ export const analistaComportamentalesQuestions: Question[] = [
     ],
     correctAnswer: "D",
     explanation:
-      "Adaptabilidad N4 demanda impulsar e institucionalizar cambios de manera proactiva, no solo reaccionar al ajuste.",
+      "Adaptabilidad N3 demanda ajuste proactivo ante cambios del entorno, actitud positiva y lectura de impactos.",
   },
   {
     id: 7,
@@ -120,7 +120,7 @@ export const analistaComportamentalesQuestions: Question[] = [
   },
   {
     id: 10,
-    text: "Cambian lineamientos de priorización de cartera por riesgo. Desde Adaptabilidad N4, la mejor respuesta es:",
+    text: "Cambian lineamientos de priorización de cartera por riesgo. Desde Adaptabilidad N3, la mejor respuesta es:",
     options: [
       { letter: "A", text: "Aplicar solo cambios mínimos para no alterar la rutina." },
       { letter: "B", text: "Esperar validación externa antes de cualquier ajuste." },
@@ -129,7 +129,7 @@ export const analistaComportamentalesQuestions: Question[] = [
     ],
     correctAnswer: "D",
     explanation:
-      "Adaptabilidad N4 incluye anticipación de impactos y rediseño de prácticas para asegurar continuidad y cumplimiento de objetivos.",
+      "Adaptabilidad N3 incluye ajuste proactivo, lectura de repercusiones y mantenimiento de resultados ante cambios.",
   },
   {
     id: 11,
@@ -172,7 +172,7 @@ export const analistaComportamentalesQuestions: Question[] = [
   },
   {
     id: 14,
-    text: "Se implementa nueva matriz de riesgo y debes ajustar rutinas de análisis. ¿Qué opción evidencia Adaptabilidad N4?",
+    text: "Se implementa nueva matriz de riesgo y debes ajustar rutinas de análisis. ¿Qué opción evidencia Adaptabilidad N3?",
     options: [
       { letter: "A", text: "Mantener criterios previos hasta finalizar el trimestre." },
       { letter: "B", text: "Adoptar cambios sin informar al equipo." },
@@ -181,7 +181,7 @@ export const analistaComportamentalesQuestions: Question[] = [
     ],
     correctAnswer: "D",
     explanation:
-      "N4 en adaptabilidad no se limita a cumplir cambios: impulsa apropiación y sostenibilidad del nuevo método de trabajo.",
+      "N3 en adaptabilidad implica ajuste proactivo al cambio, actitud positiva e identificación de repercusiones operativas.",
   },
   {
     id: 15,
@@ -224,7 +224,7 @@ export const analistaComportamentalesQuestions: Question[] = [
   },
   {
     id: 18,
-    text: "La dirección solicita acelerar implementación de un cambio no probado. En Adaptabilidad N4, lo más idóneo es:",
+    text: "La dirección solicita acelerar implementación de un cambio no probado. En Adaptabilidad N3, lo más idóneo es:",
     options: [
       { letter: "A", text: "Negarse a todo cambio por riesgo operativo." },
       { letter: "B", text: "Implementar total sin evaluación previa." },
@@ -233,7 +233,7 @@ export const analistaComportamentalesQuestions: Question[] = [
     ],
     correctAnswer: "D",
     explanation:
-      "El nivel 4 supone gestión proactiva del cambio con diseño metodológico y evaluación de repercusiones antes de escalar.",
+      "El nivel 3 supone ajuste proactivo al cambio, actitud positiva y evaluación de repercusiones operativas antes de escalar.",
   },
   {
     id: 19,
@@ -276,7 +276,7 @@ export const analistaComportamentalesQuestions: Question[] = [
   },
   {
     id: 22,
-    text: "Se modifica repentinamente la priorización de casos por lineamiento nacional. En Adaptabilidad N4, la respuesta esperada es:",
+    text: "Se modifica repentinamente la priorización de casos por lineamiento nacional. En Adaptabilidad N3, la respuesta esperada es:",
     options: [
       { letter: "A", text: "Aplicar solo en el siguiente periodo para evitar reprocesos." },
       { letter: "B", text: "Delegar el ajuste sin acompañamiento." },
@@ -285,7 +285,7 @@ export const analistaComportamentalesQuestions: Question[] = [
     ],
     correctAnswer: "D",
     explanation:
-      "Adaptabilidad en nivel 4 exige capacidad de conducción de cambio y ajuste metodológico con enfoque de resultados.",
+      "Adaptabilidad N3 exige ajuste proactivo y lectura de repercusiones ante cambios del entorno.",
   },
   {
     id: 23,

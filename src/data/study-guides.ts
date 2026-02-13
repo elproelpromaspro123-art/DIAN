@@ -104,7 +104,7 @@ export const studyGuides: Record<string, StudyGuide> = {
         title: "Competencias y niveles oficiales del cargo",
         bullets: [
           "Comportamiento etico (Nivel 4).",
-          "Adaptabilidad (Nivel 4).",
+          "Adaptabilidad (Nivel 3).",
           "Comunicacion efectiva (Nivel 3).",
           "Trabajo en equipo (Nivel 3).",
         ],
@@ -113,7 +113,7 @@ export const studyGuides: Record<string, StudyGuide> = {
         title: "Que evalua cada competencia",
         bullets: [
           "Etico N4: referente institucional, imparcialidad y defensa de legalidad.",
-          "Adaptabilidad N4: liderar cambio, no solo acatarlo.",
+          "Adaptabilidad N3: ajustarse proactivamente al cambio, actitud positiva y lectura de impactos.",
           "Comunicacion N3: elegir canal adecuado, verificar comprension y reducir distorsion.",
           "Trabajo en equipo N3: coordinar, monitorear acuerdos y sostener resultados compartidos.",
         ],
@@ -139,7 +139,7 @@ export const studyGuides: Record<string, StudyGuide> = {
         title: "Errores frecuentes",
         bullets: [
           "Elegir opcion " + '"rapida"' + " pero eticamente debil.",
-          "Confundir Adaptabilidad N4 con simple flexibilidad personal.",
+          "Confundir Adaptabilidad N3 con obediencia pasiva o resistencia al cambio.",
           "Suponer que trabajo en equipo es " + '"hacer todo solo"' + ".",
           "No distinguir comunicacion efectiva de envio de mensajes incompletos.",
         ],
@@ -147,8 +147,8 @@ export const studyGuides: Record<string, StudyGuide> = {
       {
         title: "Datos clave para memorizar",
         bullets: [
-          "En Analista V, Adaptabilidad es N4 (no N3).",
-          "N4 evalua capacidad de influir y conducir practicas del equipo.",
+          "En Analista V, solo Comportamiento etico es N4; las demas son N3.",
+          "N3 evalua ajuste proactivo ante cambios del entorno.",
           "Respuestas validas siempre combinan legalidad + efectividad + servicio.",
           "La fase tiene peso clasificatorio del 15%.",
         ],

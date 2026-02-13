@@ -20,24 +20,24 @@ import {
 
 const pruebas = [
   {
-    title: "Competencias básicas y funcionales",
-    badge: "Eliminatorio · 65% (Analista) / 70% (Gestor)",
+    title: "Competencias bÃ¡sicas y funcionales",
+    badge: "Eliminatorio Â· 65% (Analista) / 70% (Gestor)",
     description:
-      "Evalúa conocimientos normativos y manual funcional con situaciones aplicadas de toma de decisión. No superar el mínimo te excluye del proceso.",
+      "EvalÃºa conocimientos normativos y manual funcional con situaciones aplicadas de toma de decisiÃ³n. No superar el mÃ­nimo te excluye del proceso.",
     icon: ClipboardCheck,
   },
   {
     title: "Competencias comportamentales",
-    badge: "Clasificatorio · 15% (Analista) / 20% (Gestor)",
+    badge: "Clasificatorio Â· 15% (Analista) / 20% (Gestor)",
     description:
       "Mide tu forma de actuar en escenarios situacionales, alineada con el Diccionario de Competencias y conductas observables oficiales.",
     icon: Users,
   },
   {
     title: "Prueba de integridad",
-    badge: "Clasificatorio · 10% (ambos cargos)",
+    badge: "Clasificatorio Â· 10% (ambos cargos)",
     description:
-      "Valora ética pública y criterio frente a dilemas del servicio, con base en Código de Integridad y Código de Ética DIAN.",
+      "Valora Ã©tica pÃºblica y criterio frente a dilemas del servicio, con base en CÃ³digo de Integridad y CÃ³digo de Ã‰tica DIAN.",
     icon: ShieldAlert,
   },
 ];
@@ -46,18 +46,18 @@ const cargos = [
   {
     id: "analista",
     title: "Analista V",
-    subtitle: "Nivel técnico · Código 205 · Grado 5",
+    subtitle: "Nivel tÃ©cnico Â· CÃ³digo 205 Â· Grado 5",
     opec: "OPEC 236732 y 236756",
-    entidad: "Ingreso DIAN 2676 · Convocatoria 1011914855",
+    entidad: "Ingreso DIAN 2676 Â· Convocatoria 1011914855",
     salario: `${ANALISTA_V_OFFICIAL_SNAPSHOT.salario2025} (vigencia 2025)`,
     vacantes: `${ANALISTA_V_OFFICIAL_SNAPSHOT.vacantesTotal} vacantes`,
     cierre: "Cierre de inscripciones: 7 de febrero de 2026",
     manual: "/recursos/manual-funciones-analista-v.pdf",
     highlights: [
       "Proceso misional: cumplimiento de obligaciones tributarias",
-      "Subproceso: administración de cartera y recaudo/devoluciones",
+      "Subproceso: administraciÃ³n de cartera y recaudo/devoluciones",
       "Vacantes SIMO: OPEC 236732 (4) + OPEC 236756 (10)",
-      "Experiencia: 3 años (2 laboral + 1 relacionada)",
+      "Experiencia: 3 aÃ±os (2 laboral + 1 relacionada)",
     ],
     funcionales: [
       "Control extensivo de obligaciones",
@@ -66,51 +66,51 @@ const cargos = [
       "Medidas cautelares y procesos concursales",
     ],
     comportamentales: [
-      "Comportamiento ético (nivel 4)",
-      "Adaptabilidad (nivel 4)",
-      "Comunicación efectiva (nivel 3)",
+      "Comportamiento Ã©tico (nivel 4)",
+      "Adaptabilidad (nivel 3)",
+      "ComunicaciÃ³n efectiva (nivel 3)",
       "Trabajo en equipo (nivel 3)",
     ],
     basicas: [
-      "Constitución, función pública y procedimiento administrativo (Ley 1437)",
+      "ConstituciÃ³n, funciÃ³n pÃºblica y procedimiento administrativo (Ley 1437)",
       "Sistema tributario, aduanero y cambiario",
       "Recaudo, devoluciones, transparencia y MIPG",
-      "Gestión documental, herramientas informáticas y PQRSF",
+      "GestiÃ³n documental, herramientas informÃ¡ticas y PQRSF",
     ],
   },
   {
     id: "gestor",
     title: "Gestor I",
-    subtitle: "Nivel profesional · Código 301 · Grado 1",
+    subtitle: "Nivel profesional Â· CÃ³digo 301 Â· Grado 1",
     opec: "OPEC 236741 y 236767",
-    entidad: "Ingreso DIAN 2676 · Convocatoria 1011914855",
+    entidad: "Ingreso DIAN 2676 Â· Convocatoria 1011914855",
     salario: `${GESTOR_I_OFFICIAL_SNAPSHOT.salario2025} (vigencia 2025)`,
     vacantes: `${GESTOR_I_OFFICIAL_SNAPSHOT.vacantesTotal} vacantes`,
     cierre: "Cierre de inscripciones: 7 de febrero de 2026",
     manual: "/recursos/manual-funciones-gestor-i.pdf",
     highlights: [
       "Proceso: administrativo y financiero",
-      "Subproceso: recursos administrativos, logística, compras y contratos",
+      "Subproceso: recursos administrativos, logÃ­stica, compras y contratos",
       "Vacantes SIMO: OPEC 236741 (8) + OPEC 236767 (189)",
       "Experiencia: no requiere",
     ],
     funcionales: [
-      "Gestión documental y SIIF Nación II",
-      "Administración de custodia y disposición de mercancías",
-      "Administración de infraestructura y servicios",
-      "Contratación pública y control de ingresos",
+      "GestiÃ³n documental y SIIF NaciÃ³n II",
+      "AdministraciÃ³n de custodia y disposiciÃ³n de mercancÃ­as",
+      "AdministraciÃ³n de infraestructura y servicios",
+      "ContrataciÃ³n pÃºblica y control de ingresos",
     ],
     comportamentales: [
-      "Comportamiento ético (nivel 4)",
-      "Innovación (nivel 3)",
+      "Comportamiento Ã©tico (nivel 4)",
+      "InnovaciÃ³n (nivel 3)",
       "Adaptabilidad (nivel 3)",
-      "Solución de problemas (nivel 3)",
+      "SoluciÃ³n de problemas (nivel 3)",
     ],
     basicas: [
-      "Constitución, función pública y procedimiento administrativo (Ley 1437)",
+      "ConstituciÃ³n, funciÃ³n pÃºblica y procedimiento administrativo (Ley 1437)",
       "Recursos administrativos y servicio al ciudadano",
-      "Código de buen gobierno, integridad y transparencia",
-      "Gestión documental, PQRSF y herramientas institucionales",
+      "CÃ³digo de buen gobierno, integridad y transparencia",
+      "GestiÃ³n documental, PQRSF y herramientas institucionales",
     ],
   },
 ];
@@ -119,7 +119,7 @@ export default function InfoSection() {
   return (
     <section
       id="resumen"
-      className="py-16 bg-gradient-to-b from-[#191919] via-[#121212] to-[#191919] border-t border-dian-navy/10"
+      className="py-16 bg-dian-gray border-t border-dian-navy/10"
     >
       <div className="max-w-6xl mx-auto px-4">
         <motion.div
@@ -132,8 +132,8 @@ export default function InfoSection() {
             Resumen del proceso DIAN 2676
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto text-sm leading-relaxed">
-            Guía para entender cómo se evalúa la convocatoria, qué estudiar y
-            cómo practicar con material oficial.
+            GuÃ­a para entender cÃ³mo se evalÃºa la convocatoria, quÃ© estudiar y
+            cÃ³mo practicar con material oficial.
           </p>
         </motion.div>
 
@@ -159,8 +159,8 @@ export default function InfoSection() {
               <div className="flex items-start gap-2">
                 <CheckCircle2 className="w-4 h-4 text-dian-success mt-0.5" />
                 <p>
-                  DIAN publicó apertura de inscripciones (28-ene-2026) y la CNSC
-                  amplió el cierre hasta el 7-feb-2026.
+                  DIAN publicÃ³ apertura de inscripciones (28-ene-2026) y la CNSC
+                  ampliÃ³ el cierre hasta el 7-feb-2026.
                 </p>
               </div>
               <div className="flex items-start gap-2">
@@ -173,8 +173,8 @@ export default function InfoSection() {
               <div className="flex items-start gap-2">
                 <CheckCircle2 className="w-4 h-4 text-dian-success mt-0.5" />
                 <p>
-                  La prueba de competencias básicas y funcionales es eliminatoria;
-                  se suman comportamental, integridad y valoración de antecedentes.
+                  La prueba de competencias bÃ¡sicas y funcionales es eliminatoria;
+                  se suman comportamental, integridad y valoraciÃ³n de antecedentes.
                 </p>
               </div>
             </div>
@@ -185,7 +185,7 @@ export default function InfoSection() {
                 rel="noopener noreferrer"
                 className="text-xs text-dian-navy hover:underline font-medium"
               >
-                Ver aviso oficial CNSC →
+                Ver aviso oficial CNSC â†’
               </a>
             </div>
           </motion.div>
@@ -245,7 +245,7 @@ export default function InfoSection() {
                 Tabla oficial por cargo
               </h3>
               <span className="text-xs text-gray-400 group-open:rotate-180 transition-transform">
-                ▼
+                â–¼
               </span>
             </summary>
             <div className="px-6 pb-6">
@@ -254,7 +254,7 @@ export default function InfoSection() {
                   <div className="bg-dian-mint px-4 py-2">
                     <p className="text-sm font-semibold text-dian-navy">Analista V</p>
                     <p className="text-[11px] text-gray-600">
-                      65% / 15% / 10% + valoración de antecedentes 10% (documental)
+                      65% / 15% / 10% + valoraciÃ³n de antecedentes 10% (documental)
                     </p>
                   </div>
                   <div className="overflow-x-auto">
@@ -262,13 +262,13 @@ export default function InfoSection() {
                       <thead className="text-xs uppercase text-gray-500 border-b bg-white">
                         <tr>
                           <th className="py-2 px-4">Prueba</th>
-                          <th className="py-2 px-4">Carácter</th>
+                          <th className="py-2 px-4">CarÃ¡cter</th>
                           <th className="py-2 px-4">Peso</th>
                         </tr>
                       </thead>
                       <tbody className="text-gray-600">
                         <tr className="border-b">
-                          <td className="py-2.5 px-4 font-medium text-gray-900">Básicas y funcionales</td>
+                          <td className="py-2.5 px-4 font-medium text-gray-900">BÃ¡sicas y funcionales</td>
                           <td className="py-2.5 px-4">Eliminatoria</td>
                           <td className="py-2.5 px-4">65%</td>
                         </tr>
@@ -283,7 +283,7 @@ export default function InfoSection() {
                           <td className="py-2.5 px-4">10%</td>
                         </tr>
                         <tr>
-                          <td className="py-2.5 px-4 font-medium text-gray-900">Valoración de antecedentes</td>
+                          <td className="py-2.5 px-4 font-medium text-gray-900">ValoraciÃ³n de antecedentes</td>
                           <td className="py-2.5 px-4">Clasificatoria (documental)</td>
                           <td className="py-2.5 px-4">10%</td>
                         </tr>
@@ -302,13 +302,13 @@ export default function InfoSection() {
                       <thead className="text-xs uppercase text-gray-500 border-b bg-white">
                         <tr>
                           <th className="py-2 px-4">Prueba</th>
-                          <th className="py-2 px-4">Carácter</th>
+                          <th className="py-2 px-4">CarÃ¡cter</th>
                           <th className="py-2 px-4">Peso</th>
                         </tr>
                       </thead>
                       <tbody className="text-gray-600">
                         <tr className="border-b">
-                          <td className="py-2.5 px-4 font-medium text-gray-900">Básicas y funcionales</td>
+                          <td className="py-2.5 px-4 font-medium text-gray-900">BÃ¡sicas y funcionales</td>
                           <td className="py-2.5 px-4">Eliminatoria</td>
                           <td className="py-2.5 px-4">70%</td>
                         </tr>
@@ -346,7 +346,7 @@ export default function InfoSection() {
               Analista V y Gestor I
             </h3>
             <p className="text-sm text-gray-600 max-w-2xl mx-auto">
-              Información consolidada con manuales de funciones y oferta vigente.
+              InformaciÃ³n consolidada con manuales de funciones y oferta vigente.
             </p>
           </motion.div>
 
@@ -372,7 +372,7 @@ export default function InfoSection() {
                       <p className="text-sm text-gray-500 mt-1">{cargo.subtitle}</p>
                     </div>
                     <span className="text-xs text-gray-400 mt-2 group-open:rotate-180 transition-transform">
-                      ▼
+                      â–¼
                     </span>
                   </summary>
 
@@ -412,7 +412,7 @@ export default function InfoSection() {
                         </p>
                         <ul className="space-y-1">
                           {cargo.funcionales.map((item) => (
-                            <li key={item}>• {item}</li>
+                            <li key={item}>â€¢ {item}</li>
                           ))}
                         </ul>
                       </div>
@@ -422,7 +422,7 @@ export default function InfoSection() {
                         </p>
                         <ul className="space-y-1">
                           {cargo.comportamentales.map((item) => (
-                            <li key={item}>• {item}</li>
+                            <li key={item}>â€¢ {item}</li>
                           ))}
                         </ul>
                       </div>
@@ -434,7 +434,7 @@ export default function InfoSection() {
                       </p>
                       <ul className="grid gap-1">
                         {cargo.basicas.map((item) => (
-                          <li key={item}>• {item}</li>
+                          <li key={item}>â€¢ {item}</li>
                         ))}
                       </ul>
                     </div>

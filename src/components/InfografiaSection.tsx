@@ -240,18 +240,23 @@ export default function InfografiaSection() {
   return (
     <section
       id="recursos"
-      className="py-16 bg-gradient-to-b from-[#191919] to-[#131313] border-t border-dian-navy/10"
+      className="py-16 bg-dian-sand border-t border-dian-navy/10"
     >
       <div className="max-w-6xl mx-auto px-4">
-        <div className="text-center mb-10">
-          <h2 className="text-2xl sm:text-3xl font-bold text-dian-navy mb-2 font-[family:var(--font-display)]">
-            Recursos oficiales DIAN + CNSC
-          </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto text-sm">
-            Documentos y avisos oficiales verificados. En móvil los recursos PDF
-            se abren en pestaña nueva para evitar bloqueos del visor integrado.
-          </p>
-        </div>
+        <details className="group">
+          <summary className="flex items-center justify-between cursor-pointer mb-10">
+            <div className="text-center flex-1">
+              <h2 className="text-2xl sm:text-3xl font-bold text-dian-navy mb-2 font-[family:var(--font-display)]">
+                Recursos oficiales DIAN + CNSC
+              </h2>
+              <p className="text-gray-600 max-w-2xl mx-auto text-sm">
+                Documentos y avisos oficiales verificados. Haz clic para ver todos los recursos.
+              </p>
+            </div>
+            <span className="text-sm text-gray-400 group-open:rotate-180 transition-transform ml-4">
+              ▼
+            </span>
+          </summary>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {resources.map((resource) => {
@@ -309,6 +314,7 @@ export default function InfografiaSection() {
             );
           })}
         </div>
+        </details>
       </div>
 
       <AnimatePresence>
