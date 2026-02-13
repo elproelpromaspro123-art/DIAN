@@ -1,7 +1,11 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import SimulacroAnalistaVClient from "./SimulacroAnalistaVClient";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://simo-dian.vercel.app";
+const configuredSiteUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+const siteUrl = (configuredSiteUrl || "https://preparatedian2026.vercel.app").replace(
+  /\/+$/,
+  ""
+);
 
 export const metadata: Metadata = {
   title: "Simulacro Integral Analista V | Prepárate DIAN",

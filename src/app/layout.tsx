@@ -15,8 +15,11 @@ const fraunces = Fraunces({
   subsets: ["latin"],
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://simo-dian.vercel.app";
-const metadataBase = siteUrl ? new URL(siteUrl) : undefined;
+const fallbackSiteUrl = "https://preparatedian2026.vercel.app";
+const configuredSiteUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+const siteUrl = (configuredSiteUrl || fallbackSiteUrl).replace(/\/+$/, "");
+const metadataBase = new URL(siteUrl);
+const ogImageUrl = `${siteUrl}/og.png`;
 
 export const viewport: Viewport = {
   themeColor: "#ffffff",
@@ -41,7 +44,7 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Prepárate DIAN" }],
   alternates: {
-    canonical: "/",
+    canonical: siteUrl,
   },
   icons: {
     icon: [
@@ -58,12 +61,13 @@ export const metadata: Metadata = {
     type: "website",
     locale: "es_CO",
     siteName: "Prepárate DIAN",
-    url: "/",
+    url: siteUrl,
     images: [
       {
-        url: "/og.png",
+        url: ogImageUrl,
         width: 1200,
         height: 630,
+        type: "image/png",
         alt: "Prepárate DIAN 2676 - SIMO",
       },
     ],
@@ -73,7 +77,7 @@ export const metadata: Metadata = {
     title: "Prepárate DIAN 2676 | SIMO",
     description:
       "Simulacros y estudio guiado para Analista V y Gestor I. Actualizado febrero 2026.",
-    images: ["/og.png"],
+    images: [ogImageUrl],
   },
   robots: {
     index: true,

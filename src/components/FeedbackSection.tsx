@@ -1,21 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import {
-  AlertTriangle,
-  CheckCircle2,
-  Lightbulb,
-  Mail,
-  MessageSquare,
-  Send,
-} from "lucide-react";
+import { AlertTriangle, CheckCircle2, Lightbulb, Mail, Send } from "lucide-react";
 import { motion } from "framer-motion";
 
 type FeedbackType = "problema" | "sugerencia";
 
-const WEBHOOK_URL =
-  process.env.NEXT_PUBLIC_DISCORD_WEBHOOK_URL ??
-  "https://discord.com/api/webhooks/1470994988216221737/CmovSQXQBYRwNva2cnAoAyy78ipCHNm_ZnQTRYAwEc5ceD-wHAUYsbAklY3n959JdSqV";
+const WEBHOOK_URL = process.env.NEXT_PUBLIC_DISCORD_WEBHOOK_URL?.trim() ?? "";
 const MAX_MESSAGE_LENGTH = 1800;
 
 export default function FeedbackSection() {
@@ -31,6 +22,14 @@ export default function FeedbackSection() {
 
     if (!trimmedMessage) {
       setErrorMessage("Escribe el detalle del problema o la sugerencia.");
+      setStatus("error");
+      return;
+    }
+
+    if (!WEBHOOK_URL) {
+      setErrorMessage(
+        "El canal de reportes no está configurado. Define NEXT_PUBLIC_DISCORD_WEBHOOK_URL para habilitar envíos."
+      );
       setStatus("error");
       return;
     }
@@ -57,8 +56,7 @@ export default function FeedbackSection() {
         JSON.stringify({ content: contentLines.join("\n") })
       );
 
-      const canBeacon =
-        typeof navigator !== "undefined" && "sendBeacon" in navigator;
+      const canBeacon = typeof navigator !== "undefined" && "sendBeacon" in navigator;
 
       if (canBeacon) {
         const ok = navigator.sendBeacon(WEBHOOK_URL, formData);
@@ -76,9 +74,9 @@ export default function FeedbackSection() {
       setMessage("");
       setEmail("");
     } catch {
-      setStatus("success");
+      setStatus("error");
       setErrorMessage(
-        "No pudimos confirmar el envío, pero es posible que ya haya llegado."
+        "No pudimos confirmar el envío del reporte. Intenta de nuevo en unos minutos."
       );
     }
   };
@@ -133,7 +131,7 @@ export default function FeedbackSection() {
 
           <textarea
             value={message}
-            onChange={(e) => setMessage(e.target.value)}
+            onChange={(event) => setMessage(event.target.value)}
             placeholder="Cuéntanos qué pasó o qué te gustaría mejorar."
             className="w-full min-h-[100px] rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm text-gray-700 outline-none focus:border-dian-navy focus:bg-white"
             maxLength={2000}
@@ -149,7 +147,7 @@ export default function FeedbackSection() {
               <input
                 type="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(event) => setEmail(event.target.value)}
                 placeholder="tucorreo@ejemplo.com"
                 className="w-full rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-sm text-gray-700 outline-none focus:border-dian-navy focus:bg-white"
               />

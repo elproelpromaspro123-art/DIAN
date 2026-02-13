@@ -1,4 +1,4 @@
-﻿import Navbar from "@/components/Navbar";
+import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import InfoSection from "@/components/InfoSection";
 import InfografiaSection from "@/components/InfografiaSection";
@@ -7,7 +7,8 @@ import SimulacroSection from "@/components/SimulacroSection";
 import FeedbackSection from "@/components/FeedbackSection";
 import Footer from "@/components/Footer";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://simo-dian.vercel.app";
+const configuredSiteUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+const siteUrl = (configuredSiteUrl || "https://preparatedian2026.vercel.app").replace(/\/+$/, "");
 
 const jsonLd = {
   "@context": "https://schema.org",

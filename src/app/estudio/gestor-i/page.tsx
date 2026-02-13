@@ -1,8 +1,12 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import CargoStudyClient from "@/components/CargoStudyClient";
 import { GESTOR_STUDY_CONTENT } from "@/data/cargo-study-content";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://simo-dian.vercel.app";
+const configuredSiteUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+const siteUrl = (configuredSiteUrl || "https://preparatedian2026.vercel.app").replace(
+  /\/+$/,
+  ""
+);
 
 export const metadata: Metadata = {
   title: "Estudio Integrado Gestor I | Prepárate DIAN",
