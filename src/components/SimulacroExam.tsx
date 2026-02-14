@@ -629,9 +629,15 @@ export default function SimulacroExam({
 
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
               <div className="bg-dian-mint rounded-xl p-4">
-                <p className={`text-3xl font-bold ${getScoreColor(displayScore)}`}>
-                  {displayScore}
-                </p>
+                <motion.div
+                  initial={{ scale: 0, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ type: "spring", stiffness: 200, damping: 15, delay: 0.3 }}
+                >
+                  <p className={`text-3xl font-bold ${getScoreColor(displayScore)}`}>
+                    {displayScore}
+                  </p>
+                </motion.div>
                 <p className="text-xs text-gray-500 mt-1">Puntaje simulado /100</p>
                 <p className={`text-xs font-semibold mt-1 ${getScoreColor(displayScore)}`}>
                   {getScoreLabel(displayScore)}
@@ -801,7 +807,7 @@ export default function SimulacroExam({
                 Mostrando {reviewQuestions.length} de {questions.length} preguntas
               </span>
             </div>
-            {reviewQuestions.map((q) => {
+            {reviewQuestions.map((q, reviewIndex) => {
               const questionNumber =
                 questions.findIndex((item) => item.id === q.id) + 1;
               const userAnswer = answers[q.id];
@@ -834,11 +840,17 @@ export default function SimulacroExam({
                     </span>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 mb-2">
-                        {isCorrect ? (
-                          <CheckCircle2 className="w-5 h-5 text-green-500 shrink-0" />
-                        ) : (
-                          <XCircle className="w-5 h-5 text-red-500 shrink-0" />
-                        )}
+                        <motion.div
+                          initial={{ scale: 0 }}
+                          animate={{ scale: 1 }}
+                          transition={{ type: "spring", stiffness: 400, damping: 12, delay: reviewIndex * 0.03 }}
+                        >
+                          {isCorrect ? (
+                            <CheckCircle2 className="w-5 h-5 text-green-500 shrink-0" />
+                          ) : (
+                            <XCircle className="w-5 h-5 text-red-500 shrink-0" />
+                          )}
+                        </motion.div>
                         <span
                           className={`text-xs font-semibold ${
                             isCorrect ? "text-green-600" : "text-red-600"
@@ -975,6 +987,22 @@ export default function SimulacroExam({
 
   return (
     <div className={`min-h-screen ${rootClass} flex flex-col`}>
+      {/* XP reward toast */}
+      <AnimatePresence>
+        {rewardMessage && (
+          <motion.div
+            key="xp-toast"
+            initial={{ opacity: 0, y: -50, scale: 0.8 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -30, scale: 0.8 }}
+            transition={{ type: "spring", stiffness: 400, damping: 15 }}
+            className="fixed top-4 left-1/2 -translate-x-1/2 z-[60] bg-dian-navy text-white px-5 py-3 rounded-xl shadow-xl text-sm font-semibold flex items-center gap-2"
+          >
+            ⭐ {rewardMessage}
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Top bar */}
       <div className="bg-white border-b shadow-sm sticky top-0 z-40 exam-surface">
         <div className="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">

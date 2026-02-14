@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import {
   ArrowLeft,
@@ -820,6 +821,20 @@ export default function CargoStudyClient({ content }: Props) {
     <main className="min-h-screen bg-dian-gray">
       <Navbar />
 
+      <AnimatePresence>
+        {rewardMessage && (
+          <motion.div
+            initial={{ opacity: 0, y: -50, scale: 0.8 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -30, scale: 0.8 }}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            className="fixed top-4 left-1/2 -translate-x-1/2 z-[60] bg-dian-navy text-white px-5 py-3 rounded-xl shadow-xl text-sm font-semibold flex items-center gap-2"
+          >
+            ⭐ {rewardMessage}
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <div className="max-w-6xl mx-auto px-4 py-10">
         <Link
           href="/"
@@ -860,7 +875,7 @@ export default function CargoStudyClient({ content }: Props) {
             </p>
             <div className="mt-2 h-2 rounded-full bg-white border border-dian-navy/10 overflow-hidden">
               <div
-                className="h-full bg-dian-navy transition-all"
+                className="h-full bg-dian-navy transition-all duration-700 ease-out"
                 style={{
                   width:
                     totals.totalAxes > 0
@@ -1035,7 +1050,7 @@ export default function CargoStudyClient({ content }: Props) {
 
                   <div className="h-2 rounded-full bg-white border border-dian-navy/10 overflow-hidden mb-4">
                     <div
-                      className="h-full bg-dian-navy transition-all"
+                      className="h-full bg-dian-navy transition-all duration-700 ease-out"
                       style={{ width: `${phaseProgress}%` }}
                     />
                   </div>
@@ -1050,8 +1065,13 @@ export default function CargoStudyClient({ content }: Props) {
                       const lesson = phase.axisLessons?.[index] ?? explainAxis(axis, phase.title);
 
                       return (
-                        <article
+                        <motion.div
                           key={`${content.slug}-${phase.id}-${axisKey}`}
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: index * 0.05 }}
+                        >
+                        <article
                           className={`rounded-xl border p-4 ${
                             isRead
                               ? "border-dian-navy/30 bg-dian-mint/20"
@@ -1071,7 +1091,17 @@ export default function CargoStudyClient({ content }: Props) {
                                     : "border-gray-300 text-gray-600 hover:bg-gray-50"
                                 }`}
                               >
-                                {isRead ? "Leído" : "Marcar como leído"}
+                                <AnimatePresence mode="wait">
+                                  <motion.span
+                                    key={isRead ? "read" : "unread"}
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    exit={{ opacity: 0 }}
+                                    transition={{ duration: 0.2 }}
+                                  >
+                                    {isRead ? "Leído" : "Marcar como leído"}
+                                  </motion.span>
+                                </AnimatePresence>
                               </button>
                               <p className="text-[11px] text-gray-500 mt-1">
                                 {cooldownRemainingMs > 0
@@ -1119,6 +1149,7 @@ export default function CargoStudyClient({ content }: Props) {
                             </div>
                           )}
                         </article>
+                        </motion.div>
                       );
                     })}
                   </div>
