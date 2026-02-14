@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import {
   ArrowLeft,
@@ -14,8 +14,14 @@ import {
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import GamificationPanel from "@/components/GamificationPanel";
 import type { CargoStudyContent } from "@/data/cargo-study-content";
-import { formatTodayBogotaLabel } from "@/data/official-dian2676";
+import { getLatestSourceCheckLabel } from "@/data/sourceHealth";
+import {
+  grantStudyAxisCompleted,
+  loadGamificationState,
+  summarizeReward,
+} from "@/lib/gamification";
 
 interface Props {
   content: CargoStudyContent;
@@ -53,6 +59,40 @@ type PhaseCriticalPack = {
   readingTasks: CriticalReadingTask[];
   situationalCases: SituationalCase[];
 };
+
+const AXIS_XP_COOLDOWN_MS = 30 * 60 * 1000;
+const AXIS_XP_COOLDOWN_STORAGE_KEY = "simo_dian_axis_xp_cooldown_v1";
+
+function loadAxisXpCooldownMap(): Record<string, number> {
+  if (typeof window === "undefined") return {};
+  try {
+    const raw = localStorage.getItem(AXIS_XP_COOLDOWN_STORAGE_KEY);
+    if (!raw) return {};
+    const parsed = JSON.parse(raw) as Record<string, unknown>;
+    return Object.fromEntries(
+      Object.entries(parsed).filter(
+        ([, value]) => typeof value === "number" && Number.isFinite(value) && value > 0
+      )
+    ) as Record<string, number>;
+  } catch {
+    return {};
+  }
+}
+
+function persistAxisXpCooldownMap(map: Record<string, number>) {
+  if (typeof window === "undefined") return;
+  localStorage.setItem(AXIS_XP_COOLDOWN_STORAGE_KEY, JSON.stringify(map));
+}
+
+function formatCooldownRemaining(remainingMs: number): string {
+  const totalSeconds = Math.max(0, Math.ceil(remainingMs / 1000));
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = totalSeconds % 60;
+  if (minutes > 0) {
+    return `${minutes}m ${String(seconds).padStart(2, "0")}s`;
+  }
+  return `${seconds}s`;
+}
 
 const PHASE_CRITICAL_PACKS: Record<string, PhaseCriticalPack> = {
   "analista-v:fase-1": {
@@ -710,7 +750,26 @@ export default function CargoStudyClient({ content }: Props) {
   const [completedAxes, setCompletedAxes] = useState<Record<string, boolean>>({});
   const [expandedAnswers, setExpandedAnswers] = useState<Record<string, boolean>>({});
   const [expandAllByPhase, setExpandAllByPhase] = useState<Record<string, boolean>>({});
-  const todayLabel = formatTodayBogotaLabel();
+  const [axisXpCooldownMap, setAxisXpCooldownMap] = useState<Record<string, number>>(() =>
+    loadAxisXpCooldownMap()
+  );
+  const [clockMs, setClockMs] = useState(0);
+  const [gamificationState, setGamificationState] = useState(() =>
+    loadGamificationState()
+  );
+  const [rewardMessage, setRewardMessage] = useState<string | null>(null);
+  const latestSourceCheckLabel = getLatestSourceCheckLabel();
+
+  useEffect(() => {
+    const updateClock = () => setClockMs(new Date().getTime());
+    updateClock();
+    const timerId = window.setInterval(updateClock, 1000);
+    return () => window.clearInterval(timerId);
+  }, []);
+
+  useEffect(() => {
+    persistAxisXpCooldownMap(axisXpCooldownMap);
+  }, [axisXpCooldownMap]);
 
   const totals = useMemo(() => {
     const totalAxes = content.phases.reduce(
@@ -720,6 +779,42 @@ export default function CargoStudyClient({ content }: Props) {
     const completed = Object.values(completedAxes).filter(Boolean).length;
     return { totalAxes, completed };
   }, [content.phases, completedAxes]);
+
+  const getAxisCooldownRemainingMs = (axisKey: string, now: number) => {
+    const lastAwardAt = axisXpCooldownMap[axisKey] ?? 0;
+    if (lastAwardAt <= 0 || now <= 0) return 0;
+    return Math.max(0, lastAwardAt + AXIS_XP_COOLDOWN_MS - now);
+  };
+
+  const handleToggleAxisRead = (axisKey: string, wasRead: boolean) => {
+    const nextRead = !wasRead;
+    setCompletedAxes((prev) => ({
+      ...prev,
+      [axisKey]: nextRead,
+    }));
+
+    if (!nextRead) return;
+
+    const now = clockMs > 0 ? clockMs : new Date().getTime();
+    const cooldownRemainingMs = getAxisCooldownRemainingMs(axisKey, now);
+
+    if (cooldownRemainingMs > 0) {
+      setRewardMessage(
+        `Eje marcado como leido. XP en cooldown: ${formatCooldownRemaining(cooldownRemainingMs)}.`
+      );
+      window.setTimeout(() => setRewardMessage(null), 2600);
+      return;
+    }
+
+    const reward = grantStudyAxisCompleted();
+    setGamificationState(reward.state);
+    setAxisXpCooldownMap((prev) => ({
+      ...prev,
+      [axisKey]: now,
+    }));
+    setRewardMessage(summarizeReward(reward));
+    window.setTimeout(() => setRewardMessage(null), 2600);
+  };
 
   return (
     <main className="min-h-screen bg-dian-gray">
@@ -743,7 +838,7 @@ export default function CargoStudyClient({ content }: Props) {
               OPEC {content.opec}
             </span>
             <span className="text-xs font-semibold px-3 py-1 rounded-full bg-gray-100 text-gray-600">
-              Verificado: {todayLabel} · {content.lastUpdate}
+              Verificación automática: {latestSourceCheckLabel} · {content.lastUpdate}
             </span>
           </div>
 
@@ -776,7 +871,7 @@ export default function CargoStudyClient({ content }: Props) {
             </div>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 mt-5 text-xs">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-3 mt-5 text-xs">
             <div className="rounded-xl bg-dian-gray p-3 border border-gray-100">
               <p className="font-semibold text-gray-800">Nivel</p>
               <p className="text-gray-600">{content.level}</p>
@@ -788,6 +883,10 @@ export default function CargoStudyClient({ content }: Props) {
             <div className="rounded-xl bg-dian-gray p-3 border border-gray-100">
               <p className="font-semibold text-gray-800">Vacantes</p>
               <p className="text-gray-600">{content.vacancies}</p>
+            </div>
+            <div className="rounded-xl bg-dian-gray p-3 border border-gray-100">
+              <p className="font-semibold text-gray-800">Experiencia</p>
+              <p className="text-gray-600">{content.experienceRequirement}</p>
             </div>
             <div className="rounded-xl bg-dian-gray p-3 border border-gray-100">
               <p className="font-semibold text-gray-800">Asignación salarial</p>
@@ -820,7 +919,37 @@ export default function CargoStudyClient({ content }: Props) {
               </a>
             ))}
           </div>
+
+          <div className="mt-5 rounded-xl border border-dian-navy/15 bg-white p-4">
+            <p className="text-sm font-semibold text-dian-navy mb-2">
+              Coherencia estudio vs simulacro ({content.cargo})
+            </p>
+            <p className="text-xs text-gray-600 mb-3">
+              Todo lo que se evalua en el simulacro de este cargo esta explicado en esta guia.
+              Usa esta matriz como mapa de cobertura antes de practicar.
+            </p>
+            <div className="space-y-2">
+              {content.simulacroCoverage.map((item) => (
+                <article
+                  key={`${content.slug}-coverage-${item.title}`}
+                  className="rounded-lg border border-gray-200 bg-dian-gray/40 p-3"
+                >
+                  <p className="text-sm font-semibold text-gray-900">{item.title}</p>
+                  <p className="text-xs text-gray-700 mt-1">{item.explanation}</p>
+                  <p className="text-[11px] text-gray-500 mt-2">Fuente: {item.source}</p>
+                </article>
+              ))}
+            </div>
+          </div>
         </section>
+
+        <div className="mb-6">
+          <GamificationPanel
+            state={gamificationState}
+            title="Progreso gamificado por ejes"
+            feedback={rewardMessage}
+          />
+        </div>
 
         <section className="bg-white border border-gray-100 rounded-2xl p-5 sm:p-6 shadow-sm mb-6">
           <p className="text-sm font-semibold text-dian-navy mb-3">Ruta por fases</p>
@@ -917,6 +1046,7 @@ export default function CargoStudyClient({ content }: Props) {
                       const checkpoint = phase.checkpoints[index];
                       const isRead = completedAxes[axisKey] ?? false;
                       const axisExpanded = allExpanded || (expandedAnswers[axisKey] ?? false);
+                      const cooldownRemainingMs = getAxisCooldownRemainingMs(axisKey, clockMs);
                       const lesson = phase.axisLessons?.[index] ?? explainAxis(axis, phase.title);
 
                       return (
@@ -932,21 +1062,23 @@ export default function CargoStudyClient({ content }: Props) {
                             <p className="text-xs font-semibold text-gray-500">
                               Eje {index + 1}
                             </p>
-                            <button
-                              onClick={() =>
-                                setCompletedAxes((prev) => ({
-                                  ...prev,
-                                  [axisKey]: !isRead,
-                                }))
-                              }
-                              className={`text-xs font-semibold px-2.5 py-1 rounded-lg border ${
-                                isRead
-                                  ? "border-dian-navy/30 text-dian-navy bg-dian-mint"
-                                  : "border-gray-300 text-gray-600 hover:bg-gray-50"
-                              }`}
-                            >
-                              {isRead ? "Leído" : "Marcar como leído"}
-                            </button>
+                            <div className="text-right">
+                              <button
+                                onClick={() => handleToggleAxisRead(axisKey, isRead)}
+                                className={`text-xs font-semibold px-2.5 py-1 rounded-lg border ${
+                                  isRead
+                                    ? "border-dian-navy/30 text-dian-navy bg-dian-mint"
+                                    : "border-gray-300 text-gray-600 hover:bg-gray-50"
+                                }`}
+                              >
+                                {isRead ? "Leído" : "Marcar como leído"}
+                              </button>
+                              <p className="text-[11px] text-gray-500 mt-1">
+                                {cooldownRemainingMs > 0
+                                  ? `XP en cooldown: ${formatCooldownRemaining(cooldownRemainingMs)}`
+                                  : "XP disponible para este eje"}
+                              </p>
+                            </div>
                           </div>
 
                           <h3 className="text-sm font-semibold text-gray-900 mb-2">

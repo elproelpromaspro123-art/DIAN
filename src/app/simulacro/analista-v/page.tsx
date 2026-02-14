@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import SimulacroAnalistaVClient from "./SimulacroAnalistaVClient";
+import { getSimulacroDescription } from "@/data/simulacro-config";
 
 const configuredSiteUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim();
 const siteUrl = (configuredSiteUrl || "https://preparatedian2026.vercel.app").replace(
@@ -9,8 +10,7 @@ const siteUrl = (configuredSiteUrl || "https://preparatedian2026.vercel.app").re
 
 export const metadata: Metadata = {
   title: "Simulacro Integral Analista V | Prepárate DIAN",
-  description:
-    "Simulacro por fases para Analista V con 50 reactivos de entrenamiento basados en fuentes oficiales.",
+  description: getSimulacroDescription("Analista V"),
   alternates: {
     canonical: `${siteUrl}/simulacro/analista-v`,
   },

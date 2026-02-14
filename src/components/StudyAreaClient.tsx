@@ -14,9 +14,15 @@ import {
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import GamificationPanel from "@/components/GamificationPanel";
 import { Question } from "@/data/types";
 import { StudyGuide } from "@/data/study-guides";
 import { renderFormattedText } from "@/lib/formatText";
+import {
+  grantDailyStudySessionXp,
+  loadGamificationState,
+  summarizeReward,
+} from "@/lib/gamification";
 
 interface Props {
   areaId: string;
@@ -44,6 +50,10 @@ export default function StudyAreaClient({
   const [query, setQuery] = useState("");
   const [readingMode, setReadingMode] = useState(false);
   const [showAnswers, setShowAnswers] = useState(true);
+  const [gamificationState, setGamificationState] = useState(() =>
+    loadGamificationState()
+  );
+  const [rewardMessage, setRewardMessage] = useState<string | null>(null);
 
   useEffect(() => {
     let mounted = true;
@@ -62,6 +72,18 @@ export default function StudyAreaClient({
       mounted = false;
     };
   }, [loadQuestions]);
+
+  useEffect(() => {
+    if (!rewardMessage) return;
+    const timeoutId = window.setTimeout(() => setRewardMessage(null), 2600);
+    return () => window.clearTimeout(timeoutId);
+  }, [rewardMessage]);
+
+  const handleRegisterStudySession = () => {
+    const reward = grantDailyStudySessionXp();
+    setGamificationState(reward.state);
+    setRewardMessage(summarizeReward(reward));
+  };
 
   const filteredQuestions = useMemo(() => {
     const trimmed = query.trim().toLowerCase();
@@ -109,6 +131,20 @@ export default function StudyAreaClient({
           <p className="text-gray-500 text-sm max-w-2xl mx-auto">
             {areaDescription}
           </p>
+        </div>
+
+        <div className="mb-8 space-y-3">
+          <GamificationPanel
+            state={gamificationState}
+            title="Progreso gamificado de estudio"
+            feedback={rewardMessage}
+          />
+          <button
+            onClick={handleRegisterStudySession}
+            className="inline-flex items-center gap-2 rounded-lg border border-dian-navy/20 bg-white px-3 py-2 text-xs font-semibold text-dian-navy hover:bg-dian-mint transition-colors"
+          >
+            Registrar sesión de estudio (+XP)
+          </button>
         </div>
 
         {guide && (

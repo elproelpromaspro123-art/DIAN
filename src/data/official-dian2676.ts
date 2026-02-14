@@ -10,8 +10,7 @@ export type OfficialCargoSnapshot = {
 };
 
 export const OFFICIAL_SIMO_CONVOCATORIA_ID = "1011914855";
-export const OFFICIAL_SIMO_SOURCE_URL =
-  "https://simo.cnsc.gov.co/empleos/ofertaPublica/?search_convocatoria=1011914855";
+export const OFFICIAL_SIMO_SOURCE_URL = "https://simo.cnsc.gov.co/#/ofertaEmpleo";
 export const OFFICIAL_SIMO_SNAPSHOT_DATE_ISO = "2026-02-12";
 export const OFFICIAL_SIMO_SNAPSHOT_LABEL = "12-feb-2026";
 

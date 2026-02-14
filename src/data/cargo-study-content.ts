@@ -23,6 +23,12 @@ export type AxisLesson = {
   examFocus: string;
 };
 
+export type SimulacroCoverageItem = {
+  title: string;
+  explanation: string;
+  source: string;
+};
+
 export type StudyPhase = {
   id: "fase-1" | "fase-2" | "fase-3";
   title: string;
@@ -44,11 +50,13 @@ export type CargoStudyContent = {
   level: string;
   codeGrade: string;
   vacancies: string;
+  experienceRequirement: string;
   salary: string;
   salaryYear: string;
   enrollmentWindow: string;
   lastUpdate: string;
   sources: StudySource[];
+  simulacroCoverage: SimulacroCoverageItem[];
   phases: StudyPhase[];
 };
 
@@ -60,26 +68,66 @@ export const ANALISTA_STUDY_CONTENT: CargoStudyContent = {
   level: "Técnico",
   codeGrade: "Código 205 · Grado 5",
   vacancies: `${ANALISTA_V_OFFICIAL_SNAPSHOT.vacantesTotal} vacantes oficiales (236732: 4 + 236756: 10)`,
+  experienceRequirement:
+    "Tres anos de experiencia (2 anos laboral y 1 ano relacionada), segun el manual oficial del empleo.",
   salary: ANALISTA_V_OFFICIAL_SNAPSHOT.salario2025,
   salaryYear: "Vigencia salarial 2025",
   enrollmentWindow:
     "Inscripciones DIAN 2676: del 28-ene-2026 al 6-feb-2026, con ampliación oficial CNSC hasta el 7-feb-2026.",
   lastUpdate: `Corte oficial SIMO: ${OFFICIAL_SIMO_SNAPSHOT_LABEL}`,
   sources: [
-    { label: "SIMO API · ofertaPublica (corte oficial)", href: OFFICIAL_SIMO_SOURCE_URL },
+    { label: "SIMO · Oferta de empleo (corte oficial)", href: OFFICIAL_SIMO_SOURCE_URL },
     { label: "SIMO · Oferta de empleo", href: "https://simo.cnsc.gov.co/#/ofertaEmpleo" },
     { label: "CNSC · Convocatoria DIAN 2676", href: "https://www.cnsc.gov.co/node/59797" },
     {
-      label: "CNSC · Acuerdo 205 de 2025",
-      href: "https://www.cnsc.gov.co/convocatorias/dian-2022?field_tipo_de_contenido_convocat_target_id=65",
+      label: "CNSC · Acuerdo 21 de 2025",
+      href: "https://www.cnsc.gov.co/node/54168",
     },
     {
       label: "CNSC · Anexo DIAN 2676 de 2025",
-      href: "https://www.cnsc.gov.co/convocatorias/dian-2022?field_tipo_de_contenido_convocat_target_id=65",
+      href: "https://www.cnsc.gov.co/node/54169",
     },
     {
       label: "DIAN · Comunicado de inicio de inscripciones",
       href: "https://www.dian.gov.co/Prensa/Paginas/NG-Inician-inscripciones-en-la-modalidad-abierta-del-concurso-de-meritos-DIAN-2676.aspx",
+    },
+  ],
+  simulacroCoverage: [
+    {
+      title: "Identificacion oficial del cargo",
+      explanation:
+        "El simulacro pregunta OPEC 236732 y 236756, nivel tecnico, codigo 205 grado 5 y 14 vacantes; estos datos se explican en esta guia y en la ficha oficial.",
+      source: "SIMO + Manual Analista V",
+    },
+    {
+      title: "Reglas del concurso y requisitos",
+      explanation:
+        "Incluye experiencia exigida (3 anos), rol de la CNSC, base juridica del Decreto Ley 927 de 2023 y cierre oficial de inscripciones.",
+      source: "CNSC + Decreto Ley 927 de 2023",
+    },
+    {
+      title: "Estructura de pruebas del Analista V",
+      explanation:
+        "La guia cubre Fase 1 eliminatoria 65% con minimo 70/100, Fase 2 15%, Fase 3 10% y valoracion de antecedentes 10% de caracter documental.",
+      source: "Acuerdo 21 de 2025",
+    },
+    {
+      title: "Bloque funcional evaluado en simulacro",
+      explanation:
+        "Se explica cobro persuasivo y coactivo, mandamiento de pago, titulo ejecutivo, excepciones, medidas cautelares (articulo 837 ET) y devoluciones (articulo 855 ET).",
+      source: "Manual Analista V + Estatuto Tributario",
+    },
+    {
+      title: "Marco institucional DIAN",
+      explanation:
+        "Se desarrolla creacion de la DIAN (Decreto 2117 de 1992), naturaleza juridica, direccion y reglas de actuacion administrativa aplicables al cargo.",
+      source: "Decreto 2117 de 1992 + marco organico DIAN",
+    },
+    {
+      title: "Comportamental e integridad",
+      explanation:
+        "La guia aterriza adaptabilidad, comunicacion, trabajo en equipo, conflicto de interes y rechazo de beneficios indebidos con casos y resolucion orientativa.",
+      source: "Res. 065 de 2024 + Codigo de Integridad y Etica DIAN",
     },
   ],
   phases: [
@@ -483,26 +531,65 @@ export const GESTOR_STUDY_CONTENT: CargoStudyContent = {
   level: "Profesional",
   codeGrade: "Código 301 · Grado 1",
   vacancies: `${GESTOR_I_OFFICIAL_SNAPSHOT.vacantesTotal} vacantes oficiales (236741: 8 + 236767: 189)`,
+  experienceRequirement: "No requiere experiencia segun el manual oficial del empleo.",
   salary: GESTOR_I_OFFICIAL_SNAPSHOT.salario2025,
   salaryYear: "Vigencia salarial 2025",
   enrollmentWindow:
     "Inscripciones DIAN 2676: del 28-ene-2026 al 6-feb-2026, con ampliación oficial CNSC hasta el 7-feb-2026.",
   lastUpdate: `Corte oficial SIMO: ${OFFICIAL_SIMO_SNAPSHOT_LABEL}`,
   sources: [
-    { label: "SIMO API · ofertaPublica (corte oficial)", href: OFFICIAL_SIMO_SOURCE_URL },
+    { label: "SIMO · Oferta de empleo (corte oficial)", href: OFFICIAL_SIMO_SOURCE_URL },
     { label: "SIMO · Oferta de empleo", href: "https://simo.cnsc.gov.co/#/ofertaEmpleo" },
     { label: "CNSC · Convocatoria DIAN 2676", href: "https://www.cnsc.gov.co/node/59797" },
     {
-      label: "CNSC · Acuerdo 205 de 2025",
-      href: "https://www.cnsc.gov.co/convocatorias/dian-2022?field_tipo_de_contenido_convocat_target_id=65",
+      label: "CNSC · Acuerdo 21 de 2025",
+      href: "https://www.cnsc.gov.co/node/54168",
     },
     {
       label: "CNSC · Anexo DIAN 2676 de 2025",
-      href: "https://www.cnsc.gov.co/convocatorias/dian-2022?field_tipo_de_contenido_convocat_target_id=65",
+      href: "https://www.cnsc.gov.co/node/54169",
     },
     {
       label: "DIAN · Comunicado de inicio de inscripciones",
       href: "https://www.dian.gov.co/Prensa/Paginas/NG-Inician-inscripciones-en-la-modalidad-abierta-del-concurso-de-meritos-DIAN-2676.aspx",
+    },
+  ],
+  simulacroCoverage: [
+    {
+      title: "Identificacion oficial del cargo",
+      explanation:
+        "El simulacro pregunta OPEC 236741 y 236767, nivel profesional, codigo 301 grado 1 y 197 vacantes; todos estos datos aparecen explicados en estudio.",
+      source: "SIMO + Manual Gestor I",
+    },
+    {
+      title: "Reglas del concurso y requisito de experiencia",
+      explanation:
+        "Se cubre que Gestor I no requiere experiencia, el rol de la CNSC, la base del Decreto Ley 927 de 2023 y las fechas oficiales de la convocatoria.",
+      source: "CNSC + Decreto Ley 927 de 2023",
+    },
+    {
+      title: "Estructura de pruebas del Gestor I",
+      explanation:
+        "La guia desarrolla Fase 1 eliminatoria 70% con minimo 70/100, Fase 2 20% y Fase 3 10%, igual que en el simulacro del cargo.",
+      source: "Acuerdo 21 de 2025",
+    },
+    {
+      title: "Bloque funcional evaluado en simulacro",
+      explanation:
+        "Incluye Ley 80 de 1993, Ley 1150 de 2007, principios de transparencia/economia/responsabilidad, SECOP II, SIIF Nacion II y custodia de mercancias.",
+      source: "Manual Gestor I + Ley 80/1993 + Ley 1150/2007",
+    },
+    {
+      title: "Marco institucional DIAN",
+      explanation:
+        "Se explica creacion de la DIAN mediante Decreto 2117 de 1992 y su estructura para diferenciar alcance funcional del Gestor I.",
+      source: "Decreto 2117 de 1992 + marco organico DIAN",
+    },
+    {
+      title: "Comportamental e integridad",
+      explanation:
+        "La guia cubre solucion de problemas, innovacion, adaptabilidad, conflicto de interes, igualdad de trato y rechazo de ofrecimientos indebidos.",
+      source: "Res. 065 de 2024 + Codigo de Integridad y Etica DIAN",
     },
   ],
   phases: [
@@ -634,7 +721,7 @@ export const GESTOR_STUDY_CONTENT: CargoStudyContent = {
         },
         {
           label: "Ley 1150 de 2007",
-          href: "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=25806",
+          href: "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=184686",
         },
         {
           label: "Ley 1437 de 2011",

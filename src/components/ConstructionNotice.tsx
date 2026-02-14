@@ -1,33 +1,32 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useSyncExternalStore } from "react";
 import styles from './ConstructionNotice.module.css';
+import { getLatestSourceCheckLabel } from "@/data/sourceHealth";
 
 interface ConstructionNoticeProps {
   enabled?: boolean;
 }
 
-export default function ConstructionNotice({ enabled = true }: ConstructionNoticeProps) {
-  const [isVisible, setIsVisible] = useState(true);
-  const [showToggleButton, setShowToggleButton] = useState(false);
-  const [isStorageLoaded, setIsStorageLoaded] = useState(false);
+const STORAGE_KEY = "constructionNoticeClosed";
+const emptySubscribe = () => () => {};
 
-  useEffect(() => {
-    // Load from localStorage
-    if (typeof window !== 'undefined') {
-      const stored = localStorage.getItem('constructionNoticeClosed');
-      // Si no está cerrado explícitamente, mostrar siempre
-      const wasClosed = stored === 'true';
-      setIsVisible(!wasClosed && enabled);
-      setShowToggleButton(wasClosed && enabled);
-      setIsStorageLoaded(true);
-    }
-  }, [enabled]);
+export default function ConstructionNotice({ enabled = true }: ConstructionNoticeProps) {
+  const mounted = useSyncExternalStore(emptySubscribe, () => true, () => false);
+  const [isVisible, setIsVisible] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return localStorage.getItem(STORAGE_KEY) !== "true";
+  });
+  const [showToggleButton, setShowToggleButton] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return localStorage.getItem(STORAGE_KEY) === "true";
+  });
+  const latestCheckLabel = getLatestSourceCheckLabel();
 
   const handleContinue = () => {
     setIsVisible(false);
     setShowToggleButton(true);
-    localStorage.setItem('constructionNoticeClosed', 'true');
+    localStorage.setItem(STORAGE_KEY, "true");
   };
 
   const handleReshow = () => {
@@ -35,8 +34,7 @@ export default function ConstructionNotice({ enabled = true }: ConstructionNotic
     setShowToggleButton(false);
   };
 
-  // Don't render until storage is loaded (hydration safe)
-  if (!isStorageLoaded) return null;
+  if (!mounted || !enabled) return null;
 
   return (
     <>
@@ -101,35 +99,35 @@ export default function ConstructionNotice({ enabled = true }: ConstructionNotic
                     <span className={styles.progressDot} style={{ background: 'linear-gradient(135deg, #16a34a 0%, #22c55e 100%)', boxShadow: '0 0 8px rgba(22, 163, 74, 0.5)' }}></span>
                     <span className={styles.progressLabel} style={{ color: '#16a34a' }}>Terminado</span>
                   </span>
-                  <span>Animaciones interactivas en toda la página entera</span>
+                  <span>Animaciones y transiciones interactivas en toda la experiencia</span>
                 </li>
                 <li className={styles.featureItem}>
                   <span className={styles.progressIndicator}>
                     <span className={styles.progressDot} style={{ background: 'linear-gradient(135deg, #16a34a 0%, #22c55e 100%)', boxShadow: '0 0 8px rgba(22, 163, 74, 0.5)' }}></span>
                     <span className={styles.progressLabel} style={{ color: '#16a34a' }}>Terminado</span>
                   </span>
-                  <span>Estudio interactivo tipo juego con animaciones interactivas</span>
+                  <span>Estudio interactivo con progreso y práctica guiada</span>
                 </li>
                 <li className={styles.featureItem}>
                   <span className={styles.progressIndicator}>
                     <span className={styles.progressDot} style={{ background: 'linear-gradient(135deg, #16a34a 0%, #22c55e 100%)', boxShadow: '0 0 8px rgba(22, 163, 74, 0.5)' }}></span>
                     <span className={styles.progressLabel} style={{ color: '#16a34a' }}>Terminado</span>
                   </span>
-                  <span>Simulacro interactivo tipo juego con animaciones interactivas</span>
+                  <span>Simulacro interactivo con puntaje, tiempo e historial</span>
                 </li>
                 <li className={styles.featureItem}>
                   <span className={styles.progressIndicator}>
                     <span className={styles.progressDot} style={{ background: 'linear-gradient(135deg, #16a34a 0%, #22c55e 100%)', boxShadow: '0 0 8px rgba(22, 163, 74, 0.5)' }}></span>
                     <span className={styles.progressLabel} style={{ color: '#16a34a' }}>Terminado</span>
                   </span>
-                  <span>Información actualizada y verificada con fuentes oficiales hasta la fecha</span>
+                  <span>Fuentes oficiales verificadas automáticamente por última vez: {latestCheckLabel}</span>
                 </li>
                 <li className={styles.featureItem}>
                   <span className={styles.progressIndicator}>
                     <span className={styles.progressDot} style={{ background: 'linear-gradient(135deg, #16a34a 0%, #22c55e 100%)', boxShadow: '0 0 8px rgba(22, 163, 74, 0.5)' }}></span>
                     <span className={styles.progressLabel} style={{ color: '#16a34a' }}>Terminado</span>
                   </span>
-                  <span>Errores de información y técnicos corregidos</span>
+                  <span>Mejoras técnicas y de contenido en proceso continuo</span>
                 </li>
               </ul>
             </div>
@@ -155,7 +153,7 @@ export default function ConstructionNotice({ enabled = true }: ConstructionNotic
       {showToggleButton && (
         <button
           onClick={handleReshow}
-              className={styles.toggleButton}
+          className={styles.toggleButton}
           title="Mostrar aviso de construcción"
         >
           <svg

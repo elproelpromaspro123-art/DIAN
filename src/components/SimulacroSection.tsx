@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { ArrowRight, Briefcase, ClipboardCheck } from "lucide-react";
 import { motion } from "framer-motion";
+import { SIMULACRO_TOTAL_QUESTIONS } from "@/data/simulacro-config";
 
 const areas = [
   {
@@ -10,7 +11,7 @@ const areas = [
     icon: ClipboardCheck,
     href: "/simulacro/analista-v",
     color: "from-zinc-700 to-zinc-900",
-    questions: 100,
+    questions: SIMULACRO_TOTAL_QUESTIONS,
     description:
       "Incluye fase eliminatoria y dos fases clasificatorias, con retroalimentación detallada.",
   },
@@ -19,7 +20,7 @@ const areas = [
     icon: Briefcase,
     href: "/simulacro/gestor-i",
     color: "from-neutral-700 to-neutral-900",
-    questions: 100,
+    questions: SIMULACRO_TOTAL_QUESTIONS,
     description:
       "Entrenamiento completo por fases con evaluación de desempeño y mejora por bloque.",
   },

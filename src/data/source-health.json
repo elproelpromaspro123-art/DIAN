@@ -1,0 +1,110 @@
+{
+  "generatedAt": "2026-02-14T02:24:57.852Z",
+  "timezone": "America/Bogota",
+  "entries": [
+    {
+      "sourceId": "simo-oferta",
+      "url": "https://simo.cnsc.gov.co/#/ofertaEmpleo",
+      "status": "ok",
+      "checkedAt": "2026-02-14T02:24:54.959Z",
+      "finalUrl": "https://simo.cnsc.gov.co/",
+      "notes": "HTTP 200"
+    },
+    {
+      "sourceId": "cnsc-convocatoria-dian-2676",
+      "url": "https://www.cnsc.gov.co/convocatorias/dian-2676",
+      "status": "ok",
+      "checkedAt": "2026-02-14T02:24:55.117Z",
+      "finalUrl": "https://www.cnsc.gov.co/convocatorias/dian-2676",
+      "notes": "HTTP 200"
+    },
+    {
+      "sourceId": "cnsc-aviso-ampliacion-2026-02-07",
+      "url": "https://www.cnsc.gov.co/node/59797",
+      "status": "ok",
+      "checkedAt": "2026-02-14T02:24:55.247Z",
+      "finalUrl": "https://www.cnsc.gov.co/node/59797",
+      "notes": "HTTP 200"
+    },
+    {
+      "sourceId": "cnsc-incidencia-pago-simo-2026-02-04",
+      "url": "https://www.cnsc.gov.co/node/59574",
+      "status": "ok",
+      "checkedAt": "2026-02-14T02:24:55.364Z",
+      "finalUrl": "https://www.cnsc.gov.co/node/59574",
+      "notes": "HTTP 200"
+    },
+    {
+      "sourceId": "cnsc-acuerdo-dian-2676-2025",
+      "url": "https://www.cnsc.gov.co/node/54168",
+      "status": "ok",
+      "checkedAt": "2026-02-14T02:24:55.493Z",
+      "finalUrl": "https://www.cnsc.gov.co/node/54168",
+      "notes": "HTTP 200"
+    },
+    {
+      "sourceId": "cnsc-anexo-dian-2676-2025",
+      "url": "https://www.cnsc.gov.co/node/54169",
+      "status": "ok",
+      "checkedAt": "2026-02-14T02:24:55.617Z",
+      "finalUrl": "https://www.cnsc.gov.co/node/54169",
+      "notes": "HTTP 200"
+    },
+    {
+      "sourceId": "dian-comunicado-inicio-inscripciones",
+      "url": "https://www.dian.gov.co/Prensa/Paginas/NG-Inician-inscripciones-en-la-modalidad-abierta-del-concurso-de-meritos-DIAN-2676.aspx",
+      "status": "ok",
+      "checkedAt": "2026-02-14T02:24:55.745Z",
+      "finalUrl": "https://www.dian.gov.co/Prensa/Paginas/NG-Inician-inscripciones-en-la-modalidad-abierta-del-concurso-de-meritos-DIAN-2676.aspx",
+      "notes": "HTTP 200"
+    },
+    {
+      "sourceId": "cnsc-resolucion-0067-2024-merf",
+      "url": "https://www.cnsc.gov.co/sites/default/files/2024-04/3.-resolucion-no.-0067-del-11-de-abril-del-2024.pdf",
+      "status": "warning",
+      "checkedAt": "2026-02-14T02:24:56.158Z",
+      "finalUrl": "https://www.cnsc.gov.co/sites/default/files/2024-04/3.-resolucion-no.-0067-del-11-de-abril-del-2024.pdf",
+      "notes": "HTTP 404; se usará respaldo local /recursos/manual-funciones-analista-v.pdf."
+    },
+    {
+      "sourceId": "cnsc-resolucion-0065-2024-diccionario",
+      "url": "https://www.cnsc.gov.co/sites/default/files/2024-04/2.-resolucion-no.-0065-del-11-de-abril-del-2024.pdf",
+      "status": "warning",
+      "checkedAt": "2026-02-14T02:24:56.331Z",
+      "finalUrl": "https://www.cnsc.gov.co/sites/default/files/2024-04/2.-resolucion-no.-0065-del-11-de-abril-del-2024.pdf",
+      "notes": "HTTP 404; se usará respaldo local /recursos/diccionario-competencias-res-065-2024.pdf."
+    },
+    {
+      "sourceId": "funcion-publica-ley-80-1993",
+      "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=304",
+      "status": "ok",
+      "checkedAt": "2026-02-14T02:24:56.460Z",
+      "finalUrl": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=304",
+      "notes": "HTTP 200"
+    },
+    {
+      "sourceId": "funcion-publica-ley-1150-2007",
+      "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=184686",
+      "status": "ok",
+      "checkedAt": "2026-02-14T02:24:56.842Z",
+      "finalUrl": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=184686",
+      "notes": "HTTP 200"
+    },
+    {
+      "sourceId": "funcion-publica-ley-1437-2011",
+      "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=41249",
+      "status": "ok",
+      "checkedAt": "2026-02-14T02:24:57.207Z",
+      "finalUrl": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=41249",
+      "notes": "HTTP 200"
+    },
+    {
+      "sourceId": "funcion-publica-ley-1712-2014",
+      "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=56882",
+      "status": "ok",
+      "checkedAt": "2026-02-14T02:24:57.545Z",
+      "finalUrl": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=56882",
+      "notes": "HTTP 200"
+    }
+  ]
+}

@@ -9,6 +9,13 @@ const cache = new Map();
 const failures = [];
 const warnings = [];
 
+function normalizeForMatch(text) {
+  return String(text ?? "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
+}
+
 function fail(message) {
   failures.push(message);
 }
@@ -224,9 +231,104 @@ function validateResourceFilesFromInfografia() {
   }
 }
 
+function validateSimulacroCountConsistency(expectedTotal, analistaQuestions, gestorQuestions) {
+  if (analistaQuestions.length !== expectedTotal) {
+    fail(
+      `simulacro/analista-v: total esperado ${expectedTotal}, encontrado ${analistaQuestions.length}.`
+    );
+  }
+
+  if (gestorQuestions.length !== expectedTotal) {
+    fail(
+      `simulacro/gestor-i: total esperado ${expectedTotal}, encontrado ${gestorQuestions.length}.`
+    );
+  }
+
+  const metadataFiles = [
+    path.join(root, "src/app/simulacro/analista-v/page.tsx"),
+    path.join(root, "src/app/simulacro/gestor-i/page.tsx"),
+  ];
+
+  for (const filePath of metadataFiles) {
+    const source = fs.readFileSync(filePath, "utf8");
+    if (/50\s+reactivos/i.test(source)) {
+      fail(`${path.relative(root, filePath)}: metadata desactualizada ("50 reactivos").`);
+    }
+  }
+}
+
+function buildStudyCorpus(cargoContent) {
+  const chunks = [
+    cargoContent.cargo,
+    cargoContent.subtitle,
+    cargoContent.opec,
+    cargoContent.level,
+    cargoContent.codeGrade,
+    cargoContent.vacancies,
+    cargoContent.experienceRequirement ?? "",
+    ...(cargoContent.sources ?? []).flatMap((source) => [source.label, source.href]),
+    ...(cargoContent.simulacroCoverage ?? []).flatMap((item) => [
+      item.title,
+      item.explanation,
+      item.source,
+    ]),
+    ...(cargoContent.phases ?? []).flatMap((phase) => [
+      phase.title,
+      phase.character,
+      phase.weight,
+      phase.whatEvaluates,
+      ...(phase.thematicAxes ?? []),
+      ...(phase.quickSummary ?? []),
+      ...(phase.axisLessons ?? []).flatMap((lesson) => [
+        lesson.title,
+        lesson.whatIs,
+        lesson.examFocus,
+      ]),
+      ...(phase.checkpoints ?? []).flatMap((checkpoint) => [
+        checkpoint.prompt,
+        checkpoint.answer,
+        checkpoint.source,
+      ]),
+      ...(phase.sources ?? []).flatMap((source) => [source.label, source.href]),
+    ]),
+  ];
+
+  return normalizeForMatch(chunks.join(" "));
+}
+
+function validateStudySimulacroCoherence(cargoContent, cargoName, requiredTerms) {
+  if (
+    typeof cargoContent.experienceRequirement !== "string" ||
+    cargoContent.experienceRequirement.trim() === ""
+  ) {
+    fail(`${cargoName}: falta experienceRequirement para coherencia estudio-simulacro.`);
+  }
+
+  if (!Array.isArray(cargoContent.simulacroCoverage) || cargoContent.simulacroCoverage.length < 6) {
+    fail(`${cargoName}: simulacroCoverage debe tener al menos 6 items.`);
+    return;
+  }
+
+  for (const [index, item] of cargoContent.simulacroCoverage.entries()) {
+    if (!item?.title || !item?.explanation || !item?.source) {
+      fail(`${cargoName}: simulacroCoverage[${index}] incompleto.`);
+    }
+  }
+
+  const corpus = buildStudyCorpus(cargoContent);
+  for (const term of requiredTerms) {
+    if (!corpus.includes(normalizeForMatch(term))) {
+      fail(`${cargoName}: falta cobertura explicita del tema "${term}" en estudio.`);
+    }
+  }
+}
+
 function run() {
   const { analistaVQuestions } = loadModule(path.join(root, "src/data/questions-analista-v.ts"));
   const { gestorIQuestions } = loadModule(path.join(root, "src/data/questions-gestor-i.ts"));
+  const { SIMULACRO_TOTAL_QUESTIONS } = loadModule(
+    path.join(root, "src/data/simulacro-config.ts")
+  );
   const { ANALISTA_STUDY_CONTENT, GESTOR_STUDY_CONTENT } = loadModule(
     path.join(root, "src/data/cargo-study-content.ts")
   );
@@ -245,6 +347,56 @@ function run() {
   validateStudySources(ANALISTA_STUDY_CONTENT, "cargo-study-content/analista-v");
   validateStudySources(GESTOR_STUDY_CONTENT, "cargo-study-content/gestor-i");
   validateResourceFilesFromInfografia();
+  validateSimulacroCountConsistency(
+    SIMULACRO_TOTAL_QUESTIONS,
+    analistaVQuestions,
+    gestorIQuestions
+  );
+  validateStudySimulacroCoherence(ANALISTA_STUDY_CONTENT, "cargo-study-content/analista-v", [
+    "236732",
+    "236756",
+    "codigo 205",
+    "grado 5",
+    "14 vacantes",
+    "decreto ley 927",
+    "cnsc",
+    "decreto 2117",
+    "fase 1",
+    "65%",
+    "fase 2",
+    "15%",
+    "fase 3",
+    "10%",
+    "70/100",
+    "valoracion de antecedentes",
+    "articulo 837",
+    "articulo 855",
+  ]);
+  validateStudySimulacroCoherence(GESTOR_STUDY_CONTENT, "cargo-study-content/gestor-i", [
+    "236741",
+    "236767",
+    "codigo 301",
+    "grado 1",
+    "197 vacantes",
+    "no requiere experiencia",
+    "decreto ley 927",
+    "cnsc",
+    "decreto 2117",
+    "fase 1",
+    "70%",
+    "fase 2",
+    "20%",
+    "fase 3",
+    "10%",
+    "siif",
+    "ley 80",
+    "ley 1150",
+    "transparencia",
+    "economia",
+    "responsabilidad",
+    "secop",
+    "custodia",
+  ]);
 
   if (warnings.length > 0) {
     console.warn("Advertencias de integridad:");

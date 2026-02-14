@@ -13,27 +13,6 @@ const coreRoutes = [
   "/simulacro/gestor-i",
 ];
 
-const secondaryRoutes = [
-  "/estudio/analista-basicas",
-  "/estudio/analista-comportamentales",
-  "/estudio/analista-integridad",
-  "/estudio/gestor-basicas",
-  "/estudio/gestor-comportamentales",
-  "/estudio/gestor-integridad",
-  "/estudio/lectura",
-  "/estudio/matematicas",
-  "/estudio/sociales",
-  "/simulacro/analista-basicas",
-  "/simulacro/analista-comportamentales",
-  "/simulacro/analista-integridad",
-  "/simulacro/gestor-basicas",
-  "/simulacro/gestor-comportamentales",
-  "/simulacro/gestor-integridad",
-  "/simulacro/lectura",
-  "/simulacro/matematicas",
-  "/simulacro/sociales",
-];
-
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
@@ -47,12 +26,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified,
       changeFrequency: "monthly" as const,
       priority: 0.8,
-    })),
-    ...secondaryRoutes.map((path) => ({
-      url: `${siteUrl}${path}`,
-      lastModified,
-      changeFrequency: "monthly" as const,
-      priority: 0.6,
     })),
   ];
 }

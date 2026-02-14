@@ -121,13 +121,13 @@ const resources: Resource[] = [
     href: "https://www.cnsc.gov.co/node/59574",
   },
   {
-    name: "CNSC · Acuerdo 205 de 2025",
+    name: "CNSC · Acuerdo 21 de 2025",
     icon: FileCheck2,
     available: true,
     color: "from-zinc-700 to-zinc-900",
     summary: "Reglas, pesos y etapas del proceso DIAN 2676.",
     kind: "link",
-    href: "https://www.cnsc.gov.co/convocatorias/dian-2022?field_tipo_de_contenido_convocat_target_id=65",
+    href: "https://www.cnsc.gov.co/node/54168",
   },
   {
     name: "CNSC · Anexo DIAN 2676 de 2025",
@@ -136,7 +136,7 @@ const resources: Resource[] = [
     color: "from-zinc-700 to-zinc-900",
     summary: "Especificaciones técnicas de pruebas y criterios.",
     kind: "link",
-    href: "https://www.cnsc.gov.co/convocatorias/dian-2022?field_tipo_de_contenido_convocat_target_id=65",
+    href: "https://www.cnsc.gov.co/node/54169",
   },
   {
     name: "DIAN · Resolución 0067 de 2024 (MERF)",
@@ -145,7 +145,7 @@ const resources: Resource[] = [
     color: "from-zinc-700 to-zinc-900",
     summary: "Manual Específico de Requisitos y Funciones.",
     kind: "link",
-    href: "https://historico.cnsc.gov.co/docs/DIAN_3._Resolucion_no_0067_del_11_de_abril_del_2024.pdf",
+    href: "https://www.cnsc.gov.co/sites/default/files/2024-04/3.-resolucion-no.-0067-del-11-de-abril-del-2024.pdf",
   },
   {
     name: "DIAN · Resolución 0065 de 2024 (Diccionario)",
@@ -154,7 +154,7 @@ const resources: Resource[] = [
     color: "from-stone-600 to-stone-800",
     summary: "Competencias comportamentales por nivel.",
     kind: "link",
-    href: "https://historico.cnsc.gov.co/docs/DIAN_2._Resolucion_no_0065_del_11_de_abril_del_2024.pdf",
+    href: "https://www.cnsc.gov.co/sites/default/files/2024-04/2.-resolucion-no.-0065-del-11-de-abril-del-2024.pdf",
   },
   {
     name: "Ley 80 de 1993 (Función Pública)",
@@ -172,7 +172,7 @@ const resources: Resource[] = [
     color: "from-zinc-700 to-zinc-900",
     summary: "Medidas de eficiencia y transparencia contractual.",
     kind: "link",
-    href: "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=25806",
+    href: "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=184686",
   },
   {
     name: "Ley 1437 de 2011 (CPACA)",

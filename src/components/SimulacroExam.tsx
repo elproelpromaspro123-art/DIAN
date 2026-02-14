@@ -24,6 +24,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { Question } from "@/data/types";
+import GamificationPanel from "@/components/GamificationPanel";
 import {
   SimulacroProgress,
   SimulacroHistoryEntry,
@@ -33,6 +34,13 @@ import {
 } from "@/lib/simulacro";
 import { useFocusTrap } from "@/lib/useFocusTrap";
 import { renderFormattedText } from "@/lib/formatText";
+import {
+  grantReviewIncorrectsXp,
+  grantSimulacroAnswerFirstTime,
+  grantSimulacroCompletionXp,
+  loadGamificationState,
+  summarizeReward,
+} from "@/lib/gamification";
 
 interface Props {
   questionCount: number;
@@ -350,6 +358,11 @@ export default function SimulacroExam({
     return localStorage.getItem("dian_reading_mode") === "true";
   });
   const [showOnlyIncorrect, setShowOnlyIncorrect] = useState(false);
+  const [incorrectReviewRewarded, setIncorrectReviewRewarded] = useState(false);
+  const [gamificationState, setGamificationState] = useState(() =>
+    loadGamificationState()
+  );
+  const [rewardMessage, setRewardMessage] = useState<string | null>(null);
 
   const confirmRef = useRef<HTMLDivElement>(null);
 
@@ -362,6 +375,15 @@ export default function SimulacroExam({
       .map((id) => lookup.get(id))
       .filter(Boolean) as Question[];
   }, [questionOrder, allQuestions]);
+
+  const applyReward = useCallback(
+    (messageBuilder: () => ReturnType<typeof grantSimulacroAnswerFirstTime>) => {
+      const reward = messageBuilder();
+      setGamificationState(reward.state);
+      setRewardMessage(summarizeReward(reward));
+    },
+    []
+  );
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -409,6 +431,12 @@ export default function SimulacroExam({
   }, [readingMode]);
 
   useEffect(() => {
+    if (!rewardMessage) return;
+    const timeoutId = window.setTimeout(() => setRewardMessage(null), 2600);
+    return () => window.clearTimeout(timeoutId);
+  }, [rewardMessage]);
+
+  useEffect(() => {
     if (typeof window === "undefined") return;
     if (finished || questionOrder.length === 0) return;
     const handleBeforeUnload = (event: BeforeUnloadEvent) => {
@@ -419,13 +447,15 @@ export default function SimulacroExam({
     return () => window.removeEventListener("beforeunload", handleBeforeUnload);
   }, [finished, questionOrder.length]);
 
-  const selectAnswer = useCallback(
-    (questionId: number, letter: string) => {
-      if (finished) return;
-      setAnswers((prev) => ({ ...prev, [questionId]: letter }));
-    },
-    [finished]
-  );
+  const selectAnswer = (questionId: number, letter: string) => {
+    if (finished) return;
+    const wasUnanswered = answers[questionId] === undefined;
+    setAnswers((prev) => ({ ...prev, [questionId]: letter }));
+
+    if (wasUnanswered) {
+      applyReward(() => grantSimulacroAnswerFirstTime());
+    }
+  };
 
   const handleFinish = () => {
     const total = questions.length;
@@ -438,7 +468,7 @@ export default function SimulacroExam({
         (typeof crypto !== "undefined" &&
           "randomUUID" in crypto &&
           crypto.randomUUID()) ||
-        `${Date.now()}`,
+        `${areaId}-${questionCount}-${elapsed}-${correct}`,
       date: new Date().toISOString(),
       areaId,
       questionCount,
@@ -459,6 +489,12 @@ export default function SimulacroExam({
     } catch {
       // ignore storage issues
     }
+    applyReward(() =>
+      grantSimulacroCompletionXp({
+        score: displayScore,
+        phaseScores: phaseSummaries.map((phase) => phase.score),
+      })
+    );
     setFinished(true);
     setShowConfirm(false);
   };
@@ -477,7 +513,7 @@ export default function SimulacroExam({
     ? questions.filter((q) => answers[q.id] !== q.correctAnswer)
     : questions;
 
-  const phaseSummaries = useMemo<PhaseSummary[]>(() => {
+  const phaseSummaries: PhaseSummary[] = (() => {
     const bucket = new Map<PhaseKey, PhaseSummary>();
 
     for (const question of questions) {
@@ -504,7 +540,7 @@ export default function SimulacroExam({
     return order
       .map((key) => bucket.get(key))
       .filter(Boolean) as PhaseSummary[];
-  }, [questions, answers]);
+  })();
 
   const phaseOneScore =
     phaseSummaries.find((phase) => phase.key === "fase-1")?.score ?? score;
@@ -729,6 +765,14 @@ export default function SimulacroExam({
             </div>
           </motion.div>
 
+          <div className="mb-6">
+            <GamificationPanel
+              state={gamificationState}
+              title="Progreso gamificado tras simulacro"
+              feedback={rewardMessage}
+            />
+          </div>
+
           <div className="space-y-6">
             <h2 className="text-lg font-bold text-dian-navy flex items-center gap-2">
               <AlertCircle className="w-5 h-5" />
@@ -736,7 +780,14 @@ export default function SimulacroExam({
             </h2>
             <div className="flex flex-wrap items-center gap-3 text-xs text-gray-500">
               <button
-                onClick={() => setShowOnlyIncorrect((prev) => !prev)}
+                onClick={() => {
+                  const next = !showOnlyIncorrect;
+                  setShowOnlyIncorrect(next);
+                  if (next && !incorrectReviewRewarded && hasIncorrect) {
+                    applyReward(() => grantReviewIncorrectsXp());
+                    setIncorrectReviewRewarded(true);
+                  }
+                }}
                 disabled={!hasIncorrect}
                 className={`rounded-full border px-3 py-1 font-semibold transition-colors ${
                   showOnlyIncorrect
@@ -1028,6 +1079,14 @@ export default function SimulacroExam({
           </motion.div>
         )}
       </AnimatePresence>
+
+      <div className="max-w-4xl mx-auto w-full px-4 pt-4">
+        <GamificationPanel
+          state={gamificationState}
+          title="Progreso gamificado en simulacro"
+          feedback={rewardMessage}
+        />
+      </div>
 
       {/* Question */}
       <div className="flex-1 max-w-4xl mx-auto px-4 pt-4 pb-28 sm:pb-24 w-full">

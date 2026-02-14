@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import SimulacroGestorIClient from "./SimulacroGestorIClient";
+import { getSimulacroDescription } from "@/data/simulacro-config";
 
 const configuredSiteUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim();
 const siteUrl = (configuredSiteUrl || "https://preparatedian2026.vercel.app").replace(
@@ -9,8 +10,7 @@ const siteUrl = (configuredSiteUrl || "https://preparatedian2026.vercel.app").re
 
 export const metadata: Metadata = {
   title: "Simulacro Integral Gestor I | Prepárate DIAN",
-  description:
-    "Simulacro por fases para Gestor I con 50 reactivos de entrenamiento basados en fuentes oficiales.",
+  description: getSimulacroDescription("Gestor I"),
   alternates: {
     canonical: `${siteUrl}/simulacro/gestor-i`,
   },
