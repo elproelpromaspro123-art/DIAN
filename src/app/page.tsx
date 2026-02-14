@@ -27,7 +27,7 @@ const jsonLd = {
 
 export default function Home() {
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen scroll-smooth">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

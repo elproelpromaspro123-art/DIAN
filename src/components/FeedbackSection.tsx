@@ -2,12 +2,25 @@
 
 import { useState } from "react";
 import { AlertTriangle, CheckCircle2, Lightbulb, Mail, Send } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 type FeedbackType = "problema" | "sugerencia";
 
 const WEBHOOK_URL = process.env.NEXT_PUBLIC_DISCORD_WEBHOOK_URL?.trim() ?? "";
 const MAX_MESSAGE_LENGTH = 1800;
+
+const stagger = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.12, delayChildren: 0.1 },
+  },
+};
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" as const } },
+};
 
 export default function FeedbackSection() {
   const [type, setType] = useState<FeedbackType>("problema");
@@ -82,12 +95,16 @@ export default function FeedbackSection() {
   };
 
   return (
-    <section id="reportes" className="py-12 bg-white border-t border-gray-100">
-      <div className="max-w-2xl mx-auto px-4">
+    <section
+      id="reportes"
+      className="min-h-[60vh] flex flex-col justify-center bg-white border-t border-gray-100 py-12"
+    >
+      <div className="max-w-2xl mx-auto px-4 w-full">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
           className="text-center mb-8"
         >
           <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2 font-[family:var(--font-display)]">
@@ -98,14 +115,20 @@ export default function FeedbackSection() {
           </p>
         </motion.div>
 
-        <form
+        <motion.form
           onSubmit={handleSubmit}
+          variants={stagger}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
           className="bg-white border border-gray-200 shadow-sm rounded-2xl p-6"
         >
-          <div className="flex gap-2 mb-4">
-            <button
+          <motion.div variants={fadeUp} className="flex gap-2 mb-4">
+            <motion.button
               type="button"
               onClick={() => setType("problema")}
+              whileHover={{ scale: 1.05, backgroundColor: type !== "problema" ? "#fef2f2" : undefined }}
+              whileTap={{ scale: 0.97 }}
               className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold border transition-colors ${
                 type === "problema"
                   ? "bg-red-50 text-red-600 border-red-200"
@@ -114,10 +137,12 @@ export default function FeedbackSection() {
             >
               <AlertTriangle className="w-3.5 h-3.5" />
               Problema
-            </button>
-            <button
+            </motion.button>
+            <motion.button
               type="button"
               onClick={() => setType("sugerencia")}
+              whileHover={{ scale: 1.05, backgroundColor: type !== "sugerencia" ? "#fffbeb" : undefined }}
+              whileTap={{ scale: 0.97 }}
               className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold border transition-colors ${
                 type === "sugerencia"
                   ? "bg-amber-50 text-amber-600 border-amber-200"
@@ -126,19 +151,21 @@ export default function FeedbackSection() {
             >
               <Lightbulb className="w-3.5 h-3.5" />
               Sugerencia
-            </button>
-          </div>
+            </motion.button>
+          </motion.div>
 
-          <textarea
-            value={message}
-            onChange={(event) => setMessage(event.target.value)}
-            placeholder="Cuéntanos qué pasó o qué te gustaría mejorar."
-            className="w-full min-h-[100px] rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm text-gray-700 outline-none focus:border-dian-navy focus:bg-white"
-            maxLength={2000}
-            required
-          />
+          <motion.div variants={fadeUp}>
+            <textarea
+              value={message}
+              onChange={(event) => setMessage(event.target.value)}
+              placeholder="Cuéntanos qué pasó o qué te gustaría mejorar."
+              className="w-full min-h-[100px] rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm text-gray-700 outline-none focus:border-dian-navy focus:bg-white transition-colors"
+              maxLength={2000}
+              required
+            />
+          </motion.div>
 
-          <div className="flex items-end gap-3 mt-3">
+          <motion.div variants={fadeUp} className="flex items-end gap-3 mt-3">
             <div className="flex-1">
               <label className="text-xs text-gray-500 flex items-center gap-1 mb-1">
                 <Mail className="w-3 h-3" />
@@ -149,12 +176,14 @@ export default function FeedbackSection() {
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
                 placeholder="tucorreo@ejemplo.com"
-                className="w-full rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-sm text-gray-700 outline-none focus:border-dian-navy focus:bg-white"
+                className="w-full rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-sm text-gray-700 outline-none focus:border-dian-navy focus:bg-white transition-colors"
               />
             </div>
-            <button
+            <motion.button
               type="submit"
               disabled={status === "sending"}
+              whileHover={status !== "sending" ? { scale: 1.05 } : undefined}
+              whileTap={status !== "sending" ? { scale: 0.95 } : undefined}
               className={`inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold transition-colors ${
                 status === "sending"
                   ? "bg-gray-200 text-gray-400 cursor-not-allowed"
@@ -163,24 +192,40 @@ export default function FeedbackSection() {
             >
               <Send className="w-4 h-4" />
               Enviar
-            </button>
-          </div>
+            </motion.button>
+          </motion.div>
 
           <div className="mt-2 text-xs text-gray-500" aria-live="polite">
-            {status === "success" && (
-              <span className="inline-flex items-center gap-1 text-green-600">
-                <CheckCircle2 className="w-3.5 h-3.5" />
-                Gracias. Tu reporte fue enviado.
-              </span>
-            )}
-            {errorMessage && (
-              <span className="inline-flex items-center gap-1 text-amber-600">
-                <AlertTriangle className="w-3.5 h-3.5" />
-                {errorMessage}
-              </span>
-            )}
+            <AnimatePresence mode="wait">
+              {status === "success" && (
+                <motion.span
+                  key="success"
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -6 }}
+                  transition={{ duration: 0.3 }}
+                  className="inline-flex items-center gap-1 text-green-600"
+                >
+                  <CheckCircle2 className="w-3.5 h-3.5" />
+                  Gracias. Tu reporte fue enviado.
+                </motion.span>
+              )}
+              {errorMessage && (
+                <motion.span
+                  key="error"
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -6 }}
+                  transition={{ duration: 0.3 }}
+                  className="inline-flex items-center gap-1 text-amber-600"
+                >
+                  <AlertTriangle className="w-3.5 h-3.5" />
+                  {errorMessage}
+                </motion.span>
+              )}
+            </AnimatePresence>
           </div>
-        </form>
+        </motion.form>
       </div>
     </section>
   );

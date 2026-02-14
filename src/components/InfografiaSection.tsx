@@ -194,6 +194,23 @@ const resources: Resource[] = [
   },
 ];
 
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.04 },
+  },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 24, scale: 0.96 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { type: "spring" as const, stiffness: 260, damping: 20 },
+  },
+};
+
 export default function InfografiaSection() {
   const [selectedResource, setSelectedResource] = useState<Resource | null>(null);
   const [isMobileViewport, setIsMobileViewport] = useState(false);
@@ -240,81 +257,154 @@ export default function InfografiaSection() {
   return (
     <section
       id="recursos"
-      className="py-16 bg-dian-sand border-t border-dian-navy/10"
+      className="relative min-h-screen flex flex-col justify-center bg-gradient-to-b from-[#0f172a] via-[#1e293b] to-[#0f172a] py-20 sm:py-28"
     >
-      <div className="max-w-6xl mx-auto px-4">
-        <details className="group">
-          <summary className="flex items-center justify-between cursor-pointer mb-10">
-            <div className="text-center flex-1">
-              <h2 className="text-2xl sm:text-3xl font-bold text-dian-navy mb-2 font-[family:var(--font-display)]">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 -left-20 w-72 h-72 bg-blue-500/10 rounded-full blur-[100px]" />
+        <div className="absolute bottom-20 -right-20 w-80 h-80 bg-amber-400/10 rounded-full blur-[100px]" />
+      </div>
+
+      <div className="relative max-w-6xl mx-auto px-4 w-full">
+        <details className="group" open>
+          <summary className="flex items-center justify-between cursor-pointer mb-12 list-none [&::-webkit-details-marker]:hidden">
+            <motion.div
+              className="text-center flex-1"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+            >
+              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3 font-[family:var(--font-display)]">
                 Recursos oficiales DIAN + CNSC
               </h2>
-              <p className="text-gray-600 max-w-2xl mx-auto text-sm">
+              <p className="text-white/60 max-w-2xl mx-auto text-sm">
                 Documentos y avisos oficiales verificados. Haz clic para ver todos los recursos.
               </p>
-            </div>
-            <span className="text-sm text-gray-400 group-open:rotate-180 transition-transform ml-4">
+            </motion.div>
+            <motion.span
+              className="text-white/40 text-sm ml-4 group-open:rotate-180 transition-transform duration-300"
+              whileHover={{ scale: 1.2 }}
+            >
               ▼
-            </span>
+            </motion.span>
           </summary>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {resources.map((resource) => {
-            const Icon = resource.icon;
-            const cardClass = `relative group rounded-2xl p-5 text-left transition-all duration-300 border-2 shadow-sm hover:-translate-y-0.5 ${
-              resource.available
-                ? "border-dian-navy/15 hover:border-dian-navy hover:shadow-lg cursor-pointer bg-white"
-                : "border-gray-200 bg-gray-50 cursor-not-allowed opacity-70"
-            }`;
+          <motion.div
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.05 }}
+          >
+            {resources.map((resource) => {
+              const Icon = resource.icon;
 
-            if (resource.kind === "link" && resource.href) {
+              if (resource.kind === "link" && resource.href) {
+                return (
+                  <motion.a
+                    key={resource.name}
+                    href={resource.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    variants={cardVariants}
+                    whileHover={{
+                      scale: 1.03,
+                      y: -4,
+                      boxShadow: "0 20px 40px rgba(0,0,0,0.3)",
+                    }}
+                    whileTap={{ scale: 0.98 }}
+                    className="relative rounded-2xl p-5 text-left bg-white/5 backdrop-blur-sm border border-white/10 hover:border-amber-400/50 transition-colors duration-300 cursor-pointer"
+                  >
+                    <motion.div
+                      className={`w-12 h-12 mb-3 rounded-xl bg-gradient-to-br ${resource.color} flex items-center justify-center`}
+                      whileHover={{ rotate: [0, -6, 6, 0] }}
+                      transition={{ duration: 0.4 }}
+                    >
+                      <Icon className="w-6 h-6 text-white" />
+                    </motion.div>
+                    <h3 className="font-semibold text-sm text-white">{resource.name}</h3>
+                    <p className="text-xs text-white/50 mt-1">{resource.summary}</p>
+                    <span className="mt-3 inline-flex items-center text-xs text-amber-400 font-medium">
+                      Abrir enlace oficial
+                      <ChevronRight className="w-3 h-3 ml-0.5" />
+                    </span>
+                    <p className="text-[11px] text-white/30 mt-2">Fuente oficial (enlace directo)</p>
+                  </motion.a>
+                );
+              }
+
               return (
-                <a
+                <motion.button
                   key={resource.name}
-                  href={resource.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={cardClass}
+                  onClick={() => handleResourceOpen(resource)}
+                  disabled={!resource.available}
+                  variants={cardVariants}
+                  whileHover={
+                    resource.available
+                      ? {
+                          scale: 1.03,
+                          y: -4,
+                          boxShadow: "0 20px 40px rgba(0,0,0,0.3)",
+                        }
+                      : undefined
+                  }
+                  whileTap={resource.available ? { scale: 0.98 } : undefined}
+                  className={`relative rounded-2xl p-5 text-left transition-colors duration-300 ${
+                    resource.available
+                      ? "bg-white/5 backdrop-blur-sm border border-white/10 hover:border-amber-400/50 cursor-pointer"
+                      : "bg-white/[0.02] border border-white/5 cursor-not-allowed opacity-50"
+                  }`}
                 >
-                  <div
+                  <motion.div
                     className={`w-12 h-12 mb-3 rounded-xl bg-gradient-to-br ${resource.color} flex items-center justify-center`}
+                    whileHover={{ rotate: [0, -6, 6, 0] }}
+                    transition={{ duration: 0.4 }}
                   >
                     <Icon className="w-6 h-6 text-white" />
-                  </div>
-                  <h3 className="font-semibold text-sm text-gray-800">{resource.name}</h3>
-                  <p className="text-xs text-gray-500 mt-1">{resource.summary}</p>
-                  <span className="mt-2 inline-flex items-center text-xs text-dian-navy font-medium">
-                    Abrir enlace oficial
+                  </motion.div>
+                  <h3 className="font-semibold text-sm text-white">{resource.name}</h3>
+                  <p className="text-xs text-white/50 mt-1">{resource.summary}</p>
+                  <span className="mt-3 inline-flex items-center text-xs text-amber-400 font-medium">
+                    Abrir documento
                     <ChevronRight className="w-3 h-3 ml-0.5" />
                   </span>
-                  <p className="text-[11px] text-gray-400 mt-2">Fuente oficial (enlace directo)</p>
-                </a>
+                </motion.button>
               );
-            }
-
-            return (
-              <button
-                key={resource.name}
-                onClick={() => handleResourceOpen(resource)}
-                disabled={!resource.available}
-                className={cardClass}
-              >
-                <div
-                  className={`w-12 h-12 mb-3 rounded-xl bg-gradient-to-br ${resource.color} flex items-center justify-center`}
-                >
-                  <Icon className="w-6 h-6 text-white" />
-                </div>
-                <h3 className="font-semibold text-sm text-gray-800">{resource.name}</h3>
-                <p className="text-xs text-gray-500 mt-1">{resource.summary}</p>
-                <span className="mt-2 inline-flex items-center text-xs text-dian-navy font-medium">
-                  Abrir documento
-                  <ChevronRight className="w-3 h-3 ml-0.5" />
-                </span>
-              </button>
-            );
-          })}
-        </div>
+            })}
+          </motion.div>
         </details>
+
+        <motion.div
+          className="mt-8"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.3 }}
+        >
+          <p className="text-xs text-white/40">
+            Fuentes oficiales de consulta directa:{" "}
+            <a
+              href="https://www.cnsc.gov.co/node/59797"
+              target="_blank"
+              rel="noreferrer"
+              className="text-amber-400/70 hover:text-amber-400 hover:underline inline-flex items-center gap-1 transition-colors"
+            >
+              CNSC DIAN 2676
+              <ExternalLink className="w-3 h-3" />
+            </a>
+            {" "}y{" "}
+            <a
+              href="https://www.dian.gov.co/Prensa/Paginas/NG-Inician-inscripciones-en-la-modalidad-abierta-del-concurso-de-meritos-DIAN-2676.aspx"
+              target="_blank"
+              rel="noreferrer"
+              className="text-amber-400/70 hover:text-amber-400 hover:underline inline-flex items-center gap-1 transition-colors"
+            >
+              Comunicado DIAN
+              <ExternalLink className="w-3 h-3" />
+            </a>
+            .
+          </p>
+        </motion.div>
       </div>
 
       <AnimatePresence>
@@ -327,24 +417,25 @@ export default function InfografiaSection() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-start sm:items-center justify-center p-0 sm:p-4 overflow-y-auto"
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-start sm:items-center justify-center p-0 sm:p-4 overflow-y-auto"
             onClick={handleClose}
           >
             <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              transition={{ type: "spring", duration: 0.4 }}
+              initial={{ scale: 0.92, opacity: 0, y: 30 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.92, opacity: 0, y: 30 }}
+              transition={{ type: "spring", stiffness: 300, damping: 25 }}
               ref={modalRef}
-              className="relative bg-white sm:rounded-2xl shadow-2xl w-full h-full sm:h-[90vh] sm:max-w-5xl overflow-hidden flex flex-col"
+              className="relative bg-[#1e293b] sm:rounded-2xl shadow-2xl ring-1 ring-white/10 w-full h-full sm:h-[90vh] sm:max-w-5xl overflow-hidden flex flex-col"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="sticky top-0 bg-white sm:rounded-t-2xl border-b px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between gap-3 z-10">
+              <div className="sticky top-0 bg-[#1e293b] sm:rounded-t-2xl border-b border-white/10 px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between gap-3 z-10">
                 <div>
-                  <h3 id="resource-modal-title" className="font-bold text-dian-navy text-base sm:text-lg">
+                  <h3 id="resource-modal-title" className="font-bold text-white text-base sm:text-lg">
                     Documento — {selectedResource.name}
                   </h3>
-                  <p id="resource-modal-desc" className="text-xs text-gray-500">
+                  <p id="resource-modal-desc" className="text-xs text-white/50">
                     Si el visor falla en tu navegador, usa &quot;Abrir en pestaña nueva&quot;.
                   </p>
                   <div className="flex flex-wrap items-center gap-3 text-xs mt-2">
@@ -352,29 +443,31 @@ export default function InfografiaSection() {
                       href={selectedResource.file}
                       target="_blank"
                       rel="noreferrer"
-                      className="text-dian-navy hover:underline"
+                      className="text-amber-400 hover:underline"
                     >
                       Abrir en pestaña nueva
                     </a>
                     <a
                       href={selectedResource.file}
                       download
-                      className="inline-flex items-center gap-1 text-dian-navy hover:underline"
+                      className="inline-flex items-center gap-1 text-amber-400 hover:underline"
                     >
                       <Download className="w-3.5 h-3.5" />
                       Descargar PDF
                     </a>
                   </div>
                 </div>
-                <button
+                <motion.button
                   onClick={handleClose}
-                  className="p-2.5 hover:bg-gray-100 rounded-full transition-colors"
+                  className="p-2.5 hover:bg-white/10 rounded-full transition-colors"
                   aria-label="Cerrar"
+                  whileHover={{ scale: 1.1, rotate: 90 }}
+                  whileTap={{ scale: 0.9 }}
                 >
-                  <X className="w-6 h-6 text-gray-500" />
-                </button>
+                  <X className="w-6 h-6 text-white/60" />
+                </motion.button>
               </div>
-              <div className="flex-1 bg-gray-50 overflow-auto">
+              <div className="flex-1 bg-black/20 overflow-auto">
                 <iframe
                   title={`Documento ${selectedResource.name}`}
                   src={pdfSrc}
@@ -386,32 +479,6 @@ export default function InfografiaSection() {
           </motion.div>
         )}
       </AnimatePresence>
-
-      <div className="max-w-6xl mx-auto px-4 mt-6">
-        <p className="text-xs text-gray-500">
-          Fuentes oficiales de consulta directa: {" "}
-          <a
-            href="https://www.cnsc.gov.co/node/59797"
-            target="_blank"
-            rel="noreferrer"
-            className="text-dian-navy hover:underline inline-flex items-center gap-1"
-          >
-            CNSC DIAN 2676
-            <ExternalLink className="w-3 h-3" />
-          </a>
-          {" "}y{" "}
-          <a
-            href="https://www.dian.gov.co/Prensa/Paginas/NG-Inician-inscripciones-en-la-modalidad-abierta-del-concurso-de-meritos-DIAN-2676.aspx"
-            target="_blank"
-            rel="noreferrer"
-            className="text-dian-navy hover:underline inline-flex items-center gap-1"
-          >
-            Comunicado DIAN
-            <ExternalLink className="w-3 h-3" />
-          </a>
-          .
-        </p>
-      </div>
     </section>
   );
 }

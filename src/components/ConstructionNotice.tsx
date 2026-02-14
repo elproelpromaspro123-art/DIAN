@@ -83,53 +83,53 @@ export default function ConstructionNotice({ enabled = true }: ConstructionNotic
 
             {/* Title */}
             <h1 className={styles.title}>
-              <span className={styles.titleLine}>Página en</span>
-              <span className={styles.titleLine}>Construcción</span>
+              <span className={styles.titleLine}>Página</span>
+              <span className={styles.titleLine}>Terminada ✓</span>
             </h1>
 
             {/* Subtitle */}
             <p className={styles.subtitle}>
-              Estamos creando una experiencia increíble para ti
+              ¡La experiencia está lista para ti!
             </p>
 
             {/* Progress Section */}
             <div className={styles.progressSection}>
-              <h2 className={styles.progressTitle}>En Desarrollo:</h2>
+              <h2 className={styles.progressTitle}>Completado:</h2>
               <ul className={styles.featureList}>
                 <li className={styles.featureItem}>
                   <span className={styles.progressIndicator}>
-                    <span className={styles.progressDot}></span>
-                    <span className={styles.progressLabel}>En progreso</span>
+                    <span className={styles.progressDot} style={{ background: 'linear-gradient(135deg, #16a34a 0%, #22c55e 100%)', boxShadow: '0 0 8px rgba(22, 163, 74, 0.5)' }}></span>
+                    <span className={styles.progressLabel} style={{ color: '#16a34a' }}>Terminado</span>
                   </span>
-                  <span>Creando animaciones interactivas en toda la página entera</span>
+                  <span>Animaciones interactivas en toda la página entera</span>
                 </li>
                 <li className={styles.featureItem}>
                   <span className={styles.progressIndicator}>
-                    <span className={styles.progressDot}></span>
-                    <span className={styles.progressLabel}>En progreso</span>
+                    <span className={styles.progressDot} style={{ background: 'linear-gradient(135deg, #16a34a 0%, #22c55e 100%)', boxShadow: '0 0 8px rgba(22, 163, 74, 0.5)' }}></span>
+                    <span className={styles.progressLabel} style={{ color: '#16a34a' }}>Terminado</span>
                   </span>
-                  <span>Creando estudio interactivo tipo juego con animaciones interactivas</span>
+                  <span>Estudio interactivo tipo juego con animaciones interactivas</span>
                 </li>
                 <li className={styles.featureItem}>
                   <span className={styles.progressIndicator}>
-                    <span className={styles.progressDot}></span>
-                    <span className={styles.progressLabel}>En progreso</span>
+                    <span className={styles.progressDot} style={{ background: 'linear-gradient(135deg, #16a34a 0%, #22c55e 100%)', boxShadow: '0 0 8px rgba(22, 163, 74, 0.5)' }}></span>
+                    <span className={styles.progressLabel} style={{ color: '#16a34a' }}>Terminado</span>
                   </span>
-                  <span>Creando simulacro interactivo tipo juego con animaciones interactivas</span>
+                  <span>Simulacro interactivo tipo juego con animaciones interactivas</span>
                 </li>
                 <li className={styles.featureItem}>
                   <span className={styles.progressIndicator}>
-                    <span className={styles.progressDot}></span>
-                    <span className={styles.progressLabel}>En progreso</span>
+                    <span className={styles.progressDot} style={{ background: 'linear-gradient(135deg, #16a34a 0%, #22c55e 100%)', boxShadow: '0 0 8px rgba(22, 163, 74, 0.5)' }}></span>
+                    <span className={styles.progressLabel} style={{ color: '#16a34a' }}>Terminado</span>
                   </span>
-                  <span>Actualizar y verificar TODA la información de la página hasta la fecha actual y validar información oficial y verídica hasta la fecha</span>
+                  <span>Información actualizada y verificada con fuentes oficiales hasta la fecha</span>
                 </li>
                 <li className={styles.featureItem}>
                   <span className={styles.progressIndicator}>
-                    <span className={styles.progressDot}></span>
-                    <span className={styles.progressLabel}>En progreso</span>
+                    <span className={styles.progressDot} style={{ background: 'linear-gradient(135deg, #16a34a 0%, #22c55e 100%)', boxShadow: '0 0 8px rgba(22, 163, 74, 0.5)' }}></span>
+                    <span className={styles.progressLabel} style={{ color: '#16a34a' }}>Terminado</span>
                   </span>
-                  <span>Corregir cualquier error de información en estudios y simulacro y arreglar errores técnicos</span>
+                  <span>Errores de información y técnicos corregidos</span>
                 </li>
               </ul>
             </div>
@@ -139,7 +139,7 @@ export default function ConstructionNotice({ enabled = true }: ConstructionNotic
               onClick={handleContinue}
               className={styles.continueButton}
             >
-              <span className={styles.buttonText}>Continuar y Ver Adelantos</span>
+              <span className={styles.buttonText}>Continuar y Explorar</span>
               <span className={styles.buttonArrow}>→</span>
             </button>
 
